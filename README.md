@@ -30,20 +30,20 @@ node transpile.js < hello.cool > hello.cool.js; node hello.cool.js
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:
 ```html
-<script language='cool' src='/test.cool'></script>
+<script language="cool" src="/test.cool"></script>
 ```
 Or using it as an inline code:
 ```html
-<script language='cool'>
-... Your code here ...
+<script language="cool">
+... Your Cool! code here ...
 </script>
 ```
-At the end of the page, it needs this code:
+Of course at the end of the page, you will need to include the "cool.js" file:
 ```html
-<script src='/cool.js'></script>
+<script src="/cool.js"></script>
 ```
 
-# Import JavaScript Code
+# Importing JavaScript Code
 You can use your existing JavaScript with Cool! by using require(). The
 following code reads data from MySQL server using Node.js library:
 ```es6
@@ -69,7 +69,7 @@ class Main {
 }
 ```
 
-# Recursion
+# Writing Recursion
 ```es6
 class Main {
 	method fib(n) {
@@ -87,8 +87,8 @@ class Main {
 # Writing class with constructor
 ```es6
 class Student(name, dob) {
-	object name;
-	object dob;
+	field name;
+	field dob;
 
 	constructor {
 		this.name = name;

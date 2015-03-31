@@ -1,6 +1,6 @@
 class Student(name, dob) {
-	object name;
-	object dob;
+	field name;
+	field dob;
 
 	constructor {
 		this.name = name;

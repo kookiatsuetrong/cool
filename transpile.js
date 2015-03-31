@@ -1,8 +1,8 @@
 function transpile(originalCode) {
 	var code = originalCode;
 
-	// replacing member
-	code = code.replace(/object(\s+)/g, "this.");
+	// replacing field
+	code = code.replace(/field(\s+)/g, "this.");
 
 	// replacing method
 	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");

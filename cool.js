@@ -29,8 +29,8 @@ function request(url) {
 function transpile(originalCode) {
 	var code = originalCode;
 
-	// replacing member
-	code = code.replace(/object(\s+)/g, "this.");
+	// replacing field
+	code = code.replace(/field(\s+)/g, "this.");
 
 	// replacing method
 	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
@@ -43,9 +43,6 @@ function transpile(originalCode) {
 
 	// remove constructor
 	code = code.replace(/constructor/g, '');
-
-	// add ; to the end of }
-	// code = code.replace(/}/g, "};");
 
 	if (originalCode.match(/class(\s+)Main/))
 		code += "\n;\n (new Main()).start(); \n";
@@ -67,7 +64,7 @@ function Number() {
 
 function System() {
 
-	this.eval = function(x) {
+	this.execute = function(x) {
 		return eval(x);
 	}
 
