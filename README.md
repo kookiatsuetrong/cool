@@ -1,6 +1,9 @@
 # The Cool! programming language
 
-Cool! is a purely object-oriented programming language.
+Cool! is a purely object-oriented programming language. It has been designed for
+transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
+It supports only encapsulation and abstraction, no inheritance or polymorphism
+for the current version.
 
 # The Hello World program
 Program written by the Cool! programming language starts from the class "Main"
