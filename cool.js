@@ -49,8 +49,6 @@ function transpile(originalCode) {
 	return code;
 }
 
-// Use static method ?
-
 function System() {
 	this.execute = function(x) {
 		return eval(x);
@@ -63,16 +61,24 @@ function System() {
 	this.parse = function(x) {
 		return JSON.parse(x);
 	}
-	this.print = function(x) {
-		console.log(x);
+}
+
+function File () {
+	this.read = function(name) {
+		return "";
+	}
+	this.write = function(name, data) {
 	}
 }
 
-function Number() {
-	this.parseFloat = function(x) {
+function Float() {
+	this.parse = function(x) {
 		return parseFloat(x);
 	}
-	this.parseInt = function(x) {
+}
+
+function Integer() {
+	this.parse = function(x) {
 		return parseInt(x);
 	}
 }
@@ -81,10 +87,16 @@ function Page() {
 	this.select = function(x) {
 		return document.querySelectorAll(x);
 	}
+	// alert,
 }
 
 function Web() {
+	this.get = function(url, data, cb) {
 
+	}
+	this.post = function(url, data, cb) {
+
+	}
 }
 
 

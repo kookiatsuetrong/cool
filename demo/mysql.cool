@@ -1,4 +1,5 @@
 class Main {
+
 	method start() {
 		var mysql = require("mysql");
 		var pool  = mysql.createPool({
@@ -8,15 +9,14 @@ class Main {
 			database : "db"
 		});
 
-		var system = new System();
+		// var system = new System();
 
 		pool.getConnection(function (error, db) {
-			db.query("select * from users", [], function (error, records) {
+			db.query("select * from users", function (error, records) {
 				if (!error) {
-					system.log(records);
+					console.log(records);
 				}
 				db.release();
-				system.exit();
 			});
 		});
 	}

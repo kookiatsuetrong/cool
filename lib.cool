@@ -11,9 +11,6 @@ class System {
 	method parse(x) {
 		return JSON.parse(x);
 	}
-	method print(x) {
-		process.stdout.write(x);
-	}
 }
 
 class File {
@@ -27,13 +24,32 @@ class File {
 	}
 }
 
-class Number {
-	method parseFloat(x) {
+class Float {
+	method parse(x) {
 		if (x == '') return 0;
 		return parseFloat(x);
 	}
-	method parseInt(x) {
+}
+
+class Integer {
+	method parse(x) {
 		if (x == '') return 0;
 		return parseInt(x);
+	}
+}
+
+class Page {
+	method select(x) {
+		return [];
+	}
+	// alert,
+}
+
+function Web {
+	method get(url, data, cb) {
+
+	}
+	method post(url, data, cb) {
+
 	}
 }
