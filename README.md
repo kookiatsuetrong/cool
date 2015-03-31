@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/cool.jpg)
+
 # The Cool! programming language
 
 Cool! is a purely object-oriented programming language. It has been designed for
