@@ -1,9 +1,0 @@
-class Main {
-	method fib(n) {
-		if (n <= 1) return n;
-		return this.fib(n-1) + this.fib(n-2);
-	}
-	method start() {
-		console.log(this.fib(40));
-	}
-}
