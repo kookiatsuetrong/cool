@@ -5,7 +5,7 @@ Cool! is a purely object-oriented programming language.
 # The Hello World program
 Program written by the Cool! programming language starts from the class "Main"
 and start() method. So let's start by writing the first Hello World program:
-```scala
+```es6
 class Main {
 	method start() {
 		var system = new System();
@@ -41,7 +41,7 @@ At the end of the page, it needs this code:
 # Import JavaScript Code
 You can use your existing JavaScript with Cool! by using require(). The
 following code reads data from MySQL server using Node.js library:
-```scala
+```es6
 class Main {
 	method start() {
 		var mysql = require("mysql");
@@ -65,7 +65,7 @@ class Main {
 ```
 
 # Recursion
-```scala
+```es6
 class Main {
 	method fib(n) {
 		if (n <= 1) return n;
@@ -80,7 +80,7 @@ class Main {
 
 
 # Writing class with constructor
-```scala
+```es6
 class Student(name, dob) {
 	object name;
 	object dob;
