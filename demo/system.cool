@@ -1,0 +1,18 @@
+class System {
+
+	method execute(x) {
+		return eval(x);
+	}
+
+	method parse(x) {
+		return JSON.parse(x);
+	}
+
+	method print(x) {
+		console.log(x);
+	}
+
+	method exit() {
+		process.exit();
+	}
+}

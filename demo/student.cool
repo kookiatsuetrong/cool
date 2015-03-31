@@ -1,0 +1,24 @@
+class Student(name, dob) {
+	field name;
+	field dob;
+
+	constructor {
+		this.name = name;
+		this.dob = dob;
+	}
+
+	method toString() {
+		return this.name + ' ' + this.dob;
+	}
+}
+
+class Main {
+	method start() {
+		var students = [];
+		students[0] = new Student("James", "1980-01-01");
+		students[1] = new Student("Smith", "1980-03-01");
+		for (var i = 0; i < students.length; i++) {
+			console.log(students[i].toString());
+		}
+	}
+}

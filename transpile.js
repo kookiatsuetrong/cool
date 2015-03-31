@@ -20,7 +20,7 @@ function transpile(originalCode) {
 	// code = code.replace(/}/g, "};");
 
 	if (originalCode.match(/class(\s+)Main/))
-		code += "\n;\n (new Main()).start(); \n";
+		code += "\n;\n(new Main()).start();\n";
 	return code;
 }
 
@@ -33,8 +33,3 @@ function main() {
 }
 
 main();
-
-
-/*
-Internal Class: Object, Integer, Float, String, Console, Date, Time
-*/

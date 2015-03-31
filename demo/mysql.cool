@@ -1,0 +1,23 @@
+class Main {
+	method start() {
+		var mysql = require("mysql");
+		var pool  = mysql.createPool({
+			host     : "localhost",
+			user     : "user",
+			password : "password",
+			database : "db"
+		});
+
+		var system = require('./system');
+
+		pool.getConnection(function (error, db) {
+			db.query("select * from users", [], function (error, records) {
+				if (!error) {
+					system.print(records);
+				}
+				db.release();
+				system.exit();
+			});
+		});
+	}
+}

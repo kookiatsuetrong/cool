@@ -45,22 +45,12 @@ function transpile(originalCode) {
 	code = code.replace(/constructor/g, '');
 
 	if (originalCode.match(/class(\s+)Main/))
-		code += "\n;\n (new Main()).start(); \n";
+		code += "\n;\n(new Main()).start();\n";
 	return code;
 }
 
 
 // Use static method ?
-
-function Number() {
-	this.parseInt = function(x) {
-		return parseInt(x);
-	}
-
-	this.parseFloat = function(x) {
-		return parseFloat(x);
-	}
-}
 
 function System() {
 
@@ -75,8 +65,20 @@ function System() {
 	this.print = function(x) {
 		console.log(x);
 	}
+
+	this.exit = function() {
+	}
 }
 
+function Number() {
+	this.parseInt = function(x) {
+		return parseInt(x);
+	}
+
+	this.parseFloat = function(x) {
+		return parseFloat(x);
+	}
+}
 
 
 
