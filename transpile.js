@@ -17,7 +17,7 @@ function transpile(originalCode) {
 	code = code.replace(/constructor/g, '');
 
 	// add ; to the end of }
-	code = code.replace(/}/g, "};");
+	// code = code.replace(/}/g, "};");
 
 	if (originalCode.match(/class(\s+)Main/))
 		code += "\n;\n (new Main()).start(); \n";
