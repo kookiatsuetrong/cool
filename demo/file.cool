@@ -1,0 +1,11 @@
+class Main {
+
+	method start() {
+		var file = new File();
+		var str = file.read('demo/data.txt');
+		var system = new System();
+		system.log(str);
+		file.write('demo/new.txt', str);
+	}
+
+}

@@ -16,12 +16,24 @@ class System {
 	}
 }
 
+class File {
+	method read(name) {
+		var fs = require('fs');
+		return fs.readFileSync(name, "utf8");
+	}
+	method write(name, data) {
+		var fs = require('fs');
+		fs.writeFileSync(name, data);
+	}
+}
 
 class Number {
 	method parseFloat(x) {
+		if (x == '') return 0;
 		return parseFloat(x);
 	}
 	method parseInt(x) {
+		if (x == '') return 0;
 		return parseInt(x);
 	}
 }

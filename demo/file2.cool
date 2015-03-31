@@ -1,0 +1,15 @@
+class Main {
+	method start() {
+		var number = new Number();
+		var system = new System();
+		var file = new File();
+		var lines = file.read("demo/data.txt").split('\n');
+		var sum = 0;
+		for (var i = 0; i < lines.length; i++) {
+			var k = number.parseInt(lines[i]);
+			sum += k;
+		}
+		system.log(sum);
+		file.write("demo/new.txt", sum);
+	}
+}
