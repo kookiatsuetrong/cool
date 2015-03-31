@@ -8,8 +8,8 @@ It supports only encapsulation and abstraction, no inheritance or polymorphism
 for the current version.
 
 # The Hello World program
-Program written by the Cool! programming language starts from the class "Main"
-and start() method. So let's start by writing the first Hello World program:
+Program written by the Cool! programming language starts from the start() method
+of the Main class. So let's start by writing the first Hello World program:
 ```es6
 class Main {
 	method start() {
@@ -18,11 +18,11 @@ class Main {
 	}
 }
 ```
-To transpile the above code to JavaScript, you have to issue this command:
+To transpile the above code to JavaScript, you have to execute this command:
 ```
 node transpile.js < hello.cool > hello.cool.js
 ```
-Or run the code by issue this command:
+Or run the code by run this command:
 ```
 node transpile.js < hello.cool > hello.cool.js; node hello.cool.js
 ```
@@ -54,15 +54,18 @@ class Main {
 			host     : "localhost",
 			user     : "user",
 			password : "password",
-			database : "database"
+			database : "db"
 		});
+
+		var system = new System();
 
 		pool.getConnection(function (error, db) {
 			db.query("select * from users", [], function (error, records) {
 				if (!error) {
-					console.log(records);
+					system.log(records);
 				}
 				db.release();
+				system.exit();
 			});
 		});
 	}
@@ -77,8 +80,8 @@ class Main {
 		return this.fib(n-1) + this.fib(n-2);
 	}
 	method start() {
-		var system = new System;
-		system.print(this.fib(40));
+		var system = new System();
+		system.log(this.fib(40));
 	}
 }
 ```
@@ -89,12 +92,10 @@ class Main {
 class Student(name, dob) {
 	field name;
 	field dob;
-
 	constructor {
 		this.name = name;
 		this.dob = dob;
 	}
-
 	method toString() {
 		return this.name + ' ' + this.dob;
 	}
@@ -102,11 +103,12 @@ class Student(name, dob) {
 
 class Main {
 	method start() {
+		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
 		students[1] = new Student("Smith", "1980-03-01");
 		for (var i = 0; i < students.length; i++) {
-			console.log(students[i].toString());
+			system.log(students[i].toString());
 		}
 	}
 }

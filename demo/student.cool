@@ -14,11 +14,12 @@ class Student(name, dob) {
 
 class Main {
 	method start() {
+		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
 		students[1] = new Student("Smith", "1980-03-01");
 		for (var i = 0; i < students.length; i++) {
-			console.log(students[i].toString());
+			system.log(students[i].toString());
 		}
 	}
 }

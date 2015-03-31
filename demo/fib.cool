@@ -4,6 +4,7 @@ class Main {
 		return this.fib(n-1) + this.fib(n-2);
 	}
 	method start() {
-		console.log(this.fib(40));
+		var system = new System();
+		system.log(this.fib(40));
 	}
 }

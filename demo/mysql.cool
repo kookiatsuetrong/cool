@@ -8,12 +8,12 @@ class Main {
 			database : "db"
 		});
 
-		var system = require('./system');
+		var system = new System();
 
 		pool.getConnection(function (error, db) {
 			db.query("select * from users", [], function (error, records) {
 				if (!error) {
-					system.print(records);
+					system.log(records);
 				}
 				db.release();
 				system.exit();

@@ -49,40 +49,43 @@ function transpile(originalCode) {
 	return code;
 }
 
-
 // Use static method ?
 
 function System() {
-
 	this.execute = function(x) {
 		return eval(x);
 	}
-
+	this.exit = function() {
+	}
+	this.log = function(x) {
+		console.log(x);
+	}
 	this.parse = function(x) {
 		return JSON.parse(x);
 	}
-
 	this.print = function(x) {
 		console.log(x);
-	}
-
-	this.exit = function() {
 	}
 }
 
 function Number() {
-	this.parseInt = function(x) {
-		return parseInt(x);
-	}
-
 	this.parseFloat = function(x) {
 		return parseFloat(x);
 	}
+	this.parseInt = function(x) {
+		return parseInt(x);
+	}
 }
 
+function Page() {
+	this.select = function(x) {
+		return document.querySelectorAll(x);
+	}
+}
 
+function Web() {
 
-
+}
 
 
 

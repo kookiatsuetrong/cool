@@ -1,0 +1,27 @@
+class System {
+	method execute(x) {
+		return eval(x);
+	}
+	method exit() {
+		process.exit();
+	}
+	method log(x) {
+		console.log(x);
+	}
+	method parse(x) {
+		return JSON.parse(x);
+	}
+	method print(x) {
+		process.stdout.write(x);
+	}
+}
+
+
+class Number {
+	method parseFloat(x) {
+		return parseFloat(x);
+	}
+	method parseInt(x) {
+		return parseInt(x);
+	}
+}

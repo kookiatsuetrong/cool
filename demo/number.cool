@@ -1,9 +1,8 @@
 class Number {
-	method parseInt(x) {
-		return parseInt(x);
-	}
-
 	method parseFloat(x) {
 		return parseFloat(x);
+	}
+	method parseInt(x) {
+		return parseInt(x);
 	}
 }

@@ -29,7 +29,11 @@ function main() {
 	process.stdin.setEncoding("UTF8");
 	var stream = "";
 	process.stdin.on("data", function (input) { stream += input; });
-	process.stdin.on("end", function () { console.log(transpile(stream)); });
+	process.stdin.on("end", function () {
+		var fs = require('fs');
+		stream += "\n" + fs.readFileSync("lib.cool");
+		console.log(transpile(stream));
+	});
 }
 
 main();
