@@ -6,21 +6,24 @@ class MyApp {
 		var tokens = context.request.url.split("/");
 		var integer = new Integer();
 		var data = {result: integer.parse(tokens[2]) * 2};
-		return this.system.stringify(data);
+		var result = this.system.stringify(data);
+		context.response.end(result);
 	}
 
-	method about() {
-		return this.engine.render("about.html");
+	method about(context) {
+		var page = this.engine.render("about.html");
+		context.response.end(page);
 	}
 
-	method error() {
-		return this.engine.render("error.html");
+	method error(context) {
+		var page = this.engine.render("error.html");
+		context.response.end(page);
 	}
 
-	method index() {
-		return this.engine.render("index.html");
+	method index(context) {
+		var page = this.engine.render("index.html");
+		context.response.end(page);
 	}
-
 }
 
 class Main {
@@ -35,9 +38,10 @@ class Main {
 class Engine {
 	member file   = new File();
 	member engine = require("ejs");
+	member folder = "./views/";
 
 	method render(name) {
-		var html = this.file.read("./views/" + name);
+		var html = this.file.read(this.folder + name);
 		return this.engine.render(html);
 	}
 }
@@ -46,43 +50,50 @@ class App {
 	member port    = 2000;
 	member address = "127.0.0.1";
 	member http    = require('http');
+	member system  = new System();
+	member folder  = "./public"
 
 	method run(handler) {
-
-		this.http.createServer(function (req, res) {
-			var urlTokens = req.url.split("/");
+		handler.folder = this.folder;
+		this.http.createServer(function (request, response) {
+			var urlTokens = request.url.split("/");
 			var callee = urlTokens[1];
-			if (callee == "") callee = "index";
+			if (callee == "")
+				callee = "index";
 
-			var folder = "./public"
 			var file   = new File();
-			var system = new System();
+			var path   = handler.folder + request.url;
 
-			if (file.exists(folder + req.url) && callee != "index") {
-				res.writeHead(404, {"Content-Type": "text/plain"});
-				res.end(file.read(folder + req.url));
+			if (file.exists(path) && callee != "index") {
+				response.statusCode = 200;
+				// TODO: set MIME type for static file here
+				response.end(file.read(path));
 			} else {
 				if (handler[callee] == null) {
+					response.statusCode = 404;
 					if (handler['error'] == null) {
-						res.writeHead(404, {"Content-Type": "text/plain"});
-						res.end('404');
+						response.end();
 					} else {
-						res.writeHead(404, {"Content-Type": "text/html"});
-						res.end(handler['error']());
+						handler['error']({request:request, response:response});
 					}
 				} else {
-					res.writeHead(200, {"Content-Type": "text/html"});
-					res.end(handler[callee](
-						{request: req, response: res}
-					));
+					response.statusCode = 200;
+					response.setHeader("Content-Type", "text/html");
+					handler[callee]({request:request, response:response});
 				}
 			}
-
 		}).listen(this.port, this.address);
 
-		// system.log("Running at http://" + this.address + ":" + this.port);
+		this.system.log("Running at http://" + this.address + ":" + this.port);
 	}
 }
+
+
+
+
+
+
+
 
 
 
