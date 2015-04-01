@@ -48,14 +48,14 @@ class Page {
 	method select(x) {
 		return [];
 	}
-	// alert,
+	// alert ?,
 }
 
 class Web {
-	method get(url, data, cb) {
-
+	method get(url, data, callback) {
+		callback();
 	}
-	method post(url, data, cb) {
-
+	method post(url, data, callback) {
+		callback();
 	}
 }

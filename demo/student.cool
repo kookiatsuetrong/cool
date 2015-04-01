@@ -1,7 +1,8 @@
 class Student(name, dob) {
-	field name;
-	field dob;
+	property name;
+	property dob;
 
+	// comment
 	constructor {
 		this.name = name;
 		this.dob = dob;
@@ -10,9 +11,12 @@ class Student(name, dob) {
 	method toString() {
 		return this.name + ' ' + this.dob;
 	}
+	/*
+	 * End of the class
+	 */
 }
 
-class Main {
+class Main{
 	method start() {
 		var system = new System();
 		var students = [];
