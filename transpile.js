@@ -1,14 +1,5 @@
-/*
-public  item -> this.item
-private item -> var item
-
-public  method sum() -> this.sum = function()
-private method sum() -> function sum()
-
-*/
-
 function transpile(originalCode) {
-	var code = '"use strict";\n' +  originalCode;
+	var code = originalCode;
 
 	// remove all comments // /* */
 	// code = code.replace(/\/\/.*\n/g, "\n");
@@ -45,7 +36,8 @@ function transpile(originalCode) {
 	*/
 
 	if (originalCode.match(/class(\s+)Main/))
-		code += "\n;\n(new Main()).start();\n";
+		code = "(new Main()).start();\n\n" + code;
+	code = '"use strict";\n' + code;
 	return code;
 }
 
@@ -57,6 +49,7 @@ function main() {
 	process.stdin.on("end", function () {
 		var fs = require('fs');
 		stream += "\n" + fs.readFileSync(__dirname + "/library.cool");
+		stream += "\n" + fs.readFileSync(__dirname + "/mvc.cool");
 		console.log(transpile(stream));
 	});
 }

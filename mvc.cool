@@ -1,0 +1,54 @@
+// Web MVC Framework
+
+class Engine {
+	member file   = new File();
+	member engine = require("ejs");
+	member folder = "./views/";
+
+	method render(name) {
+		var html = this.file.read(this.folder + name);
+		return this.engine.render(html);
+	}
+}
+
+class App {
+	member port    = 2000;
+	member address = "127.0.0.1";
+	member http    = require('http');
+	member system  = new System();
+	member folder  = "./public"
+
+	method run(handler) {
+		handler.folder = this.folder;
+		this.http.createServer(function (request, response) {
+			var urlTokens = request.url.split("/");
+			var callee = urlTokens[1];
+			if (callee == "")
+				callee = "index";
+
+			var file   = new File();
+			var path   = handler.folder + request.url;
+
+			if (file.exists(path) && callee != "index") {
+				response.statusCode = 200;
+				// TODO: set MIME type for static file here
+				response.end(file.read(path));
+			} else {
+				if (handler[callee] == null) {
+					response.statusCode = 404;
+					if (handler['error'] == null) {
+						response.end();
+					} else {
+						handler['error']({request:request, response:response});
+					}
+				} else {
+					response.statusCode = 200;
+					response.setHeader("Content-Type", "text/html");
+					handler[callee]({request:request, response:response});
+				}
+			}
+		}).listen(this.port, this.address);
+
+		this.system.log("Running at http://" + this.address + ":" + this.port);
+	}
+}

@@ -29,10 +29,10 @@ function request(url) {
 }
 
 function transpile(originalCode) {
-	var code = '"use strict";\n' +  originalCode;
+	var code = originalCode;
 
 	// remove all comments // /* */
-	code = code.replace(/\/\/.*\n/g, "\n");
+	// code = code.replace(/\/\/.*\n/g, "\n");
 	code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
 	// replacing class without constructor
@@ -66,7 +66,8 @@ function transpile(originalCode) {
 	*/
 
 	if (originalCode.match(/class(\s+)Main/))
-		code += "\n;\n(new Main()).start();\n";
+		code = "(new Main()).start();\n\n" + code;
+	code = '"use strict";\n' + code;
 	return code;
 }
 
