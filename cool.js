@@ -14,15 +14,17 @@ for (var i = 0; i < scripts.length; i++) {
 
 function request(url) {
 	var request = new XMLHttpRequest();
-	request.open('GET', url, true);
-
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) {
-			var text = request.responseText;
-			eval(transpile(text));
+	request.onreadystatechange = function () {
+		var DONE = 4;
+		var OK = 200;
+		if (request.readyState === DONE) {
+			if (request.status === OK) {
+				var text = request.responseText;
+				eval(transpile(text));
+			}
 		}
-	};
-
+	}
+	request.open('get', url, true);
 	request.send();
 }
 
@@ -91,11 +93,39 @@ function Page() {
 }
 
 function Web() {
-	this.get = function(url, data, cb) {
-
+	this.get = function(url, data, callback) {
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = function () {
+			var DONE = 4;
+			var OK = 200;
+			if (request.readyState === DONE) {
+				if (request.status === OK) {
+					var text = request.responseText;
+					callback(text);
+				}
+			}
+		}
+		request.open('get', url, true);
+		request.send(data);
 	}
-	this.post = function(url, data, cb) {
 
+	this.post = function(url, data, callback) {
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = function () {
+			var DONE = 4;
+			var OK = 200;
+			if (request.readyState === DONE) {
+				if (request.status === OK) {
+					var text = request.responseText;
+					callback(text);
+				}
+			}
+		}
+		request.open('post', url, true);
+		request.setRequestHeader('Content-Type',
+			'application/x-www-form-urlencoded; charset=UTF-8');
+
+		request.send(data);
 	}
 }
 

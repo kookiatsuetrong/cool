@@ -1,3 +1,5 @@
+// Standard Library
+
 class System {
 	method execute(x) {
 		return eval(x);
@@ -22,6 +24,10 @@ class File {
 		var fs = require('fs');
 		fs.writeFileSync(name, data);
 	}
+	method append(name, data) {
+		var fs = require('fs');
+		fs.appendFileSync(name, data);
+	}
 }
 
 class Float {
@@ -45,7 +51,7 @@ class Page {
 	// alert,
 }
 
-function Web {
+class Web {
 	method get(url, data, cb) {
 
 	}
