@@ -19,7 +19,7 @@ class System {
 }
 
 class File {
-	field fs = require('fs');
+	member fs = require('fs');
 
 	method read(name) {
 		return this.fs.readFileSync(name, "utf8");

@@ -27,7 +27,6 @@ function transpile(originalCode) {
 	// replacing field
 	code = code.replace(/field(\s+)/g, "this.");
 	code = code.replace(/member(\s+)/g, "this.");
-	code = code.replace(/property(\s+)/g, "this.");
 
 	// replacing public / private
 	/*

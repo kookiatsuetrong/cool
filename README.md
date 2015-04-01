@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/cool.jpg)
 
-# The Cool! programming language
+# The Cool! programming language () {
 
 Cool! is a purely object-oriented programming language. It has been designed for
 transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
@@ -114,6 +114,12 @@ class Main {
 }
 ```
 
+# To Do
+```
+Sample of simple web MVC
+Sample of full feature web MVC
+Sample of API MVC
+```
 
 
 
@@ -130,5 +136,4 @@ class Main {
 
 
 
-
-# End
+# }
