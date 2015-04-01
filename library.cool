@@ -13,6 +13,9 @@ class System {
 	method parse(x) {
 		return JSON.parse(x);
 	}
+	method stringify(x) {
+		return JSON.stringify(x);
+	}
 }
 
 class File {
