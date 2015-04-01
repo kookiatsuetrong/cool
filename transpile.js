@@ -37,7 +37,7 @@ function transpile(originalCode) {
 
 	if (originalCode.match(/class(\s+)Main/))
 		code = "(new Main()).start();\n\n" + code;
-	code = '"use strict";\n' + code;
+	code = '"use strict;";\n' + code;
 	return code;
 }
 

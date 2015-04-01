@@ -33,6 +33,9 @@ class File {
 	method exists(name) {
 		return this.fs.existsSync(name);
 	}
+	method list(name) {
+		return this.fs.readdirSync(name);
+	}
 }
 
 class Float {

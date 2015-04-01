@@ -17,22 +17,48 @@ class App {
 	member http    = require('http');
 	member system  = new System();
 	member folder  = "./public"
+	member file    = new File();
+
+	// TODO: Add more preprocessor file, e.g. sass, scss ...
+	method compile() {
+		var less  = require('less');
+		var files = this.file.list(this.folder);
+		for (var i = 0; i < files.length; i++) {
+			if (files[i].match(/\.less$/)) {
+				var path   = this.folder + "/" + files[i];
+				var file   = this.file;
+				var source = file.read(path);
+				less.render(source, (function(file, path) {
+					return function(error, result) {
+						var css = path.replace(".less", ".css");
+						if (error) {
+							file.write(css, "");
+						} else {
+							file.write(css, result.css);
+						}
+					}
+				})(file, path));
+			}
+		}
+	}
 
 	method run(handler) {
+		this.compile();
 		handler.folder = this.folder;
+		handler.file   = this.file;
+		handler.system = this.system;
+
 		this.http.createServer(function (request, response) {
 			var urlTokens = request.url.split("/");
 			var callee = urlTokens[1];
 			if (callee == "")
 				callee = "index";
+			var path = handler.folder + request.url;
 
-			var file   = new File();
-			var path   = handler.folder + request.url;
-
-			if (file.exists(path) && callee != "index") {
+			if (handler.file.exists(path) && callee != "index") {
 				response.statusCode = 200;
 				// TODO: set MIME type for static file here
-				response.end(file.read(path));
+				response.end(handler.file.read(path));
 			} else {
 				if (handler[callee] == null) {
 					response.statusCode = 404;
