@@ -1,0 +1,92 @@
+class MyApp {
+
+	method double() {
+		return {result: request.body.data1 * 2};
+	}
+
+	method about() {
+		return this.render("about.html");
+	}
+
+	method error() {
+		return this.render("error.html");
+	}
+
+	method index() {
+		return this.render("index.html");
+	}
+
+	// Try to attached by the App.run()
+	method render(name) {
+		return this.engine.render(name);
+	}
+	field engine = new Engine();
+}
+
+class Main {
+	method start() {
+		var app = new App();
+		app.run(new MyApp());
+	}
+}
+
+
+
+class Engine {
+	field file   = new File();
+	field engine = require("ejs");
+
+	method render(name) {
+		var html = this.file.read("./views/" + name);
+		return this.engine.render(html);
+	}
+}
+
+class App {
+	field port    = 2000;
+	field address = "127.0.0.1";
+	field http    = require('http');
+
+	method run(handler) {
+
+		this.http.createServer(function (req, res) {
+			var urlTokens = req.url.split("/");
+			var callee = urlTokens[1];
+			if (callee == "") callee = "index";
+
+			var folder = "./public"
+			var file   = new File();
+			var system = new System();
+
+			if (file.exists(folder + req.url) && callee != "index") {
+				res.writeHead(404, {"Content-Type": "text/plain"});
+				res.end(file.read(folder + req.url));
+			} else {
+				if (handler[callee] == null) {
+					if (handler['error'] == null) {
+						res.writeHead(404, {"Content-Type": "text/plain"});
+						res.end('404');
+					} else {
+						res.writeHead(404, {"Content-Type": "text/html"});
+						res.end(handler['error']());
+					}
+				} else {
+					res.writeHead(200, {"Content-Type": "text/html"});
+					res.end(handler[callee](
+						{request: req, response: res}
+					));
+				}
+			}
+
+		}).listen(this.port, this.address);
+
+		// system.log("Running at http://" + this.address + ":" + this.port);
+	}
+}
+
+
+
+
+
+
+//

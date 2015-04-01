@@ -11,7 +11,7 @@ function transpile(originalCode) {
 	var code = '"use strict";\n' +  originalCode;
 
 	// remove all comments // /* */
-	code = code.replace(/\/\/.*\n/g, "\n");
+	// code = code.replace(/\/\/.*\n/g, "\n");
 	code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
 	// replacing class without constructor
@@ -56,7 +56,7 @@ function main() {
 	process.stdin.on("data", function (input) { stream += input; });
 	process.stdin.on("end", function () {
 		var fs = require('fs');
-		stream += "\n" + fs.readFileSync("library.cool");
+		stream += "\n" + fs.readFileSync(__dirname + "/library.cool");
 		console.log(transpile(stream));
 	});
 }

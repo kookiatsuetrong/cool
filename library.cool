@@ -16,17 +16,19 @@ class System {
 }
 
 class File {
+	field fs = require('fs');
+
 	method read(name) {
-		var fs = require('fs');
-		return fs.readFileSync(name, "utf8");
+		return this.fs.readFileSync(name, "utf8");
 	}
 	method write(name, data) {
-		var fs = require('fs');
-		fs.writeFileSync(name, data);
+		this.fs.writeFileSync(name, data);
 	}
 	method append(name, data) {
-		var fs = require('fs');
-		fs.appendFileSync(name, data);
+		this.fs.appendFileSync(name, data);
+	}
+	method exists(name) {
+		return this.fs.existsSync(name);
 	}
 }
 
