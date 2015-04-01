@@ -1,6 +1,13 @@
 class MyApp {
 	member system = new System();
-	member engine = new Engine();
+
+	member mysql  = require("mysql");
+	member pool   = this.mysql.createPool({
+		host     : "localhost",
+		user     : "user",
+		password : "password",
+		database : "db"
+		});
 
 	method double(context) {
 		var tokens = context.request.url.split("/");
@@ -11,17 +18,25 @@ class MyApp {
 	}
 
 	method about(context) {
-		var page = this.engine.render("about.html");
-		context.response.end(page);
+		this.pool.getConnection(function (error, db) {
+			db.query("select * from users", function (error, records) {
+				if (!error) {
+					var page = context.engine.render("about.html",
+						{users:records});
+					context.response.end(page);
+				}
+				db.release();
+			});
+		});
 	}
 
 	method error(context) {
-		var page = this.engine.render("error.html");
+		var page = context.engine.render("error.html");
 		context.response.end(page);
 	}
 
 	method index(context) {
-		var page = this.engine.render("index.html");
+		var page = context.engine.render("index.html");
 		context.response.end(page);
 	}
 }

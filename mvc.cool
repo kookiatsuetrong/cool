@@ -5,9 +5,9 @@ class Engine {
 	member engine = require("ejs");
 	member folder = "./views/";
 
-	method render(name) {
+	method render(name, data) {
 		var html = this.file.read(this.folder + name);
-		return this.engine.render(html);
+		return this.engine.render(html, data);
 	}
 }
 
@@ -18,6 +18,7 @@ class App {
 	member system  = new System();
 	member folder  = "./public"
 	member file    = new File();
+	member engine  = new Engine();
 
 	// TODO: Add more preprocessor file, e.g. sass, scss ...
 	method compile() {
@@ -47,8 +48,9 @@ class App {
 		handler.folder = this.folder;
 		handler.file   = this.file;
 		handler.system = this.system;
+		handler.engine = this.engine;
 
-		this.http.createServer(function (request, response) {
+		var server = this.http.createServer(function (request, response) {
 			var urlTokens = request.url.split("/");
 			var callee = urlTokens[1];
 			if (callee == "")
@@ -65,16 +67,21 @@ class App {
 					if (handler['error'] == null) {
 						response.end();
 					} else {
-						handler['error']({request:request, response:response});
+						handler['error']({ request:request, response:response,
+							engine:handler.engine
+						});
 					}
 				} else {
 					response.statusCode = 200;
 					response.setHeader("Content-Type", "text/html");
-					handler[callee]({request:request, response:response});
+					handler[callee]({ request:request, response:response,
+						engine:handler.engine
+					});
 				}
 			}
-		}).listen(this.port, this.address);
+		});
 
+		server.listen(this.port, this.address);
 		this.system.log("Running at http://" + this.address + ":" + this.port);
 	}
 }

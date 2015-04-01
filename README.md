@@ -92,7 +92,7 @@ class Main {
 class Student(name, dob) {
 	member name;
 	member dob;
-	
+
 	constructor {
 		this.name = name;
 		this.dob = dob;
@@ -139,6 +139,52 @@ class Main {
 		app.run(new MyApp());
 	}
 }
+```
+
+# Web MVC with MySQL Database
+```javascript
+class MyApp {
+	member system = new System();
+
+	member mysql  = require("mysql");
+	member pool   = this.mysql.createPool({
+		host     : "localhost",
+		user     : "user",
+		password : "password",
+		database : "db"
+		});
+
+	method index(context) {
+		this.pool.getConnection(function (error, db) {
+			db.query("select * from users", function (error, records) {
+				if (!error) {
+					var page = context.engine.render("about.html",
+						{users:records});
+					context.response.end(page);
+				}
+				db.release();
+			});
+		});
+	}
+}
+
+class Main {
+	method start() {
+		var app = new App();
+		app.run(new MyApp());
+	}
+}
+```
+
+```html
+<%
+	for (var i = 0; i < users.length; i++) {
+%>
+	<%= users[i].email %><br/>
+<%
+	}
+%>
+
 ```
 
 # Building Web API
