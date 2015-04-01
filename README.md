@@ -155,15 +155,11 @@ class MyApp {
 		});
 
 	method index(context) {
-		this.pool.getConnection(function (error, db) {
-			db.query("select * from users", function (error, records) {
-				if (!error) {
-					var page = context.engine.render("about.html",
-						{users:records});
-					context.response.end(page);
-				}
-				db.release();
-			});
+		this.pool.query("select * from users", function (error, records) {
+			if (!error) {
+				var page = context.engine.render("about.html", {users:records});
+				context.response.end(page);
+			}
 		});
 	}
 }
