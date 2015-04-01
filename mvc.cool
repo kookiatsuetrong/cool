@@ -18,7 +18,6 @@ class App {
 	member system  = new System();
 	member folder  = "./public"
 	member file    = new File();
-	member engine  = new Engine();
 
 	// TODO: Add more preprocessor file, e.g. sass, scss ...
 	method compile() {
@@ -48,7 +47,6 @@ class App {
 		handler.folder = this.folder;
 		handler.file   = this.file;
 		handler.system = this.system;
-		handler.engine = this.engine;
 
 		var server = this.http.createServer(function (request, response) {
 			var urlTokens = request.url.split("/");
@@ -67,16 +65,12 @@ class App {
 					if (handler['error'] == null) {
 						response.end();
 					} else {
-						handler['error']({ request:request, response:response,
-							engine:handler.engine
-						});
+						handler['error']({request:request, response:response});
 					}
 				} else {
 					response.statusCode = 200;
 					response.setHeader("Content-Type", "text/html");
-					handler[callee]({ request:request, response:response,
-						engine:handler.engine
-					});
+					handler[callee]({request:request, response:response});
 				}
 			}
 		});

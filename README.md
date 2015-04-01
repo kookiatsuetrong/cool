@@ -145,19 +145,21 @@ class Main {
 ```javascript
 class MyApp {
 	member system = new System();
+	member engine = new Engine();
 
 	member mysql  = require("mysql");
 	member pool   = this.mysql.createPool({
-		host     : "localhost",
-		user     : "user",
-		password : "password",
-		database : "db"
+		host      : "localhost",
+		user      : "user",
+		password  : "password",
+		database  : "db"
 		});
 
 	method index(context) {
+		var engine = this.engine;
 		this.pool.query("select * from users", function (error, records) {
 			if (!error) {
-				var page = context.engine.render("about.html", {users:records});
+				var page = engine.render("about.html", {users:records});
 				context.response.end(page);
 			}
 		});
