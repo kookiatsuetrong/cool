@@ -114,21 +114,55 @@ class Main {
 }
 ```
 
+
+# Web MVC Framework
+```javascript
+class MyApp {
+	member system = new System();
+	member engine = new Engine();
+
+	method error(context) {
+		var page = this.engine.render("error.html");
+		context.response.end(page);
+	}
+
+	method index(context) {
+		var page = this.engine.render("index.html");
+		context.response.end(page);
+	}
+}
+
+class Main {
+	method start() {
+		var app = new App();
+		app.run(new MyApp());
+	}
+}
+```
+
+# Building Web API
+```javascript
+class MyApp {
+	member system = new System();
+
+	method index(context) {
+		var tokens = context.request.url.split("/");
+		var integer = new Integer();
+		var data = {result: integer.parse(tokens[2]) * 2};
+		var result = this.system.stringify(data);
+		context.response.end(result);
+	}
+}
+
+class Main {
+	method start() {
+		var app = new App();
+		app.run(new MyApp());
+	}
+}
+```
+
 # To Do
-```
-Sample of simple web MVC
-Sample of full feature web MVC
-Sample of API MVC
-```
-
-
-
-
-
-
-
-
-
 
 
 
