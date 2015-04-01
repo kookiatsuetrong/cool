@@ -2,6 +2,8 @@ class Student(name, dob) {
 	property name;
 	property dob;
 
+	field data = "Test";
+
 	// comment
 	constructor {
 		this.name = name;
@@ -16,12 +18,34 @@ class Student(name, dob) {
 	 */
 }
 
-class Main{
+/*
+class Employee {
+	field name;
+	field dob;
+	method getData() { }
+}
+
+class Employee {
+	property name;
+	property dob;
+	method getData() { }
+}
+
+class Employee {
+	public  name;
+	private dob;
+	public  method getData() {}
+	private method process() {}
+}
+*/
+
+class Main {
 	method start() {
 		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
 		students[1] = new Student("Smith", "1980-03-01");
+
 		for (var i = 0; i < students.length; i++) {
 			system.log(students[i].toString());
 		}

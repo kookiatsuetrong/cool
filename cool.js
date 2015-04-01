@@ -29,18 +29,11 @@ function request(url) {
 }
 
 function transpile(originalCode) {
-	var code = originalCode;
+	var code = '"use strict";\n' +  originalCode;
 
 	// remove all comments // /* */
 	code = code.replace(/\/\/.*\n/g, "\n");
 	code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
-
-	// replacing field
-	code = code.replace(/field(\s+)/g, "this.");
-	code = code.replace(/property(\s+)/g, "this.");
-
-	// replacing method
-	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
 
 	// replacing class without constructor
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
@@ -51,6 +44,26 @@ function transpile(originalCode) {
 	// remove constructor
 	code = code.replace(/constructor(\s+)/g, '');
 	code = code.replace(/constructor/g, '');
+
+	// replacing public method
+	/*
+	code = code.replace(/public(\s+)method(\s+)(\w+)/g, "this.$3 = function ");
+	code = code.replace(/private(\s+)method(\s+)(\w+)/g, "function $3 ");
+	*/
+
+	// replacing method
+	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
+
+	// replacing field
+	code = code.replace(/field(\s+)/g, "this.");
+	code = code.replace(/member(\s+)/g, "this.");
+	code = code.replace(/property(\s+)/g, "this.");
+
+	// replacing public / private
+	/*
+	code = code.replace(/public(\s+)/g, "this.");
+	code = code.replace(/private(\s+)/g, "var ");
+	*/
 
 	if (originalCode.match(/class(\s+)Main/))
 		code += "\n;\n(new Main()).start();\n";
