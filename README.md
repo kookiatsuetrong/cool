@@ -90,8 +90,9 @@ class Main {
 # Writing class with constructor
 ```es6
 class Student(name, dob) {
-	field name;
-	field dob;
+	member name;
+	member dob;
+	
 	constructor {
 		this.name = name;
 		this.dob = dob;
