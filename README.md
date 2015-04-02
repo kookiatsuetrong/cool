@@ -32,6 +32,48 @@ Or run the code by run this command:
 node transpile.js < hello.cool > hello.cool.js; node hello.cool.js
 ```
 
+# Writing a recursion method
+```es6
+class Main {
+	method fib(n) {
+		if (n <= 1) return n;
+		return this.fib(n-1) + this.fib(n-2);
+	}
+	method start() {
+		var system = new System();
+		system.log(this.fib(40));
+	}
+}
+```
+
+# Writing class with constructor
+```es6
+class Student(name, dob) {
+	member name;
+	member dob;
+
+	constructor {
+		this.name = name;
+		this.dob = dob;
+	}
+	method toString() {
+		return this.name + ' ' + this.dob;
+	}
+}
+
+class Main {
+	method start() {
+		var system = new System();
+		var students = [];
+		students[0] = new Student("James", "1980-01-01");
+		students[1] = new Student("Smith", "1980-03-01");
+		for (var i = 0; i < students.length; i++) {
+			system.log(students[i].toString());
+		}
+	}
+}
+```
+
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:
 ```html
@@ -99,50 +141,6 @@ class Main {
 }
 ```
 
-# Writing Recursion
-```es6
-class Main {
-	method fib(n) {
-		if (n <= 1) return n;
-		return this.fib(n-1) + this.fib(n-2);
-	}
-	method start() {
-		var system = new System();
-		system.log(this.fib(40));
-	}
-}
-```
-
-
-# Writing class with constructor
-```es6
-class Student(name, dob) {
-	member name;
-	member dob;
-
-	constructor {
-		this.name = name;
-		this.dob = dob;
-	}
-	method toString() {
-		return this.name + ' ' + this.dob;
-	}
-}
-
-class Main {
-	method start() {
-		var system = new System();
-		var students = [];
-		students[0] = new Student("James", "1980-01-01");
-		students[1] = new Student("Smith", "1980-03-01");
-		for (var i = 0; i < students.length; i++) {
-			system.log(students[i].toString());
-		}
-	}
-}
-```
-
-
 # Web MVC Framework
 ```javascript
 class MyApp {
@@ -201,6 +199,7 @@ class Main {
 }
 ```
 
+The default template engine is EJS.
 ```html
 <%
 	for (var i = 0; i < users.length; i++) {
@@ -234,13 +233,19 @@ class Main {
 }
 ```
 
+# Additional Information
+The "function" keyword uses for an internal or private function as well as
+call back function. But the "method" keyword uses to declare a member method of
+class.
+
+Similar to the "var" keyword for private and local variable, the "member"
+keyword are required when creating a member variable.
+
 # To Do
 ```
 - Nested class
 - import vs require
-- function vs method and var vs member
 - Syntax checking
-
 ```
 
 
