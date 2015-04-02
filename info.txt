@@ -1,0 +1,106 @@
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+Lexeme
+
+alpha numeric _ = == === != !==  + - * / & ^ ! | % $ && || \ " ' : ;
+() [] {} space, tab, cr, nl
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+Tokens
+
+underscore
+plusSign
+minusSign
+multiplySign
+divideSign
+moduloSign
+backslash
+
+ampersand
+
+logicalOr       "||"
+logicalAnd      "&&"
+
+openParenthesis "("
+closeParenthesis "("
+
+doubleQuote       "\""
+singleQuote       "\'"
+
+reservedWord    for while do function var if switch case break this
+                class method member
+identifier      name name_2 $name
+literal         1 0.5 "data"
+endStatement    :- ; \n \r
+
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+Syntax
+
+class identifier block
+class identifier () block
+block :- {[[statement]endStatement]*}
+
+stringLiteral          "{} // /* */ \" " also inside singleQuote
+singleLineComment      // ... \n
+multipleLineComment    /* ... */
+
+
+statement :- assignment | conditional | iterative |
+    functionDeclaration | variableDeclaration |
+    methodDeclaration | memberDeclaration
+
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
