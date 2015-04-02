@@ -57,19 +57,15 @@ class App {
 		handler.less    = this.less;
 
 		var server = this.http.createServer(function (request, response) {
-			var urlTokens = request.url.split("/");
-			var callee = urlTokens[1];
-			if (callee == "")
-				callee = "index";
+			var urlTokens  = request.url.split("/");
+			var callee     = urlTokens[1];
 			var path       = handler.folder + request.url;
 			var pathTokens = path.split(".");
 			var fileType   = pathTokens[pathTokens.length-1];
+			if (callee == "") callee = "index";
 
 			if (handler.storage.existsSync(path) && callee != "index") {
-				var data = "";
-
 				if (fileType == "css") {
-					// TODO: development mode use this block
 					// TODO: add production code, compile only first time
 					// TODO: support other CSS preprocessor e.g. sass, scss
 					response.setHeader("Content-Type", "text/css");
@@ -146,31 +142,6 @@ class App {
 		this.system.log("Running at http://" + this.address + ":" + this.port);
 	}
 
-
-	/*
-	// The production version, it need to compile the first time only
-	method compile() {
-		var less  = require('less');
-		var files = this.file.list(this.folder);
-		for (var i = 0; i < files.length; i++) {
-			if (files[i].match(/\.less$/)) {
-				var path   = this.folder + "/" + files[i];
-				var file   = this.file;
-				var source = file.read(path);
-				less.render(source, (function(file, path) {
-					return function(error, result) {
-						var css = path.replace(".less", ".css");
-						if (error) {
-							file.write(css, "");
-						} else {
-							file.write(css, result.css);
-						}
-					}
-				})(file, path));
-			}
-		}
-	}
-	*/
 }
 
 
