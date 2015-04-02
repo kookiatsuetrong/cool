@@ -1,28 +1,33 @@
 // Web MVC Framework
 
 class Engine {
-	member file   = new File();
+	member fs     = require('fs');
 	member engine = require("ejs");
 	member folder = "./views/";
 	member header = "";
 	member footer = "";
+	member headerContent = "";
+	member footerContent = "";
 
+	// development code
 	method render(name, data) {
-		var html = "";
-		if (this.header != "")
-			html += this.file.read(this.folder + this.header);
-		html += this.file.read(this.folder + name);
-		if (this.footer != "")
-			html += this.file.read(this.folder + this.footer);
-
-		return this.engine.render(html, data);
+		var engine = this.engine;
+		var header = this.fs.readFileSync(this.folder + this.header);
+		var footer = this.fs.readFileSync(this.folder + this.footer);
+		var center = this.fs.readFileSync(this.folder + name);
+		var html = header + center + footer;
+		return engine.render(html, data);
 	}
+	// TODO: add production code
 
 	method setHeader(name) {
-		this.header = name;
+		this.header   = name;
+		headerContent = this.fs.readFileSync(this.folder + this.header);
 	}
+
 	method setFooter(name) {
-		this.footer = name;
+		this.footer   = name;
+		footerContent = this.fs.readFileSync(this.folder + this.footer);
 	}
 }
 
@@ -35,20 +40,17 @@ class App {
 	member storage = require('fs');
 	member less    = require('less');
 
-	member mime = [];
-
-	constructor {
-		this.mime["js"  ] = { text: true , type: "text/javascript"  };
-		this.mime["css" ] = { text: true , type: "text/css"         };
-		this.mime["cool"] = { text: true , type: "text/cool"        };
-		this.mime["txt" ] = { text: true , type: "text/plain"       };
-		this.mime["map" ] = { text: true , type: "text/plain"       };
-		this.mime["json"] = { text: true , type: "application/json" };
-		this.mime["xml" ] = { text: true , type: "application/xml"  };
-	}
+	member mime = {
+		"js"   : { text: true , type: "text/javascript"  },
+		"css"  : { text: true , type: "text/css"         },
+		"cool" : { text: true , type: "text/cool"        },
+		"txt"  : { text: true , type: "text/plain"       },
+		"map"  : { text: true , type: "text/plain"       },
+		"json" : { text: true , type: "application/json" },
+		"xml"  : { text: true , type: "application/xml"  },
+	};
 
 	method run(handler) {
-		this.compile();
 		handler.folder  = this.folder;
 		handler.storage = this.storage;
 		handler.system  = this.system;
@@ -146,9 +148,8 @@ class App {
 	}
 
 
-	method compile() {}
-	// TODO: Add more preprocessor file, e.g. sass, scss ...
 	/*
+	// The production version, it need to compile the first time only
 	method compile() {
 		var less  = require('less');
 		var files = this.file.list(this.folder);
