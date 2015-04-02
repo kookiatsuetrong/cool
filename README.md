@@ -48,6 +48,28 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 <script src="/cool.js"></script>
 ```
 
+# HTML Event Handling
+```html
+<script type="text/cool">
+class Main {
+	method onClick(e) {
+		var system = new System();
+		system.log(e);
+	}
+	method onScroll(e) {
+		var system = new System();
+		system.log(this.scrollY);
+	}
+	method start() {
+		var page = new Page();
+		var body = page.select('body');
+		body[0].onscroll = this.onScroll;
+		body[0].onclick  = this.onClick;
+	}
+}
+</script>
+```
+
 # Importing JavaScript Code
 You can use your existing JavaScript with Cool! by using require(). The
 following code reads data from MySQL server using Node.js library:

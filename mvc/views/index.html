@@ -144,16 +144,48 @@
 	<span class="background-icon glyphicon glyphicon-trash"></span>
 </footer>
 
-
-
 <script type="text/cool">
 class Main {
-	method start() {
-		/*
+	method onClick(e) {
 		var system = new System();
-		for (var i = 0; i < 10; i++)
-			system.log("Hello World " + i);
-		*/
+		system.log(e);
+	}
+	method onScroll(e) {
+		var system = new System();
+		system.log(this.scrollY);
+	}
+	method start() {
+		var page = new Page();
+		var body = page.select('body');
+		body[0].onscroll = this.onScroll;
+		body[0].onclick  = this.onClick;
 	}
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -->

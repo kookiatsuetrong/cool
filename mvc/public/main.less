@@ -35,7 +35,7 @@ a {
 
 .banner {
 	margin: 0;
-	padding: 0;
+	padding: 10px 0;
 	width: 100%;
 	background: @primary;
 	color: white;
@@ -81,9 +81,15 @@ a {
 	font-size: 2rem;
 	padding: 1rem;
 	color: darken(@primary, 20%);
+	transition: all 0.1s linear;
 	text-shadow: 0 1px lighten(@primary, 10%);
 	&:hover {
 		color: white;
+		text-shadow: 0 0 50px black;
+		/*
+		color: darken(@primary, 10%);
+		text-shadow: 0 0 10px white;
+		*/
 	}
 }
 
