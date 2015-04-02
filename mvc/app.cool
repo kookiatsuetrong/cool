@@ -13,8 +13,8 @@ class MyApp {
 		});
 
 	constructor {
-		this.engine.setHeader('header.html');
-		this.engine.setFooter('footer.html');
+		this.engine.setHeader("header.html");
+		this.engine.setFooter("footer.html");
 	}
 
 	method error(context) {

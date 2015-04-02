@@ -19,20 +19,12 @@ class System {
 }
 
 class File {
-	member fs = require('fs');
+	member fs = require("fs");
 
 	method read(name) {
 		var result = "";
 		try {
-			result = this.fs.readFileSync(name, "utf8");
-		} catch (e) {}
-		return result;
-	}
-
-	method readBinary(name) {
-		var result = "";
-		try {
-			result = this.fs.readFileSync(name);
+			result = this.fs.readFileSync(name, {encoding: "utf8"});
 		} catch (e) {}
 		return result;
 	}
@@ -49,6 +41,20 @@ class File {
 	method list(name) {
 		return this.fs.readdirSync(name);
 	}
+	method isDirectory(name) {
+		var info = this.fs.statsSync(name);
+		return info.isDirectory();
+	}
+
+	/*
+		method readBinary(name) {
+			var result = "";
+			try {
+				result = this.fs.readFileSync(name);
+			} catch (e) {}
+			return result;
+		}
+	*/
 }
 
 class Float {
