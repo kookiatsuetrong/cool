@@ -32,7 +32,7 @@ class Engine {
 
 class App {
 	member port    = 2000;
-	member address = "127.0.0.1";
+	member address = "0.0.0.0";
 	member http    = require('http');
 	member system  = new System();
 	member folder  = "./public"
@@ -64,7 +64,8 @@ class App {
 			var fileType   = pathTokens[pathTokens.length-1];
 			if (callee == "") callee = "index";
 
-			if (handler.storage.existsSync(path) && callee != "index") {
+			if ((handler.storage.existsSync(path) || fileType == "css") && 
+				callee != "index") {
 				if (fileType == "css") {
 					// TODO: add production code, compile only first time
 					// TODO: support other CSS preprocessor e.g. sass, scss
