@@ -1,5 +1,29 @@
 
 
+
+class Student {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+function Student () {
+
+    {
+        this._create(arguments);
+    }
+
+    this._create(a) {
+
+    }
+}
+
+
+
+var student = new Student("name");
+
+
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 Lexeme
 

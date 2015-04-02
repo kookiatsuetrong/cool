@@ -1,20 +1,27 @@
+// Web MVC Demo
+
 class MyApp {
 	member system = new System();
 	member engine = new Engine();
 
 	member mysql  = require("mysql");
 	member pool   = this.mysql.createPool({
-		host     : "localhost",
-		user     : "user",
-		password : "password",
-		database : "db"
+		host      : "localhost",
+		user      : "user",
+		password  : "password",
+		database  : "db"
 		});
 
+	constructor {
+		this.engine.setHeader('header.html');
+		this.engine.setFooter('footer.html');
+	}
+
 	method double(context) {
-		var tokens = context.request.url.split("/");
+		var tokens  = context.request.url.split("/");
 		var integer = new Integer();
-		var data = {result: integer.parse(tokens[2]) * 2};
-		var result = this.system.stringify(data);
+		var data    = {result: integer.parse(tokens[2]) * 2};
+		var result  = this.system.stringify(data);
 		context.response.end(result);
 	}
 
@@ -29,12 +36,12 @@ class MyApp {
 	}
 
 	method error(context) {
-		var page = context.engine.render("error.html");
+		var page = this.engine.render("error.html");
 		context.response.end(page);
 	}
 
 	method index(context) {
-		var page = context.engine.render("index.html");
+		var page = this.engine.render("index.html");
 		context.response.end(page);
 	}
 }
@@ -45,7 +52,6 @@ class Main {
 		app.run(new MyApp());
 	}
 }
-
 
 
 

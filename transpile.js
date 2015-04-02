@@ -3,7 +3,7 @@ function transpile(originalCode) {
 
 	// remove all comments // /* */
 	// code = code.replace(/\/\/.*\n/g, "\n");
-	code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
+	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
 	// replacing class without constructor
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
@@ -34,9 +34,15 @@ function transpile(originalCode) {
 	code = code.replace(/private(\s+)/g, "var ");
 	*/
 
+	var prefix = '"use strict;"; ';
 	if (originalCode.match(/class(\s+)Main/))
-		code = "(new Main()).start();\n\n" + code;
-	code = '"use strict;";\n' + code;
+		prefix += "(new Main()).start(); ";
+	if (code.indexOf("//") == 0) {
+		code = prefix + code;
+	} else {
+		code = prefix + "\n" + code;
+	}
+	
 	return code;
 }
 

@@ -7,6 +7,11 @@ transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
 It supports only encapsulation and abstraction, no inheritance or polymorphism
 for the current version.
 
+The other benefit of the Cool! programming language is small library or
+framework. A large framework language like Java or C# is very hard to remember
+how to do a common task. But the Cool! programming language has only 20-30
+methods such as File.read(), Integer.parse(), System.log().
+
 # The Hello World program
 Program written by the Cool! programming language starts from the start() method
 of the Main class. So let's start by writing the first Hello World program:
@@ -208,7 +213,13 @@ class Main {
 ```
 
 # To Do
+```
+- Nested class
+- import vs require
+- function vs method and var vs member
+- Syntax checking
 
+```
 
 
 

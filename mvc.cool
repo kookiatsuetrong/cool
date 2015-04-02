@@ -4,10 +4,25 @@ class Engine {
 	member file   = new File();
 	member engine = require("ejs");
 	member folder = "./views/";
+	member header = "";
+	member footer = "";
 
 	method render(name, data) {
-		var html = this.file.read(this.folder + name);
+		var html = "";
+		if (this.header != "")
+			html += this.file.read(this.folder + this.header);
+		html += this.file.read(this.folder + name);
+		if (this.footer != "")
+			html += this.file.read(this.folder + this.footer);
+
 		return this.engine.render(html, data);
+	}
+
+	method setHeader(name) {
+		this.header = name;
+	}
+	method setFooter(name) {
+		this.footer = name;
 	}
 }
 
