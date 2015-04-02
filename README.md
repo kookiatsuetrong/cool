@@ -35,11 +35,11 @@ node transpile.js < hello.cool > hello.cool.js; node hello.cool.js
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:
 ```html
-<script language="cool" src="/test.cool"></script>
+<script type="text/cool" src="/test.cool"></script>
 ```
 Or using it as an inline code:
 ```html
-<script language="cool">
+<script type="text/cool">
 ... Your Cool! code here ...
 </script>
 ```
