@@ -33,22 +33,104 @@ class App {
 	member system  = new System();
 	member folder  = "./public"
 	member file    = new File();
+	member less    = require('less');
 
 	member mime = [];
 
 	constructor {
-		this.mime["js"  ] = "text/javascript";
-		this.mime["css" ] = "text/css";
-		this.mime["cool"] = "text/cool";
-		this.mime["json"] = "application/json";
-		this.mime["ttf" ] = "application/x-font-ttf";
-		this.mime["eot" ] = "application/vnd.ms-fontobject";
-		this.mime["svg" ] = "image/svg+xml";
-		this.mime["woff"] = "application/font-woff";
-		this.mime["woff2"]= "application/font-woff2";
+		this.mime["js"  ] = { text: true , type: "text/javascript"  };
+		this.mime["css" ] = { text: true , type: "text/css"         };
+		this.mime["cool"] = { text: true , type: "text/cool"        };
+		this.mime["txt" ] = { text: true , type: "text/plain"       };
+		this.mime["map" ] = { text: true , type: "text/plain"       };
+		this.mime["json"] = { text: true , type: "application/json" };
+		this.mime["xml" ] = { text: true , type: "application/xml"  };
 	}
 
+	method run(handler) {
+		this.compile();
+		handler.folder = this.folder;
+		handler.file   = this.file;
+		handler.system = this.system;
+		handler.mime   = this.mime;
+		handler.less   = this.less;
+
+		var server = this.http.createServer(function (request, response) {
+			var urlTokens = request.url.split("/");
+			var callee = urlTokens[1];
+			if (callee == "")
+				callee = "index";
+			var path = handler.folder + request.url;
+			var pathTokens = path.split(".");
+			var fileType   = pathTokens[pathTokens.length-1];
+
+			if (handler.file.exists(path) && callee != "index") {
+				var data = "";
+
+
+				if (fileType == "css") { // recompile
+					var oldFile = path;
+					oldFile = oldFile.replace(/\.css$/g, ".less");
+					var oldData = handler.file.read(oldFile);
+
+					if (oldData == "") {
+						data = handler.file.read(path);
+						response.statusCode = 200;
+						response.setHeader("Content-Type", "text/css");
+						response.end(data);
+					} else {
+						handler.less.render(oldData, function(error, css) {
+							if (error) data = ""; else data = css.css;
+							handler.file.write(path, data);
+							response.statusCode = 200;
+							response.setHeader("Content-Type", "text/css");
+							response.end(data);
+						});
+					}
+				} else {
+					data = handler.file.read(path);
+					if (data == "") {
+						response.statusCode = 404;
+						response.end();
+					} else {
+						var mime   = handler.mime[fileType] == null ?
+										"application/octet-stream" :
+										handler.mime[fileType].type;
+						var isText = handler.mime[fileType] == null ?
+										false :
+										handler.mime[fileType].text;
+
+						response.statusCode = 200;
+						response.setHeader("Content-Type", mime);
+						if (!isText)
+							data = handler.file.readBinary();
+						response.end(data);
+					}
+				}
+			} else {
+				if (handler[callee] == null) {
+					response.statusCode = 404;
+					if (handler['error'] == null) {
+						response.end();
+					} else {
+						handler['error']({request:request, response:response});
+					}
+				} else {
+					response.statusCode = 200;
+					response.setHeader("Content-Type", "text/html");
+					handler[callee]({request:request, response:response});
+				}
+			}
+		});
+
+		server.listen(this.port, this.address);
+		this.system.log("Running at http://" + this.address + ":" + this.port);
+	}
+
+
+	method compile() {}
 	// TODO: Add more preprocessor file, e.g. sass, scss ...
+	/*
 	method compile() {
 		var less  = require('less');
 		var files = this.file.list(this.folder);
@@ -70,54 +152,17 @@ class App {
 			}
 		}
 	}
-
-	method run(handler) {
-		this.compile();
-		handler.folder = this.folder;
-		handler.file   = this.file;
-		handler.system = this.system;
-		handler.mime   = this.mime;
-
-		var server = this.http.createServer(function (request, response) {
-			var urlTokens = request.url.split("/");
-			var callee = urlTokens[1];
-			if (callee == "")
-				callee = "index";
-			var path = handler.folder + request.url;
-
-			if (handler.file.exists(path) && callee != "index") {
-				var data = handler.file.read(path);
-				if (data == "") {
-					response.statusCode = 404;
-					response.end(data);
-					// handler['error']({request:request, response:response});
-				} else {
-					var pathTokens = path.split(".");
-					var fileType   = pathTokens[pathTokens.length-1];
-					var mime       = handler.mime[fileType] ||
-										"application/octet-stream";
-					response.statusCode = 200;
-					response.setHeader("Content-Type", mime);
-					response.end(data);
-				}
-
-			} else {
-				if (handler[callee] == null) {
-					response.statusCode = 404;
-					if (handler['error'] == null) {
-						response.end();
-					} else {
-						handler['error']({request:request, response:response});
-					}
-				} else {
-					response.statusCode = 200;
-					response.setHeader("Content-Type", "text/html");
-					handler[callee]({request:request, response:response});
-				}
-			}
-		});
-
-		server.listen(this.port, this.address);
-		this.system.log("Running at http://" + this.address + ":" + this.port);
-	}
+	*/
 }
+
+
+
+
+
+/*
+this.mime["ttf" ] = { text: false, type: "application/x-font-ttf" };
+this.mime["eot" ] = { text: false, type: "application/vnd.ms-fontobject"};
+this.mime["svg" ] = { text: false, type: "image/svg+xml" };
+this.mime["woff"] = { text: false, type: "application/font-woff" };
+this.mime["woff2"]= { text: false, type: "application/font-woff2" };
+*/

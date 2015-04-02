@@ -24,19 +24,19 @@ class File {
 	method read(name) {
 		var result = "";
 		try {
-			var nameTokens = name.split(".");
-			var fileType   = nameTokens[nameTokens.length-1];
-			if (fileType == "ttf" || fileType == "svg" ||
-				fileType == "eot" || 
-				fileType == "woff"|| fileType == "woff2") {
-				result = this.fs.readFileSync(name);
-			}
-			else {
-				result = this.fs.readFileSync(name, "utf8");
-			}
+			result = this.fs.readFileSync(name, "utf8");
 		} catch (e) {}
 		return result;
 	}
+
+	method readBinary(name) {
+		var result = "";
+		try {
+			result = this.fs.readFileSync(name);
+		} catch (e) {}
+		return result;
+	}
+
 	method write(name, data) {
 		this.fs.writeFileSync(name, data);
 	}
