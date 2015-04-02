@@ -9,16 +9,15 @@ class Engine {
 	member headerContent = "";
 	member footerContent = "";
 
-	// development code
 	method render(name, data) {
 		var engine = this.engine;
 		var header = this.fs.readFileSync(this.folder + this.header);
 		var footer = this.fs.readFileSync(this.folder + this.footer);
 		var center = this.fs.readFileSync(this.folder + name);
 		var html = header + center + footer;
+		// TODO: add hashing here for production server
 		return engine.render(html, data);
 	}
-	// TODO: add production code
 
 	method setHeader(name) {
 		this.header   = name;
