@@ -34,6 +34,20 @@ class App {
 	member folder  = "./public"
 	member file    = new File();
 
+	member mime = [];
+
+	constructor {
+		this.mime["js"  ] = "text/javascript";
+		this.mime["css" ] = "text/css";
+		this.mime["cool"] = "text/cool";
+		this.mime["json"] = "application/json";
+		this.mime["ttf" ] = "application/x-font-ttf";
+		this.mime["eot" ] = "application/vnd.ms-fontobject";
+		this.mime["svg" ] = "image/svg+xml";
+		this.mime["woff"] = "application/font-woff";
+		this.mime["woff2"]= "application/font-woff2";
+	}
+
 	// TODO: Add more preprocessor file, e.g. sass, scss ...
 	method compile() {
 		var less  = require('less');
@@ -62,6 +76,7 @@ class App {
 		handler.folder = this.folder;
 		handler.file   = this.file;
 		handler.system = this.system;
+		handler.mime   = this.mime;
 
 		var server = this.http.createServer(function (request, response) {
 			var urlTokens = request.url.split("/");
@@ -71,9 +86,21 @@ class App {
 			var path = handler.folder + request.url;
 
 			if (handler.file.exists(path) && callee != "index") {
-				response.statusCode = 200;
-				// TODO: set MIME type for static file here
-				response.end(handler.file.read(path));
+				var data = handler.file.read(path);
+				if (data == "") {
+					response.statusCode = 404;
+					response.end(data);
+					// handler['error']({request:request, response:response});
+				} else {
+					var pathTokens = path.split(".");
+					var fileType   = pathTokens[pathTokens.length-1];
+					var mime       = handler.mime[fileType] ||
+										"application/octet-stream";
+					response.statusCode = 200;
+					response.setHeader("Content-Type", mime);
+					response.end(data);
+				}
+
 			} else {
 				if (handler[callee] == null) {
 					response.statusCode = 404;

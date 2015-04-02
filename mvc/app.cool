@@ -18,7 +18,10 @@ class MyApp {
 	}
 
 	method error(context) {
-		var page = this.engine.render("error.html");
+		this.system.log('error ' + context.request.url);
+		var page = this.engine.render("error.html", {
+			title: "Hello World"
+		});
 		context.response.end(page);
 	}
 

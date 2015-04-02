@@ -5,8 +5,8 @@ html {
 	font-size: 100%;
 }
 body {
-	font-weight: 200;
 	background: @background;
+	font-size: 1rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -20,4 +20,18 @@ h1, h2, h3, h4, h5, h6 {
 	background: @primary;
 	color: white;
 	height: 120px;
+}
+
+
+.background-primary {
+	background: @primary;
+	color: white;
+}
+
+.background-icon {
+	font-size: 5rem;
+	color: darken(@primary, 10%);
+	&:hover {
+		color: white;
+	}
 }
