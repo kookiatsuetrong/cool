@@ -1,8 +1,8 @@
 var scripts = document.getElementsByTagName('script');
 
 for (var i = 0; i < scripts.length; i++) {
-	if (scripts[i].attributes['language'] != null) {
-		if (scripts[i].attributes['language'].value === 'cool') {
+	if (scripts[i].attributes['type'] != null) {
+		if (scripts[i].attributes['type'].value === 'text/cool') {
 			if (scripts[i].attributes['src'] == null) {
 				eval(transpile(scripts[i].text));
 			} else {

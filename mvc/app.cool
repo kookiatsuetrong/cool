@@ -17,33 +17,18 @@ class MyApp {
 		this.engine.setFooter('footer.html');
 	}
 
-	method double(context) {
-		var tokens  = context.request.url.split("/");
-		var integer = new Integer();
-		var data    = {result: integer.parse(tokens[2]) * 2};
-		var result  = this.system.stringify(data);
-		context.response.end(result);
-	}
-
-	method about(context) {
-		var engine = this.engine;
-		this.pool.query("select * from users", function (error, records) {
-			if (!error) {
-				var page = engine.render("about.html", {users:records});
-				context.response.end(page);
-			}
-		});
-	}
-
 	method error(context) {
 		var page = this.engine.render("error.html");
 		context.response.end(page);
 	}
 
 	method index(context) {
-		var page = this.engine.render("index.html");
+		var page = this.engine.render("index.html", {
+			title: "Hello World"
+		});
 		context.response.end(page);
 	}
+
 }
 
 class Main {
@@ -65,4 +50,30 @@ class Main {
 
 
 
-//
+
+
+
+
+
+
+
+
+/*
+method double(context) {
+	var tokens  = context.request.url.split("/");
+	var integer = new Integer();
+	var data    = {result: integer.parse(tokens[2]) * 2};
+	var result  = this.system.stringify(data);
+	context.response.end(result);
+}
+
+method about(context) {
+	var engine = this.engine;
+	this.pool.query("select * from users", function (error, records) {
+		if (!error) {
+			var page = engine.render("about.html", {users:records});
+			context.response.end(page);
+		}
+	});
+}
+*/
