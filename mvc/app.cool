@@ -20,14 +20,14 @@ class MyApp {
 	method error(context) {
 		this.system.log('error ' + context.request.url);
 		var page = this.engine.render("error.html", {
-			title: "Hello World"
+			title: "Cool!"
 		});
 		context.response.end(page);
 	}
 
 	method index(context) {
 		var page = this.engine.render("index.html", {
-			title: "Hello World"
+			title: "Cool!"
 		});
 		context.response.end(page);
 	}
