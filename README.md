@@ -104,12 +104,19 @@ class D(p) extends C(p) {
 ```
 
 If you really need multiple inheritance please use .call() method directly.
+Similar to the following code:
+```es6
+class E(p) {
+	B.call(this);
+	C.call(this, p);
+}
+```
 
 # The Root class
 The Root class is the base class for every class, please explicitly extends
 from this class. Unlike Java or C# that automatically extends from the Object
 class. For example:
-```
+```es6
 class Root {
 	...
 }
