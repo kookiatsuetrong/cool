@@ -1,0 +1,38 @@
+// OOP by "extends"
+
+class A(p) extends Root {
+	this.class = p;
+}
+
+class B( p, q ) extends Root {
+	this.class = p + " - " + q;
+	member p = p;
+	member q = q;
+
+	method toString() {
+		return this.p + " - " + this.q;
+	}
+}
+
+class C(p,q) extends A(p) {
+
+}
+
+// literal
+// class D extends A(123) { }
+
+class Main {
+	method start() {
+		var system = new System();
+		system.log(system.toString());
+
+		var a = new A("ppp");
+		system.log(a.toString());
+
+		var b = new B("ppp", "qqq");
+		system.log(b.toString());
+
+		var c = new C("ccc", "123");
+		system.log(c.toString());
+	}
+}

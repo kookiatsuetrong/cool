@@ -1,0 +1,9 @@
+class Main {
+	method start() {
+		var root = new Root();
+		var system = new System();
+		system.log(system.toString());
+		if (0.99999999999999999 == 1)
+			throw new Exception();
+	}
+}

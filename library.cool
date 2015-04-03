@@ -1,40 +1,64 @@
 // Standard Library
 
-class System {
-	method execute(x) {
-		return eval(x);
+class Root {
+	member class = "Root";
+	method toString() {
+		return this.class;
+	}
+}
+
+class Exception extends Root {
+	this.class = "Exception";
+}
+
+class System extends Root {
+	this.class = "System";
+
+	method log(data) {
+		console.log(data);
+	}
+	method execute(code) {
+		eval(code);
 	}
 	method exit() {
 		process.exit();
 	}
-	method log(x) {
-		console.log(x);
+	method parse(data) {
+		return JSON.parse(data);
 	}
-	method parse(x) {
-		return JSON.parse(x);
-	}
-	method stringify(x) {
-		return JSON.stringify(x);
+	method stringify(data) {
+		return JSON.stringify(data);
 	}
 }
 
-class File {
-	member fs = require("fs");
+class Integer extends Root {
+	this.class = "Integer";
+	method parse(n) { return parseInt(n); }
+}
 
+class Float extends Root {
+	this.class = "Float";
+	method parse(f) { return parseFloat(f); }
+}
+
+class File extends Root {
+	this.class = "File";
+
+	member fs = require("fs");
 	method read(name) {
 		var result = "";
 		try {
 			result = this.fs.readFileSync(name, {encoding: "utf8"});
-		} catch (e) {}
+		} catch (e) { throw new Exception(); }
 		return result;
 	}
-
 	method write(name, data) {
 		this.fs.writeFileSync(name, data);
 	}
 	method append(name, data) {
 		this.fs.appendFileSync(name, data);
 	}
+	/*
 	method exists(name) {
 		return this.fs.existsSync(name);
 	}
@@ -45,40 +69,15 @@ class File {
 		var info = this.fs.statsSync(name);
 		return info.isDirectory();
 	}
-
-	/*
-		method readBinary(name) {
-			var result = "";
-			try {
-				result = this.fs.readFileSync(name);
-			} catch (e) {}
-			return result;
-		}
 	*/
 }
 
-class Float {
-	method parse(x) {
-		if (x == '') return 0;
-		return parseFloat(x);
-	}
-}
+class Web extends Root {
+	this.class = "Web";
 
-class Integer {
-	method parse(x) {
-		if (x == '') return 0;
-		return parseInt(x);
-	}
-}
-
-class Page {
 	method select(x) {
 		return [];
 	}
-	// alert ?,
-}
-
-class Web {
 	method get(url, data, callback) {
 		callback();
 	}

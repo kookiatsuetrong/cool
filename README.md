@@ -90,27 +90,42 @@ class B {
 	method bbb() { this.system.log("B.bbb()"); }
 }
 
-class C(p) {
-	mutate A;
-	mutate B;
-
+class C(p) extends A {
 	member p = p;
-
 	method aaa() {
 		// do something polymorphism here
 	}
-
 	method ccc() {
-		this.bbb();
 	}
 }
 
-class D(p) {
-	mutate C(p);
+class D(p) extends C(p) {
 }
-
 ```
 
+If you really need multiple inheritance please use .call() method directly.
+
+# The Root class
+The Root class is the base class for every class, please explicitly extends
+from this class. Unlike Java or C# that automatically extends from the Object
+class. For example:
+```
+class Root {
+	...
+}
+class System extends Root {
+	...
+}
+```
+
+# Exception
+```es6
+try {
+
+} catch (error) {
+	throw new Exception();
+}
+```
 
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:

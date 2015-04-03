@@ -1,11 +1,24 @@
 
 
-member field data property attribute
+- member field data property attribute
 
-method
+- method
 
-derive extend mutate obtain expand borrow include extends inherits
+- derive extend mutate obtain expand borrow include extends inherits
+- the Root class similar to Object in Java
 
+class Root {
+    member class = "Root";
+}
+
+class Integer {
+    extend Root;
+    this.class = "Integer";
+
+    method parse(x) {
+        return parseInt(x);
+    }
+}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 Lexeme
