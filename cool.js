@@ -35,6 +35,7 @@ function transpile(originalCode) {
 	// code = code.replace(/\/\/.*\n/g, "\n");
 	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
+	/* use keyword "extends"
 	// transpile class with extends
 	code = code.replace(/class(\s+)(\w+)(\s+)extends(\s+)(\w+)(\s+){/g,
 		"function $2 () { $5.call(this); ");
@@ -43,11 +44,18 @@ function transpile(originalCode) {
 	code = code.replace(
 		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s+){/g,
 		"function $2 ($4) { $7.call(this); ");
+	*/
 
-	// replacing class without parameters in constructor
+	// transpile mutate with parameter
+	code = code.replace(/mutate(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+
+	// transpile mutate without parameter
+	code = code.replace(/mutate(\s*)(\w*)/g, "$2.call(this)");
+
+	// transpile class without parameters in constructor
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
 
-	// replacing class with parameters in constructor
+	// transpile class with parameters in constructor
 	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
 
 	// remove constructor
@@ -63,8 +71,8 @@ function transpile(originalCode) {
 	// replacing method
 	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
 
-	// replacing field
-	code = code.replace(/field(\s+)/g, "this.");
+	// replacing member
+	// code = code.replace(/field(\s+)/g, "this.");
 	code = code.replace(/member(\s+)/g, "this.");
 
 	// replacing public / private

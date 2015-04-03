@@ -5,6 +5,12 @@ class A {
 	method aaa() { this.system.log("A.aaa()"); }
 }
 
+class B {
+		member system = new System();
+		method bbb() { this.system.log("B.bbb()"); }
+}
+
+/* first style
 // inheritance
 class F extends A {
 }
@@ -23,14 +29,73 @@ class G (p, q) extends A {
 		this.system.log("G.aaa() - " + p + " - " + q);
 	}
 }
+*/
+
+class H {
+	mutate A;
+	mutate B;
+
+	method hhh() {
+		this.bbb();
+	}
+
+}
+
+class I(p) {
+	mutate A;
+	member p = p;
+	method iii() {
+		this.system.log(this.p);
+	}
+}
+
+class J(p) {
+	mutate I(p);
+	method jjj() {
+		this.system.log("J.jjj() - " + this.p);
+	}
+}
+
+class K(p, q) {
+	mutate A;
+	member p = p;
+	member q = q;
+	method kkk() {
+		this.system.log("K.kkk() - " + this.q);
+	}
+}
+
+class L(p, q, r) {
+	mutate K(p, q);
+	mutate J(r);
+	method lll() {
+		this.system.log("L.lll() - " + this.p + " - " + this.q);
+	}
+}
 
 class Main {
 	method start() {
+		/*
 		var f = new F();
 		f.aaa();
 		var e = new E('hello');
 		e.aaa();
 		var g = new G('first', 'second');
 		g.aaa();
+		if (g instanceof G) {
+			console.log('true');
+		}
+
+		var h = new H();
+		h.hhh();
+		*/
+
+		var j = new J('ppp');
+		j.jjj();
+		var k = new K("ppp", "qqq");
+		k.kkk();
+
+		var l = new L("ppp", "qqq", "rrr");
+		l.lll();
 	}
 }
