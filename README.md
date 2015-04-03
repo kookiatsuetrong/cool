@@ -4,13 +4,15 @@
 
 Cool! is a purely object-oriented programming language. It has been designed for
 transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
-It supports only encapsulation and abstraction, no inheritance or polymorphism
-for the current version.
+It supports encapsulation, abstraction, inheritance and polymorphism for the
+current version. I'm consider to add static and multiple inheritance to this
+language in the future.
 
-The other benefit of the Cool! programming language is small library or
-framework. A large framework language like Java or C# is very hard to remember
-how to do a common task. But the Cool! programming language has only 20-30
-methods such as File.read(), Integer.parse(), System.log().
+The another benefit of the Cool! programming language is its small library or
+framework. So developer can easily to remember and no need to use any IDE. A
+large framework language like Java or C# is very hard to remember even doing a
+common task. The Cool! programming language will have only 20-30 basic methods
+such as File.read(), Integer.parse(), System.log().
 
 # The Hello World program
 Program written by the Cool! programming language starts from the start() method
