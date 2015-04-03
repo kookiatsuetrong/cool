@@ -29,8 +29,10 @@ function transpile(originalCode) {
 	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
 
 	// remove constructor
+	/*
 	code = code.replace(/constructor(\s+)/g, '');
 	code = code.replace(/constructor/g, '');
+	*/
 
 	// replacing public method
 	/*
@@ -38,10 +40,10 @@ function transpile(originalCode) {
 	code = code.replace(/private(\s+)method(\s+)(\w+)/g, "function $3 ");
 	*/
 
-	// replacing method
+	// transpile method
 	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
 
-	// replacing member
+	// transpile member
 	// code = code.replace(/field(\s+)/g, "this.");
 	code = code.replace(/member(\s+)/g, "this.");
 

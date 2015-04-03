@@ -1,27 +1,10 @@
 
 
+member field data property attribute
 
-class Student {
-    constructor(name) {
-        this.name = name;
-    }
-}
+method
 
-function Student () {
-
-    {
-        this._create(arguments);
-    }
-
-    this._create(a) {
-
-    }
-}
-
-
-
-var student = new Student("name");
-
+derive extend mutate obtain expand borrow include extends inherits
 
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

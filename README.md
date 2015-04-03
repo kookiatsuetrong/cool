@@ -54,7 +54,7 @@ class Student(name, dob) {
 	member name;
 	member dob;
 
-	constructor {
+	{
 		this.name = name;
 		this.dob = dob;
 	}
