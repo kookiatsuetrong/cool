@@ -50,10 +50,11 @@ a {
 	max-width: 200px;
 	margin: 20px;
 	margin-left: 0;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.5s ease-in-out;
 	border: 6px solid darken(@primary, 20%);
 	&:hover {
-		border: 6px solid white;
+		// border: 6px solid white;
+		box-shadow: 0 0 50px 0 white;
 	}
 }
 .inline {
@@ -96,8 +97,8 @@ a {
 footer {
 	background: @primary;
 	// background: lighten(@primary, 0%);
-	// overflow: hidden;
-	// height: 200px;
+	overflow: hidden;
+	height: 200px;
 }
 
 

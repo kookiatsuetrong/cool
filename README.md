@@ -74,6 +74,46 @@ class Main {
 }
 ```
 
+# Inheritance and Polymorphism
+```es6
+// Demo of Inheritance and Polymorphism
+
+class A {
+	member system = new System();
+	method aaa() { this.system.log("A.aaa()"); }
+}
+
+// inheritance
+class F extends A {
+}
+
+// inheritance with parameter and polymorphism
+class E(p) extends A {
+	member data = p;
+	method aaa() { this.system.log("E.aaa() - " + this.data); }
+}
+
+// inheritance with parameters
+class G (p, q) extends A {
+	member p = p;
+	member q = q;
+	method aaa() {
+		this.system.log("G.aaa() - " + p + " - " + q);
+	}
+}
+
+class Main {
+	method start() {
+		var f = new F();
+		f.aaa();
+		var e = new E('hello');
+		e.aaa();
+		var g = new G('first', 'second');
+		g.aaa();
+	}
+}
+```
+
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:
 ```html
@@ -243,6 +283,9 @@ keyword are required when creating a member variable.
 
 # To Do
 ```
+- Annotate and 2-way binding
+- Inheriance and Multiple Inheritance
+- Polymorphism
 - Nested class
 - import vs require
 - Syntax checking

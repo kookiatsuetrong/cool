@@ -33,12 +33,21 @@ function transpile(originalCode) {
 
 	// remove all comments // /* */
 	// code = code.replace(/\/\/.*\n/g, "\n");
-	code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
+	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
-	// replacing class without constructor
+	// transpile class with extends
+	code = code.replace(/class(\s+)(\w+)(\s+)extends(\s+)(\w+)(\s+){/g,
+		"function $2 () { $5.call(this); ");
+
+	// transpile class with extends and parameters in constructor
+	code = code.replace(
+		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s+){/g,
+		"function $2 ($4) { $7.call(this); ");
+
+	// replacing class without parameters in constructor
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
 
-	// replacing class with constructor
+	// replacing class with parameters in constructor
 	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
 
 	// remove constructor
@@ -57,7 +66,6 @@ function transpile(originalCode) {
 	// replacing field
 	code = code.replace(/field(\s+)/g, "this.");
 	code = code.replace(/member(\s+)/g, "this.");
-	code = code.replace(/property(\s+)/g, "this.");
 
 	// replacing public / private
 	/*
@@ -65,9 +73,15 @@ function transpile(originalCode) {
 	code = code.replace(/private(\s+)/g, "var ");
 	*/
 
+	var prefix = '"use strict;"; ';
 	if (originalCode.match(/class(\s+)Main/))
-		code = "(new Main()).start();\n\n" + code;
-	code = '"use strict";\n' + code;
+		prefix += "(new Main()).start(); ";
+	if (code.indexOf("//") == 0) {
+		code = prefix + code;
+	} else {
+		code = prefix + "\n" + code;
+	}
+
 	return code;
 }
 

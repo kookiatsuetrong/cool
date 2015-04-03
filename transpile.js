@@ -5,10 +5,19 @@ function transpile(originalCode) {
 	// code = code.replace(/\/\/.*\n/g, "\n");
 	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
-	// replacing class without constructor
+	// transpile class with extends
+	code = code.replace(/class(\s+)(\w+)(\s+)extends(\s+)(\w+)(\s+){/g,
+		"function $2 () { $5.call(this); ");
+
+	// transpile class with extends and parameters in constructor
+	code = code.replace(
+		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s+){/g,
+		"function $2 ($4) { $7.call(this); ");
+
+	// replacing class without parameters in constructor
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
 
-	// replacing class with constructor
+	// replacing class with parameters in constructor
 	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
 
 	// remove constructor
@@ -42,7 +51,7 @@ function transpile(originalCode) {
 	} else {
 		code = prefix + "\n" + code;
 	}
-	
+
 	return code;
 }
 
