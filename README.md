@@ -5,8 +5,8 @@
 Cool! is a purely object-oriented programming language. It has been designed for
 transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
 It supports encapsulation, abstraction, inheritance and polymorphism for the
-current version. I'm consider to add static and multiple inheritance to this
-language in the future.
+current version. I'm consider to add static and other features to this language
+in the near future.
 
 The another benefit of the Cool! programming language is its small library or
 framework. So developer can easily to remember and no need to use any IDE. A
@@ -85,36 +85,32 @@ class A {
 	method aaa() { this.system.log("A.aaa()"); }
 }
 
-// inheritance
-class F extends A {
+class B {
+	member system = new System();
+	method bbb() { this.system.log("B.bbb()"); }
 }
 
-// inheritance with parameter and polymorphism
-class E(p) extends A {
-	member data = p;
-	method aaa() { this.system.log("E.aaa() - " + this.data); }
-}
+class C(p) {
+	mutate A;
+	mutate B;
 
-// inheritance with parameters
-class G (p, q) extends A {
 	member p = p;
-	member q = q;
+
 	method aaa() {
-		this.system.log("G.aaa() - " + p + " - " + q);
+		// do something polymorphism here
+	}
+
+	method ccc() {
+		this.bbb();
 	}
 }
 
-class Main {
-	method start() {
-		var f = new F();
-		f.aaa();
-		var e = new E('hello');
-		e.aaa();
-		var g = new G('first', 'second');
-		g.aaa();
-	}
+class D(p) {
+	mutate C(p);
 }
+
 ```
+
 
 # Using Cool! in a web page
 You can put your Cool! code in a separated .cool file like this:
