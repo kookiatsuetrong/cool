@@ -1,5 +1,5 @@
 main class Main {
-	member start() {
+	new {
 		var mysql = require("mysql");
 		var pool  = mysql.createPool({
 			host     : "localhost",

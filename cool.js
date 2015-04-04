@@ -37,9 +37,13 @@ function transpile(originalCode) {
 		"{ $3.call(this); ");
 	// extends A(p,q) {
 	code = code.replace(
-		/(\s+)extends(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s*){/g,
+		/(\s+)extends(\s+)(\w+)(\s*)\(([^)]*)\)(\s*){/g,
 		"{ $3.call(this, $5); ");
-	// extends A("literal") {
+
+	// main class
+	code = code.replace(
+		/main(\s+)class(\s+)(\w+)/g,
+		"new $3(); class $3");
 
 	// class A { -> function A () {
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
@@ -53,22 +57,20 @@ function transpile(originalCode) {
 	// member m -> this.m
 	code = code.replace(/member(\s+)(\w+)/g, "this.$2");
 
+	// new { -> {
+	code = code.replace(/new(\s*){/g, "{");
+
 	// deprated features
 
 	// remove all comments // /* */
 	// code = code.replace(/\/\/.*\n/g, "\n");
 	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
-
 	// use "extend" inside the class for multiple inheritance
 	// transpile extend with parameter
-	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
 	// transpile extend without parameter
-	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
-
-	// constructor
-	// code = code.replace(/constructor(\s+)/g, '');
-	// code = code.replace(/constructor/g, '');
+	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
 	// public method
 	// code = code.replace(/public(\s+)method(\s+)(\w+)/g, "this.$3 = function ");
@@ -79,8 +81,6 @@ function transpile(originalCode) {
 	// code = code.replace(/private(\s+)/g, "var ");
 
 	var prefix = '"use strict;"; ';
-	if (originalCode.match(/class(\s+)Main/))
-		prefix += "(new Main()).start(); ";
 	if (code.indexOf("//") == 0) {
 		code = prefix + code;
 	} else {

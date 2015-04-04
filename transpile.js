@@ -42,10 +42,6 @@ function transpile(originalCode) {
 	// transpile extend without parameter
 	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
-	// constructor
-	// code = code.replace(/constructor(\s+)/g, '');
-	// code = code.replace(/constructor/g, '');
-
 	// public method
 	// code = code.replace(/public(\s+)method(\s+)(\w+)/g, "this.$3 = function ");
 	// code = code.replace(/private(\s+)method(\s+)(\w+)/g, "function $3 ");
@@ -55,10 +51,6 @@ function transpile(originalCode) {
 	// code = code.replace(/private(\s+)/g, "var ");
 
 	var prefix = '"use strict;"; ';
-	/*
-	if (originalCode.match(/class(\s+)Main/))
-		prefix += "(new Main()).start(); ";
-	*/
 	if (code.indexOf("//") == 0) {
 		code = prefix + code;
 	} else {
