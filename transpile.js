@@ -24,11 +24,11 @@ function transpile(originalCode) {
 		"function $2 ($4) { $7.call(this, $9); ");
 	*/
 
-	// use "extend" or "mutate" inside the class for multiple inheritance
-	// transpile mutate with parameter
-	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
-	// transpile mutate without parameter
-	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
+	// use "extend" inside the class for multiple inheritance
+	// transpile extend with parameter
+	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	// transpile extend without parameter
+	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
 	// class A {} -> function A {}
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");

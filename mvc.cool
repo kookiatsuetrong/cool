@@ -1,6 +1,14 @@
 // Web MVC Framework
 
-class Engine {
+class Handler extends Root {
+
+	method index(context) {
+	}
+	method error(context) {
+	}
+}
+
+class Engine extends Root {
 	member fs     = require('fs');
 	member engine = require("ejs");
 	member folder = "./views/";
@@ -30,7 +38,7 @@ class Engine {
 	}
 }
 
-class App {
+class Server extends Root {
 	member port    = 2000;
 	member address = "0.0.0.0";
 	member http    = require('http');
@@ -64,7 +72,7 @@ class App {
 			var fileType   = pathTokens[pathTokens.length-1];
 			if (callee == "") callee = "index";
 
-			if ((handler.storage.existsSync(path) || fileType == "css") && 
+			if ((handler.storage.existsSync(path) || fileType == "css") &&
 				callee != "index") {
 				if (fileType == "css") {
 					// TODO: add production code, compile only first time

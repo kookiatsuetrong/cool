@@ -12,7 +12,7 @@ class MyApp {
 		database  : "db"
 		});
 
-	constructor {
+	{
 		this.engine.setHeader("header.html");
 		this.engine.setFooter("footer.html");
 	}
@@ -36,8 +36,8 @@ class MyApp {
 
 class Main {
 	method start() {
-		var app = new App();
-		app.run(new MyApp());
+		var server = new Server();
+		server.run(new MyApp());
 	}
 }
 

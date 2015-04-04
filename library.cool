@@ -8,11 +8,11 @@ class Root {
 }
 
 class Exception extends Root {
-	this.class = "Exception";
+	member class = "Exception";
 }
 
 class System extends Root {
-	this.class = "System";
+	member class = "System";
 
 	method log(data) {
 		console.log(data);
@@ -32,17 +32,17 @@ class System extends Root {
 }
 
 class Integer extends Root {
-	this.class = "Integer";
+	member class = "Integer";
 	method parse(n) { return parseInt(n); }
 }
 
 class Float extends Root {
-	this.class = "Float";
+	member class = "Float";
 	method parse(f) { return parseFloat(f); }
 }
 
 class File extends Root {
-	this.class = "File";
+	member class = "File";
 
 	member fs = require("fs");
 	method read(name) {
@@ -73,7 +73,7 @@ class File extends Root {
 }
 
 class Web extends Root {
-	this.class = "Web";
+	member class = "Web";
 
 	method select(x) {
 		return [];
