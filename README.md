@@ -18,12 +18,12 @@ The Cool! programming language is similar to CoffeeScript, Dart, and TypeScript
 in term of "transpile" to JavaScript. It can run both browser-side and
 server-side.
 
-# The Hello World program
-Program written by the Cool! programming language starts from the first member
-method of any main class. So let's start by writing the first Cool! program:
+# The first program
+Program written by the Cool! programming language starts from the constructor
+of any any main class. So let's start by writing the first Cool! program:
 ```es6
 main class Hello {
-	member cool() {
+	new {
 		var system = new System();
 		system.log("Cool!");
 	}
@@ -41,7 +41,7 @@ node hello.cool.js
 # Writing a recursion method
 ```es6
 main class Fibonacci {
-	member start() {
+	new {
 		var system = new System();
 		system.log(this.calculate(40));
 	}
@@ -54,12 +54,10 @@ main class Fibonacci {
 
 # Writing class with constructor
 ```es6
-class Student(name, dob) {
+class Student(name, dob) extends Root {
 	member name;
 	member dob;
-
-	// constructor is here
-	{
+	new {
 		this.name = name;
 		this.dob = dob;
 	}
@@ -69,7 +67,7 @@ class Student(name, dob) {
 }
 
 main class Main {
-	member start() {
+	new {
 		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
@@ -158,7 +156,7 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```html
 <script type="text/cool">
 main class Main {
-	member start() {
+	new {
 		var page = new Page();
 		var body = page.select('body');
 		body[0].onscroll = this.onScroll;
@@ -181,7 +179,7 @@ You can use your existing JavaScript with Cool! by using require(). The
 following code reads data from MySQL server using Node.js library:
 ```es6
 main class Main {
-	member start() {
+	new {
 		var mysql = require("mysql");
 		var pool  = mysql.createPool({
 			host     : "localhost",

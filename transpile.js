@@ -38,9 +38,9 @@ function transpile(originalCode) {
 
 	// use "extend" inside the class for multiple inheritance
 	// transpile extend with parameter
-	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
 	// transpile extend without parameter
-	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
+	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
 	// constructor
 	// code = code.replace(/constructor(\s+)/g, '');
