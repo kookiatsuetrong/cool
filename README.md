@@ -205,12 +205,50 @@ main class Main {
 
 # Web MVC Framework
 ```es6
-To be added
+main class Simple extends Server {
+	member index(context) {
+		context.response.end("Cool!");
+	}
+	new {
+		this.start();
+	}
+}
 ```
+Then navigate to http://localhost:2000, you will see a greeting!
 
-# Web MVC with MySQL Database
+# MVC Template Engine
 ```es6
-To be added
+class MyServer extends Server {
+	member system = new System();
+	member engine = new Engine();
+
+	new {
+		this.engine.header = "header.html";
+		this.engine.footer = "footer.html";
+	}
+
+	member error(context) {
+		this.system.log('error ' + context.request.url);
+		var page = this.engine.render("error.html", {
+			title: "Cool!"
+		});
+		context.response.end(page);
+	}
+
+	member index(context) {
+		var page = this.engine.render("index.html", {
+			title: "Cool!"
+		});
+		context.response.end(page);
+	}
+}
+
+main class Main {
+	new {
+		var server = new MyServer();
+		server.start();
+	}
+}
 ```
 
 The default template engine is EJS.
@@ -225,10 +263,6 @@ The default template engine is EJS.
 
 ```
 
-# Building Web API
-```
-To be added
-```
 
 # Additional Information
 The "function" keyword uses for an internal or private function as well as
@@ -247,8 +281,6 @@ keyword are required when creating a member variable.
 - import vs require
 - Syntax checking
 ```
-
-
 
 
 

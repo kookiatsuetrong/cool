@@ -23,19 +23,21 @@ class Server extends Root {
 		var handler = this;
 
 		var server = this.http.createServer(function (request, response) {
+			var context    = {request:request, response:response};
 			var urlTokens  = request.url.split("/");
 			var callee     = urlTokens[1];
 			var path       = handler.folder + request.url;
 			var pathTokens = path.split(".");
 			var fileType   = pathTokens[pathTokens.length-1];
 			if (callee == "") callee = "index";
-
+			if (callee == "start") callee = null;
+			
 			if (handler[callee] == null) {
-				handler.sendFile( {request:request, response:response} );
+				handler.sendFile(context);
 			} else {
 				response.statusCode = 200;
 				response.setHeader("Content-Type", "text/html");
-				handler[callee]({request:request, response:response});
+				handler[callee](context);
 			}
 		});
 

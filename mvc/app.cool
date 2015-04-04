@@ -1,6 +1,6 @@
-// Web MVC Demo -- THIS CODE IS DEPRECATED
+// Web MVC Demo
 
-class MyApp {
+class MyServer extends Server {
 	member system = new System();
 	member engine = new Engine();
 
@@ -12,12 +12,12 @@ class MyApp {
 		database  : "db"
 		});
 
-	{
-		this.engine.setHeader("header.html");
-		this.engine.setFooter("footer.html");
+	new {
+		this.engine.header = "header.html";
+		this.engine.footer = "footer.html";
 	}
 
-	method error(context) {
+	member error(context) {
 		this.system.log('error ' + context.request.url);
 		var page = this.engine.render("error.html", {
 			title: "Cool!"
@@ -25,22 +25,29 @@ class MyApp {
 		context.response.end(page);
 	}
 
-	method index(context) {
+	member index(context) {
 		var page = this.engine.render("index.html", {
 			title: "Cool!"
 		});
 		context.response.end(page);
 	}
-
 }
 
-class Main {
-	method start() {
-		var server = new Server();
-		server.run(new MyApp());
+main class Main {
+	new {
+		var server = new MyServer();
+		// server.start();
 	}
 }
 
+main class Simple extends Server {
+	member index(context) {
+		context.response.end("Cool!");
+	}
+	new {
+		this.start();
+	}
+}
 
 
 
