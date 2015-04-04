@@ -99,16 +99,15 @@ class C(p) extends A {
 	}
 }
 
-class D(p) extends C(p) {
-}
+class D(p) extends C(p) {}
+class E extends B {}
 ```
 
-If you really need multiple inheritance please use .call() method directly.
-Similar to the following code:
+If you want to use multiple inheritance please use extend keyword for example:
 ```es6
-class E(p) {
-	B.call(this);
-	C.call(this, p);
+class F(p) {
+	extend C(p);
+	extend E;
 }
 ```
 
