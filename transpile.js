@@ -12,8 +12,8 @@ function transpile(originalCode) {
 	// extends A("literal") {
 
 	// main class
-	code = code.replace(/main(\s+)class(\s+)(\w+)/g,
-		"(new $3()).run(); class $3");
+	code = code.replace(/main(\s+)class(\s+)(\w+)(\s*){(\s*)member(\s+)(\w+)/g,
+		"(new $3()).$7(); class $3 { $4 $5 member $6 $7 ");
 
 	// class A { -> function A () {
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
@@ -37,9 +37,9 @@ function transpile(originalCode) {
 
 	// use "extend" inside the class for multiple inheritance
 	// transpile extend with parameter
-	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
 	// transpile extend without parameter
-	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
+	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
 	// constructor
 	// code = code.replace(/constructor(\s+)/g, '');

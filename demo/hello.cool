@@ -1,8 +1,8 @@
-// Cool Demo
+// Cool! Demo
 
 main class Hello {
-	member run() {
+	member cool() {
 		var system = new System();
-		system.log("Hello World!");
+		system.log("Cool!");
 	}
 }

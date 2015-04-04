@@ -15,13 +15,13 @@ common task. The Cool! programming language will have only 20-30 basic methods
 such as File.read(), Integer.parse(), System.log().
 
 # The Hello World program
-Program written by the Cool! programming language starts from the start() method
-of the Main class. So let's start by writing the first Hello World program:
+Program written by the Cool! programming language starts from the first member
+method of any main class. So let's start by writing the first Cool! program:
 ```es6
-class Main {
-	method start() {
+main class Hello {
+	member cool() {
 		var system = new System();
-		system.print("Hello World!");
+		system.log("Cool!");
 	}
 }
 ```
@@ -29,21 +29,21 @@ To transpile the above code to JavaScript, you have to execute this command:
 ```
 node transpile.js < hello.cool > hello.cool.js
 ```
-Or run the code by run this command:
+The you can run this program by execute this command:
 ```
-node transpile.js < hello.cool > hello.cool.js; node hello.cool.js
+node hello.cool.js
 ```
 
 # Writing a recursion method
 ```es6
-class Main {
-	method fib(n) {
-		if (n <= 1) return n;
-		return this.fib(n-1) + this.fib(n-2);
-	}
-	method start() {
+main class Fibonacci {
+	member start() {
 		var system = new System();
-		system.log(this.fib(40));
+		system.log(this.calculate(40));
+	}
+	member calculate(n) {
+		if (n <= 1) return n;
+		return this.calculate(n-1) + this.calculate(n-2);
 	}
 }
 ```
@@ -54,17 +54,18 @@ class Student(name, dob) {
 	member name;
 	member dob;
 
+	// construct is here
 	{
 		this.name = name;
 		this.dob = dob;
 	}
-	method toString() {
+	member toString() {
 		return this.name + ' ' + this.dob;
 	}
 }
 
-class Main {
-	method start() {
+main class Main {
+	member start() {
 		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
@@ -82,20 +83,20 @@ class Main {
 
 class A {
 	member system = new System();
-	method aaa() { this.system.log("A.aaa()"); }
+	member aaa() { this.system.log("A.aaa()"); }
 }
 
 class B {
 	member system = new System();
-	method bbb() { this.system.log("B.bbb()"); }
+	member bbb() { this.system.log("B.bbb()"); }
 }
 
 class C(p) extends A {
 	member p = p;
-	method aaa() {
+	member aaa() {
 		// do something polymorphism here
 	}
-	method ccc() {
+	member ccc() {
 	}
 }
 
@@ -153,15 +154,15 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```html
 <script type="text/cool">
 class Main {
-	method onClick(e) {
+	member onClick(e) {
 		var system = new System();
 		system.log(e);
 	}
-	method onScroll(e) {
+	member onScroll(e) {
 		var system = new System();
 		system.log(this.scrollY);
 	}
-	method start() {
+	member start() {
 		var page = new Page();
 		var body = page.select('body');
 		body[0].onscroll = this.onScroll;
@@ -175,8 +176,8 @@ class Main {
 You can use your existing JavaScript with Cool! by using require(). The
 following code reads data from MySQL server using Node.js library:
 ```es6
-class Main {
-	method start() {
+main class Main {
+	member start() {
 		var mysql = require("mysql");
 		var pool  = mysql.createPool({
 			host     : "localhost",
@@ -201,61 +202,13 @@ class Main {
 ```
 
 # Web MVC Framework
-```javascript
-class MyApp {
-	member system = new System();
-	member engine = new Engine();
-
-	method error(context) {
-		var page = this.engine.render("error.html");
-		context.response.end(page);
-	}
-
-	method index(context) {
-		var page = this.engine.render("index.html");
-		context.response.end(page);
-	}
-}
-
-class Main {
-	method start() {
-		var app = new App();
-		app.run(new MyApp());
-	}
-}
+```es6
+To be added
 ```
 
 # Web MVC with MySQL Database
-```javascript
-class MyApp {
-	member system = new System();
-	member engine = new Engine();
-
-	member mysql  = require("mysql");
-	member pool   = this.mysql.createPool({
-		host      : "localhost",
-		user      : "user",
-		password  : "password",
-		database  : "db"
-		});
-
-	method index(context) {
-		var engine = this.engine;
-		this.pool.query("select * from users", function (error, records) {
-			if (!error) {
-				var page = engine.render("about.html", {users:records});
-				context.response.end(page);
-			}
-		});
-	}
-}
-
-class Main {
-	method start() {
-		var app = new App();
-		app.run(new MyApp());
-	}
-}
+```es6
+To be added
 ```
 
 The default template engine is EJS.
@@ -271,25 +224,8 @@ The default template engine is EJS.
 ```
 
 # Building Web API
-```javascript
-class MyApp {
-	member system = new System();
-
-	method index(context) {
-		var tokens = context.request.url.split("/");
-		var integer = new Integer();
-		var data = {result: integer.parse(tokens[2]) * 2};
-		var result = this.system.stringify(data);
-		context.response.end(result);
-	}
-}
-
-class Main {
-	method start() {
-		var app = new App();
-		app.run(new MyApp());
-	}
-}
+```
+To be added
 ```
 
 # Additional Information
@@ -303,8 +239,7 @@ keyword are required when creating a member variable.
 # To Do
 ```
 - Annotate and 2-way binding
-- Inheriance and Multiple Inheritance
-- Polymorphism
+- New way of Multiple Inheritance
 - Nested class
 - import vs require
 - Syntax checking

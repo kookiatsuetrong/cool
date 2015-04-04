@@ -1,10 +1,12 @@
-class Main {
-	method fib(n) {
-		if (n <= 1) return n;
-		return this.fib(n-1) + this.fib(n-2);
-	}
-	method start() {
+// Fibonacci demo
+
+main class Fibonacci {
+	member start() {
 		var system = new System();
-		system.log(this.fib(40));
+		system.log(this.calculate(40));
+	}
+	member calculate(n) {
+		if (n <= 1) return n;
+		return this.calculate(n-1) + this.calculate(n-2);
 	}
 }
