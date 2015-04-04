@@ -1,101 +1,107 @@
 // Demo of Inheritance and Polymorphism
+/*
+class T extends U, V, W {
 
-class A {
-	member system = new System();
-	method aaa() { this.system.log("A.aaa()"); }
-}
-
-class B {
-		member system = new System();
-		method bbb() { this.system.log("B.bbb()"); }
-}
-
-/* first style
-// inheritance
-class F extends A {
-}
-
-// inheritance with parameter and polymorphism
-class E(p) extends A {
-	member data = p;
-	method aaa() { this.system.log("E.aaa() - " + this.data); }
-}
-
-// inheritance with parameters
-class G (p, q) extends A {
-	member p = p;
-	member q = q;
-	method aaa() {
-		this.system.log("G.aaa() - " + p + " - " + q);
-	}
 }
 */
 
-class H {
-	mutate A;
-	mutate B;
-
-	method hhh() {
-		this.bbb();
-	}
-
+class A {
+	member system = new System();
+	member aaa() { this.system.log("A.aaa()"); }
 }
 
-class I(p) {
-	mutate A;
-	member p = p;
-	method iii() {
-		this.system.log(this.p);
-	}
+class B {
+	member system = new System();
+	member bbb() { this.system.log("B.bbb()"); }
 }
 
-class J(p) {
-	mutate I(p);
-	method jjj() {
-		this.system.log("J.jjj() - " + this.p);
-	}
+class A2 extends A {
 }
 
-class K(p, q) {
-	mutate A;
-	member p = p;
-	member q = q;
-	method kkk() {
-		this.system.log("K.kkk() - " + this.q);
-	}
+class Ax(p) extends A {
+	this.p = p;
+	member aaa() { this.system.log("Ax.aaa() - " + this.p); }
 }
 
-class L(p, q, r) {
-	mutate K(p, q);
-	mutate J(r);
-	method lll() {
-		this.system.log("L.lll() - " + this.p + " - " + this.q);
-	}
+class Ax2 extends Ax("default") {
 }
 
-class Main {
-	method start() {
+class Ax3(p) extends Ax(p) {}
+
+class A3(p, q, r) extends A{
+	this.p=p; this.q=q; this.r=r;
+	member aaa() { this.system.log("A3.aaa()-" + this.p + "-" + this.q + "-" + this.r); }
+}
+
+class A3x(p, r) extends A3(p, "qqq", r) {
+}
+
+/*
+class AB extends A, B {}
+
+class C {
+	member system = new System();
+	member ccc() { this.system.log("C.ccc()"); }
+}
+
+class ABC extends A, B, C {}
+*/
+
+main class Main {
+	member run() {
+		var a2 = new A2();
+		a2.aaa();
+		var ax = new Ax("ppp");
+		ax.aaa();
+		var ax2 = new Ax2();
+		ax2.aaa();
+
+		var a3 = new A3("ppp", "qqq", "rrr");
+		a3.aaa();
+
+		var a3x = new A3x("ppp", "qqq", "rrr");
+		a3x.aaa();
+
 		/*
-		var f = new F();
-		f.aaa();
-		var e = new E('hello');
-		e.aaa();
-		var g = new G('first', 'second');
-		g.aaa();
-		if (g instanceof G) {
-			console.log('true');
-		}
+		var ab = new AB();
+		ab.aaa();
+		ab.bbb();
 
-		var h = new H();
-		h.hhh();
+		var abc = new ABC();
+		abc.aaa();
+		abc.bbb();
+		abc.ccc();
 		*/
-
-		var j = new J('ppp');
-		j.jjj();
-		var k = new K("ppp", "qqq");
-		k.kkk();
-
-		var l = new L("ppp", "qqq", "rrr");
-		l.lll();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

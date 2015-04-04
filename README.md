@@ -14,6 +14,10 @@ large framework language like Java or C# is very hard to remember even doing a
 common task. The Cool! programming language will have only 20-30 basic methods
 such as File.read(), Integer.parse(), System.log().
 
+The Cool! programming language is similar to CoffeeScript, Dart, and TypeScript
+in term of "transpile" to JavaScript. It can run both browser-side and
+server-side.
+
 # The Hello World program
 Program written by the Cool! programming language starts from the first member
 method of any main class. So let's start by writing the first Cool! program:
@@ -54,7 +58,7 @@ class Student(name, dob) {
 	member name;
 	member dob;
 
-	// construct is here
+	// constructor is here
 	{
 		this.name = name;
 		this.dob = dob;
@@ -153,7 +157,13 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 # HTML Event Handling
 ```html
 <script type="text/cool">
-class Main {
+main class Main {
+	member start() {
+		var page = new Page();
+		var body = page.select('body');
+		body[0].onscroll = this.onScroll;
+		body[0].onclick  = this.onClick;
+	}
 	member onClick(e) {
 		var system = new System();
 		system.log(e);
@@ -161,12 +171,6 @@ class Main {
 	member onScroll(e) {
 		var system = new System();
 		system.log(this.scrollY);
-	}
-	member start() {
-		var page = new Page();
-		var body = page.select('body');
-		body[0].onscroll = this.onScroll;
-		body[0].onclick  = this.onClick;
 	}
 }
 </script>
@@ -239,7 +243,8 @@ keyword are required when creating a member variable.
 # To Do
 ```
 - Annotate and 2-way binding
-- New way of Multiple Inheritance
+- New way of multiple inheritance
+- Static member
 - Nested class
 - import vs require
 - Syntax checking

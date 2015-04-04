@@ -7,9 +7,23 @@ function transpile(originalCode) {
 		"{ $3.call(this); ");
 	// extends A(p,q) {
 	code = code.replace(
-		/(\s+)extends(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s*){/g,
+		/(\s+)extends(\s+)(\w+)(\s*)\(([^)]*)\)(\s*){/g,
 		"{ $3.call(this, $5); ");
-	// extends A("literal") {
+
+	// code = code.replace(/\(this, \)/g, "(this)");
+
+	/* Multiple Inheritance
+	// extends A1, A2 {
+	code = code.replace(
+		/(\s+)extends(\s+)(\w+)(\s*),(\s*)(\w+)(\s*){/g,
+		"$1 extends $2 $3 $4 { $6.call(this); ");
+	*/
+	/*
+	// extends A1, A2(p,q) {
+	code = code.replace(
+		/(\s+)extends(\s+)(\w+)(\s*),(\s*)(\w+)(\s*)\((["'\w,\s]*)\)(\s*){/g,
+		"$1 extends $2 $3 $4 { $6.call(this, $8); ");
+	*/
 
 	// main class
 	code = code.replace(/main(\s+)class(\s+)(\w+)(\s*){(\s*)member(\s+)(\w+)/g,
@@ -37,9 +51,9 @@ function transpile(originalCode) {
 
 	// use "extend" inside the class for multiple inheritance
 	// transpile extend with parameter
-	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
 	// transpile extend without parameter
-	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
+	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
 	// constructor
 	// code = code.replace(/constructor(\s+)/g, '');

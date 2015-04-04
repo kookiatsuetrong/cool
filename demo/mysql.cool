@@ -1,6 +1,5 @@
-class Main {
-
-	method start() {
+main class Main {
+	member start() {
 		var mysql = require("mysql");
 		var pool  = mysql.createPool({
 			host     : "localhost",
@@ -9,14 +8,15 @@ class Main {
 			database : "db"
 		});
 
-		// var system = new System();
+		var system = new System();
 
 		pool.getConnection(function (error, db) {
-			db.query("select * from users", function (error, records) {
+			db.query("select * from users", [], function (error, records) {
 				if (!error) {
-					console.log(records);
+					system.log(records);
 				}
 				db.release();
+				system.exit();
 			});
 		});
 	}
