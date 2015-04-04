@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/cool.jpg)
+![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/cool.jpg)
 
 # The Cool! programming language () {
 
