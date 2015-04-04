@@ -36,11 +36,11 @@ class MyServer extends Server {
 main class Main {
 	new {
 		var server = new MyServer();
-		// server.start();
+		server.start();
 	}
 }
 
-main class Simple extends Server {
+class Simple extends Server {
 	member index(context) {
 		context.response.end("Cool!");
 	}
