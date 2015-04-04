@@ -9,7 +9,7 @@ class B( p, q ) extends Root {
 	member p = p;
 	member q = q;
 
-	method toString() {
+	member toString() {
 		return this.p + " - " + this.q;
 	}
 }
@@ -18,11 +18,19 @@ class C(p,q) extends A(p) {
 
 }
 
+class E(p, q) extends C(p, q) {
+	member p = p;
+	member q = q;
+	member toString() {
+		return this.p + "-" + this.q;
+	}
+}
+
 // literal
 // class D extends A(123) { }
 
 class Main {
-	method start() {
+	member start() {
 		var system = new System();
 		system.log(system.toString());
 
@@ -34,5 +42,7 @@ class Main {
 
 		var c = new C("ccc", "123");
 		system.log(c.toString());
+		var e = new E("eee", "123");
+		system.log(e.toString());
 	}
 }

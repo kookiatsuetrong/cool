@@ -1,4 +1,4 @@
-// Web MVC Demo
+// Web MVC Demo -- THIS CODE IS DEPRECATED
 
 class MyApp {
 	member system = new System();

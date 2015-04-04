@@ -2,7 +2,7 @@
 
 class Root {
 	member class = "Root";
-	method toString() {
+	member toString() {
 		return this.class;
 	}
 }
@@ -14,58 +14,58 @@ class Exception extends Root {
 class System extends Root {
 	member class = "System";
 
-	method log(data) {
+	member log(data) {
 		console.log(data);
 	}
-	method execute(code) {
+	member execute(code) {
 		eval(code);
 	}
-	method exit() {
+	member exit() {
 		process.exit();
 	}
-	method parse(data) {
+	member parse(data) {
 		return JSON.parse(data);
 	}
-	method stringify(data) {
+	member stringify(data) {
 		return JSON.stringify(data);
 	}
 }
 
 class Integer extends Root {
 	member class = "Integer";
-	method parse(n) { return parseInt(n); }
+	member parse(n) { return parseInt(n); }
 }
 
 class Float extends Root {
 	member class = "Float";
-	method parse(f) { return parseFloat(f); }
+	member parse(f) { return parseFloat(f); }
 }
 
 class File extends Root {
 	member class = "File";
 
 	member fs = require("fs");
-	method read(name) {
+	member read(name) {
 		var result = "";
 		try {
 			result = this.fs.readFileSync(name, {encoding: "utf8"});
 		} catch (e) { throw new Exception(); }
 		return result;
 	}
-	method write(name, data) {
+	member write(name, data) {
 		this.fs.writeFileSync(name, data);
 	}
-	method append(name, data) {
+	member append(name, data) {
 		this.fs.appendFileSync(name, data);
 	}
 	/*
-	method exists(name) {
+	member exists(name) {
 		return this.fs.existsSync(name);
 	}
-	method list(name) {
+	member list(name) {
 		return this.fs.readdirSync(name);
 	}
-	method isDirectory(name) {
+	member isDirectory(name) {
 		var info = this.fs.statsSync(name);
 		return info.isDirectory();
 	}
@@ -75,13 +75,13 @@ class File extends Root {
 class Web extends Root {
 	member class = "Web";
 
-	method select(x) {
+	member select(x) {
 		return [];
 	}
-	method get(url, data, callback) {
+	member get(url, data, callback) {
 		callback();
 	}
-	method post(url, data, callback) {
+	member post(url, data, callback) {
 		callback();
 	}
 }

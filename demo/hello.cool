@@ -1,0 +1,8 @@
+// Cool Demo
+
+main class Hello {
+	member run() {
+		var system = new System();
+		system.log("Hello World!");
+	}
+}

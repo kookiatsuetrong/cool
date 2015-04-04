@@ -31,57 +31,50 @@ function request(url) {
 function transpile(originalCode) {
 	var code = originalCode;
 
+	// extends A {
+	code = code.replace(
+		/(\s+)extends(\s+)(\w+)(\s*){/g,
+		"{ $3.call(this); ");
+	// extends A(p,q) {
+	code = code.replace(
+		/(\s+)extends(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s*){/g,
+		"{ $3.call(this, $5); ");
+	// extends A("literal") {
+
+	// class A { -> function A () {
+	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
+
+	// class A(p) { -> function A(p) {
+	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
+
+	// member m(p) -> this.m = function(p)
+	code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
+
+	// member m -> this.m
+	code = code.replace(/member(\s+)(\w+)/g, "this.$2");
+
+	// deprated features
+
 	// remove all comments // /* */
 	// code = code.replace(/\/\/.*\n/g, "\n");
 	// code = code.replace(/\/\*[\w\'\s\r\n\*]*\*\//g, "");
 
-	// class B extends A {
-	code = code.replace(
-		/class(\s+)(\w+)(\s+)extends(\s+)(\w+)(\s*){/g,
-		"function $2 () { $5.call(this); ");
-	// class B(p, q) extends A {
-	code = code.replace(
-		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s*){/g,
-		"function $2 ($4) { $7.call(this); ");
-	// class B(p) extends A(p) {
-	code = code.replace(
-		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s*){/g,
-		"function $2 ($4) { $7.call(this, $9); ");
-	// class B extends A("literal") {
-	/*
-	code = code.replace(
-		/class(\s+)(\w+)(\s*)\(([\w,\s]*)\)(\s+)extends(\s+)(\w+)(\s*)\((.*?)\)(\s*){/g,
-		"function $2 ($4) { $7.call(this, $9); ");
-	*/
 
 	// use "extend" inside the class for multiple inheritance
 	// transpile extend with parameter
-	code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
+	// code = code.replace(/extend(\s*)(\w*)(\s*)\(/g, "$2.call(this, ");
 	// transpile extend without parameter
-	code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
+	// code = code.replace(/extend(\s*)(\w*)/g, "$2.call(this)");
 
-	// class A {} -> function A {}
-	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
-
-	// class A(p) {} -> function A(p) {}
-	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
-
-	// remove constructor
+	// constructor
 	// code = code.replace(/constructor(\s+)/g, '');
 	// code = code.replace(/constructor/g, '');
 
-	// replacing public method
+	// public method
 	// code = code.replace(/public(\s+)method(\s+)(\w+)/g, "this.$3 = function ");
 	// code = code.replace(/private(\s+)method(\s+)(\w+)/g, "function $3 ");
 
-	// method m(p) -> this.m = function(p)
-	code = code.replace(/method(\s+)(\w+)/g, "this.$2 = function ");
-
-	// member m -> this.m
-	// code = code.replace(/field(\s+)/g, "this.");
-	code = code.replace(/member(\s+)(\w+)/g, "this.$2");
-
-	// replacing public / private
+	// public / private
 	// code = code.replace(/public(\s+)/g, "this.");
 	// code = code.replace(/private(\s+)/g, "var ");
 

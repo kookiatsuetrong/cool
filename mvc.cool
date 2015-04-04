@@ -1,51 +1,116 @@
 // Web MVC Framework
 
-class Handler extends Root {
-
-	method index(context) {
-	}
-	method error(context) {
-	}
-}
-
-class Engine extends Root {
-	member fs     = require('fs');
-	member engine = require("ejs");
-	member folder = "./views/";
-	member header = "";
-	member footer = "";
-	member headerContent = "";
-	member footerContent = "";
-
-	method render(name, data) {
-		var engine = this.engine;
-		var header = this.fs.readFileSync(this.folder + this.header);
-		var footer = this.fs.readFileSync(this.folder + this.footer);
-		var center = this.fs.readFileSync(this.folder + name);
-		var html = header + center + footer;
-		// TODO: add hashing here for production server
-		return engine.render(html, data);
-	}
-
-	method setHeader(name) {
-		this.header   = name;
-		headerContent = this.fs.readFileSync(this.folder + this.header);
-	}
-
-	method setFooter(name) {
-		this.footer   = name;
-		footerContent = this.fs.readFileSync(this.folder + this.footer);
-	}
-}
+/*
+Routing:
+/method/parameter-1
+/folder/picture.jpg
+/method/parameter-1/parameter-2       ?
+*/
 
 class Server extends Root {
 	member port    = 2000;
 	member address = "0.0.0.0";
-	member http    = require('http');
+	member http    = require("http");
 	member system  = new System();
 	member folder  = "./public"
 	member storage = require('fs');
 	member less    = require('less');
+
+	member index(context) {context.response.end(); }
+	member error(context) {context.response.end(); }
+
+	member start () {
+		var handler = this;
+
+		var server = this.http.createServer(function (request, response) {
+			var urlTokens  = request.url.split("/");
+			var callee     = urlTokens[1];
+			var path       = handler.folder + request.url;
+			var pathTokens = path.split(".");
+			var fileType   = pathTokens[pathTokens.length-1];
+			if (callee == "") callee = "index";
+
+			if (handler[callee] == null) {
+				handler.sendFile( {request:request, response:response} );
+			} else {
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				handler[callee]({request:request, response:response});
+			}
+		});
+
+		server.listen(this.port, this.address);
+		console.log("Running at http://" + this.address + ":" + this.port);
+	}
+
+	member sendFile(context) {
+		var response = context.response;
+		var request  = context.request;
+		var handler  = this;
+
+		var urlTokens  = request.url.split("/");
+		var path       = handler.folder + request.url;
+		var pathTokens = path.split(".");
+		var fileType   = pathTokens[pathTokens.length-1];
+
+		if (fileType == "css") {
+			// TODO: add production code, compile only first time
+			// TODO: support other CSS preprocessor e.g. sass, scss
+			response.setHeader("Content-Type", "text/css");
+			var oldPath = path.replace(/\.css$/g, ".less");
+			handler.storage.readFile(oldPath, {encoding:"utf8"},
+			function(error, oldData) {
+				if (error) {
+					handler.storage.readFile(path, {encoding:"utf8"},
+					function(error, data) {
+						if (error) {
+							response.statusCode = 404;
+							response.setHeader("Content-Type", "text/html");
+							handler.error(context);
+						} else {
+							response.statusCode = 200;
+							response.end(data);
+						}
+					});
+				} else {
+					handler.less.render(oldData, function(error, css) {
+						var data = oldData;
+						if (!error) data = css.css;
+						handler.storage.writeFile(path, data);
+						response.statusCode = 200;
+						response.end(data);
+					});
+				}
+			});
+		} else {
+			handler.storage.readFile(path, function(error, data) {
+				if (error) {
+					response.statusCode = 404;
+					response.setHeader("Content-Type", "text/html");
+					handler.error(context);
+				} else {
+					var mime   = handler.mime[fileType] == null ?
+									"application/octet-stream" :
+									handler.mime[fileType].type;
+					var isText = handler.mime[fileType] == null ?
+									false :
+									handler.mime[fileType].text;
+
+					response.statusCode = 200;
+					response.setHeader("Content-Type", mime);
+
+					if (isText) {
+						handler.storage.readFile(path,{encoding:"utf8"},
+						function(error, data) {
+							response.end(data);
+						});
+					} else {
+						response.end(data);
+					}
+				}
+			});
+		}
+	}
 
 	member mime = {
 		"js"   : { text: true , type: "text/javascript"  },
@@ -57,110 +122,37 @@ class Server extends Root {
 		"xml"  : { text: true , type: "application/xml"  },
 	};
 
-	method run(handler) {
-		handler.folder  = this.folder;
-		handler.storage = this.storage;
-		handler.system  = this.system;
-		handler.mime    = this.mime;
-		handler.less    = this.less;
-
-		var server = this.http.createServer(function (request, response) {
-			var urlTokens  = request.url.split("/");
-			var callee     = urlTokens[1];
-			var path       = handler.folder + request.url;
-			var pathTokens = path.split(".");
-			var fileType   = pathTokens[pathTokens.length-1];
-			if (callee == "") callee = "index";
-
-			if ((handler.storage.existsSync(path) || fileType == "css") &&
-				callee != "index") {
-				if (fileType == "css") {
-					// TODO: add production code, compile only first time
-					// TODO: support other CSS preprocessor e.g. sass, scss
-					response.setHeader("Content-Type", "text/css");
-					var oldPath = path.replace(/\.css$/g, ".less");
-					handler.storage.readFile(oldPath, {encoding:"utf8"},
-					function(error, oldData) {
-						if (error) {
-							handler.storage.readFile(path, {encoding:"utf8"},
-							function(error, data) {
-								if (error) {
-									response.statusCode = 404;
-									response.end();
-								} else {
-									response.statusCode = 200;
-									response.end(data);
-								}
-							});
-						} else {
-							handler.less.render(oldData, function(error, css) {
-								var data = oldData;
-								if (!error) data = css.css;
-								handler.storage.writeFile(path, data);
-								response.statusCode = 200;
-								response.end(data);
-							});
-						}
-					});
-				} else {
-					handler.storage.readFile(path,
-					function(error, data) {
-						if (error) {
-							response.statusCode = 404;
-							response.end();
-						} else {
-							var mime   = handler.mime[fileType] == null ?
-											"application/octet-stream" :
-											handler.mime[fileType].type;
-							var isText = handler.mime[fileType] == null ?
-											false :
-											handler.mime[fileType].text;
-
-							response.statusCode = 200;
-							response.setHeader("Content-Type", mime);
-
-							if (isText) {
-								handler.storage.readFile(path,{encoding:"utf8"},
-								function(error, data) {
-									response.end(data);
-								});
-							} else {
-								response.end(data);
-							}
-						}
-					});
-
-				}
-			} else {
-				if (handler[callee] == null) {
-					response.statusCode = 404;
-					if (handler['error'] == null) {
-						response.end();
-					} else {
-						handler['error']({request:request, response:response});
-					}
-				} else {
-					response.statusCode = 200;
-					response.setHeader("Content-Type", "text/html");
-					handler[callee]({request:request, response:response});
-				}
-			}
-		});
-
-		server.listen(this.port, this.address);
-		this.system.log("Running at http://" + this.address + ":" + this.port);
-	}
-
 }
 
+class Engine extends Root {
+	member fs     = require('fs');
+	member engine = require("ejs");
+	member folder = "./views/";
+	member header = "";
+	member footer = "";
 
+	member render(name, data) {
+		var engine = this.engine;
+		var header = this.fs.readFileSync(this.folder + this.header);
+		var footer = this.fs.readFileSync(this.folder + this.footer);
+		var center = this.fs.readFileSync(this.folder + name);
+		var html = header + center + footer;
+		// TODO: add hashing here for production server
+		return engine.render(html, data);
+	}
 
+	/*
+	member headerContent = "";
+	member footerContent = "";
 
+	member setHeader(name) {
+		this.header   = name;
+		headerContent = this.fs.readFileSync(this.folder + this.header);
+	}
 
-/*
-this.mime["ttf" ] = { text: false, type: "application/x-font-ttf" };
-this.mime["eot" ] = { text: false, type: "application/vnd.ms-fontobject"};
-this.mime["svg" ] = { text: false, type: "image/svg+xml" };
-this.mime["woff"] = { text: false, type: "application/font-woff" };
-this.mime["woff2"]= { text: false, type: "application/font-woff2" };
-*/
+	member setFooter(name) {
+		this.footer   = name;
+		footerContent = this.fs.readFileSync(this.folder + this.footer);
+	}
+	*/
+}
