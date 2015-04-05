@@ -158,19 +158,27 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```html
 <script type="text/cool">
 main class Main {
+	member scroll(e) {
+		var system = new System();
+		system.log("Scrolling " + this.scrollY);
+	}
+	member resize(e) {
+		var page = new Page();
+		var body = page.select("body");
+		var footer = page.select("footer");
+		if (window.innerHeight > body.clientHeight) {
+			footer.style.position = "absolute";
+		} else {
+			footer.style.position = "relative";
+		}
+	}
 	new {
+		var system = new System();
 		var page = new Page();
 		var body = page.select('body');
-		body[0].onscroll = this.onScroll;
-		body[0].onclick  = this.onClick;
-	}
-	member onClick(e) {
-		var system = new System();
-		system.log(e);
-	}
-	member onScroll(e) {
-		var system = new System();
-		system.log(this.scrollY);
+		body.onscroll = this.scroll;
+		body.onresize = this.resize;
+		this.resize();
 	}
 }
 </script>
