@@ -1,13 +1,56 @@
 // Web MVC Framework
 
-/*
-Routing:
-/method/parameter-1
-/folder/picture.jpg
-/method/parameter-1/parameter-2       ?
-*/
+class Model extends Root {
+	member mysql  = require("mysql");
+	member pool   = this.mysql.createPool({
+		host      : "localhost",
+		user      : "user",
+		password  : "password",
+		database  : "db"
+		});
 
-class Server extends Root {
+	member query(sql, callback) {
+		this.pool.getConnection(function(error, db) {
+			if (error) {
+				callback(null);
+			} else {
+				db.query(sql, function(error, data) {
+					if (error) {
+						callback(null);
+					} else {
+						callback(data);
+					}
+					db.release();
+				});
+			}
+		});
+	}
+}
+
+class View extends Root {
+	member fs     = require('fs');
+	member engine = require("ejs");
+	member folder = "./views/";
+	member header = "";
+	member footer = "";
+
+	member render(name, data) {
+		var engine = this.engine;
+		var header = this.fs.readFileSync(this.folder + this.header);
+		var footer = this.fs.readFileSync(this.folder + this.footer);
+		var center = this.fs.readFileSync(this.folder + name);
+		var html = header + center + footer;
+		// TODO: add hashing here for production server
+		return engine.render(html, data);
+	}
+}
+
+class Controller extends Root {
+	member index(context) {context.response.end(); }
+	member error(context) {context.response.end(); }
+}
+
+class Server(controller) extends Root {
 	member port    = 2000;
 	member address = "0.0.0.0";
 	member http    = require("http");
@@ -16,42 +59,42 @@ class Server extends Root {
 	member storage = require('fs');
 	member less    = require('less');
 
-	member index(context) {context.response.end(); }
-	member error(context) {context.response.end(); }
+	new {
+		this.controller = controller;
+	}
 
-	member start () {
-		var handler = this;
+	member start() {
+		var controller = this.controller;
+		var server  = this;
 
-		var server = this.http.createServer(function (request, response) {
+		var http = this.http.createServer(function (request, response) {
 			var context    = {request:request, response:response};
 			var urlTokens  = request.url.split("/");
 			var callee     = urlTokens[1];
-			var path       = handler.folder + request.url;
-			var pathTokens = path.split(".");
-			var fileType   = pathTokens[pathTokens.length-1];
 			if (callee == "") callee = "index";
-			if (callee == "start") callee = null;
-			
-			if (handler[callee] == null) {
-				handler.sendFile(context);
-			} else {
+
+			if (typeof controller[callee] == "function") {
 				response.statusCode = 200;
 				response.setHeader("Content-Type", "text/html");
-				handler[callee](context);
+				controller[callee](context);
+			} else {
+				// TODO: check existing here then send(file) or 404
+				server.send(context);
 			}
 		});
 
-		server.listen(this.port, this.address);
+		http.listen(this.port, this.address);
 		console.log("Running at http://" + this.address + ":" + this.port);
 	}
 
-	member sendFile(context) {
-		var response = context.response;
-		var request  = context.request;
-		var handler  = this;
+	member send(context) {
+		var response   = context.response;
+		var request    = context.request;
+		var server     = this;
+		var controller = this.controller;
 
 		var urlTokens  = request.url.split("/");
-		var path       = handler.folder + request.url;
+		var path       = server.folder + request.url;
 		var pathTokens = path.split(".");
 		var fileType   = pathTokens[pathTokens.length-1];
 
@@ -60,49 +103,49 @@ class Server extends Root {
 			// TODO: support other CSS preprocessor e.g. sass, scss
 			response.setHeader("Content-Type", "text/css");
 			var oldPath = path.replace(/\.css$/g, ".less");
-			handler.storage.readFile(oldPath, {encoding:"utf8"},
+			server.storage.readFile(oldPath, {encoding:"utf8"},
 			function(error, oldData) {
 				if (error) {
-					handler.storage.readFile(path, {encoding:"utf8"},
+					server.storage.readFile(path, {encoding:"utf8"},
 					function(error, data) {
 						if (error) {
 							response.statusCode = 404;
 							response.setHeader("Content-Type", "text/html");
-							handler.error(context);
+							controller.error(context);
 						} else {
 							response.statusCode = 200;
 							response.end(data);
 						}
 					});
 				} else {
-					handler.less.render(oldData, function(error, css) {
+					server.less.render(oldData, function(error, css) {
 						var data = oldData;
 						if (!error) data = css.css;
-						handler.storage.writeFile(path, data);
+						server.storage.writeFile(path, data);
 						response.statusCode = 200;
 						response.end(data);
 					});
 				}
 			});
 		} else {
-			handler.storage.readFile(path, function(error, data) {
+			server.storage.readFile(path, function(error, data) {
 				if (error) {
 					response.statusCode = 404;
 					response.setHeader("Content-Type", "text/html");
-					handler.error(context);
+					controller.error(context);
 				} else {
-					var mime   = handler.mime[fileType] == null ?
+					var mime   = server.mime[fileType] == null ?
 									"application/octet-stream" :
-									handler.mime[fileType].type;
-					var isText = handler.mime[fileType] == null ?
+									server.mime[fileType].type;
+					var isText = server.mime[fileType] == null ?
 									false :
-									handler.mime[fileType].text;
+									server.mime[fileType].text;
 
 					response.statusCode = 200;
 					response.setHeader("Content-Type", mime);
 
 					if (isText) {
-						handler.storage.readFile(path,{encoding:"utf8"},
+						server.storage.readFile(path,{encoding:"utf8"},
 						function(error, data) {
 							response.end(data);
 						});
@@ -123,38 +166,4 @@ class Server extends Root {
 		"json" : { text: true , type: "application/json" },
 		"xml"  : { text: true , type: "application/xml"  },
 	};
-
-}
-
-class Engine extends Root {
-	member fs     = require('fs');
-	member engine = require("ejs");
-	member folder = "./views/";
-	member header = "";
-	member footer = "";
-
-	member render(name, data) {
-		var engine = this.engine;
-		var header = this.fs.readFileSync(this.folder + this.header);
-		var footer = this.fs.readFileSync(this.folder + this.footer);
-		var center = this.fs.readFileSync(this.folder + name);
-		var html = header + center + footer;
-		// TODO: add hashing here for production server
-		return engine.render(html, data);
-	}
-
-	/*
-	member headerContent = "";
-	member footerContent = "";
-
-	member setHeader(name) {
-		this.header   = name;
-		headerContent = this.fs.readFileSync(this.folder + this.header);
-	}
-
-	member setFooter(name) {
-		this.footer   = name;
-		footerContent = this.fs.readFileSync(this.folder + this.footer);
-	}
-	*/
 }

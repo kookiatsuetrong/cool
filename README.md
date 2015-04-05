@@ -131,7 +131,7 @@ class System extends Root {
 # Exception
 ```es6
 try {
-
+	...
 } catch (error) {
 	throw new Exception();
 }
@@ -206,47 +206,60 @@ main class Main {
 
 # Web MVC Framework
 ```es6
-main class Simple extends Server {
+main class Simple extends Controller {
+	new {
+		var server = new Server(this);
+		server.start();
+	}
+
 	member index(context) {
 		context.response.end("Cool!");
-	}
-	new {
-		this.start();
 	}
 }
 ```
 Then navigate to http://localhost:2000, you will see a greeting!
 
-# MVC Template Engine
+# MVC View Engine and Database
 ```es6
-class MyServer extends Server {
-	member system = new System();
-	member engine = new Engine();
+class MyController extends Controller {
+	member view  = new View();
+	member model = new Model();
 
 	new {
-		this.engine.header = "header.html";
-		this.engine.footer = "footer.html";
+		this.view.header = "header.html";
+		this.view.footer = "footer.html";
 	}
 
 	member error(context) {
-		this.system.log('error ' + context.request.url);
-		var page = this.engine.render("error.html", {
-			title: "Cool!"
+		var page = this.view.render("error.html", {
+			title: "Error " + context.request.url
 		});
 		context.response.end(page);
 	}
 
 	member index(context) {
-		var page = this.engine.render("index.html", {
+		var page = this.view.render("index.html", {
 			title: "Cool!"
 		});
 		context.response.end(page);
 	}
+
+	member query(context) {
+		var view = this.view;
+		this.model.query("select * from users", function(data) {
+			var page = view.render("query.html", {
+				title: "MySQL",
+				data: data
+			});
+			context.response.end(page);
+		});
+	}
 }
 
-main class Main {
+main class Test {
 	new {
-		var server = new MyServer();
+		var controller = new MyController();
+		var server = new Server(controller);
 		server.start();
 	}
 }
@@ -254,14 +267,9 @@ main class Main {
 
 The default template engine is EJS.
 ```html
-<%
-	for (var i = 0; i < users.length; i++) {
-%>
-	<%= users[i].email %><br/>
-<%
-	}
-%>
-
+<% for (var i = 0; i < data.length; i++) { %>
+		<%= data[i].email %><br/>
+<% } %>
 ```
 
 
@@ -282,7 +290,6 @@ keyword are required when creating a member variable.
 - import vs require
 - Syntax checking
 ```
-
 
 
 

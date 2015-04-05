@@ -1,52 +1,60 @@
 // Web MVC Demo
 
-class MyServer extends Server {
-	member system = new System();
-	member engine = new Engine();
-
-	member mysql  = require("mysql");
-	member pool   = this.mysql.createPool({
-		host      : "localhost",
-		user      : "user",
-		password  : "password",
-		database  : "db"
-		});
+class MyController extends Controller {
+	member view  = new View();
+	member model = new Model();
 
 	new {
-		this.engine.header = "header.html";
-		this.engine.footer = "footer.html";
+		this.view.header = "header.html";
+		this.view.footer = "footer.html";
 	}
 
 	member error(context) {
-		this.system.log('error ' + context.request.url);
-		var page = this.engine.render("error.html", {
-			title: "Cool!"
+		var page = this.view.render("error.html", {
+			title: "Error " + context.request.url
 		});
 		context.response.end(page);
 	}
 
 	member index(context) {
-		var page = this.engine.render("index.html", {
+		var page = this.view.render("index.html", {
 			title: "Cool!"
 		});
 		context.response.end(page);
 	}
+
+	member query(context) {
+		var view = this.view;
+		this.model.query("select * from users", function(data) {
+			var page = view.render("query.html", {
+				title: "MySQL",
+				data: data
+			});
+			context.response.end(page);
+		});
+	}
 }
 
-main class Main {
+main
+class Test {
 	new {
-		var server = new MyServer();
+		var controller = new MyController();
+		var server = new Server(controller);
 		server.start();
 	}
 }
 
-class Simple extends Server {
+main
+class Simple extends Controller {
+	new {
+		var server = new Server(this);
+		server.port = 2001;
+		server.start();
+	}
+
 	member index(context) {
 		context.response.end("Cool!");
 	}
-	new {
-		this.start();
-	}
 }
 
 
@@ -61,29 +69,4 @@ class Simple extends Server {
 
 
 
-
-
-
-
-
-
-
-/*
-method double(context) {
-	var tokens  = context.request.url.split("/");
-	var integer = new Integer();
-	var data    = {result: integer.parse(tokens[2]) * 2};
-	var result  = this.system.stringify(data);
-	context.response.end(result);
-}
-
-method about(context) {
-	var engine = this.engine;
-	this.pool.query("select * from users", function (error, records) {
-		if (!error) {
-			var page = engine.render("about.html", {users:records});
-			context.response.end(page);
-		}
-	});
-}
-*/
+//
