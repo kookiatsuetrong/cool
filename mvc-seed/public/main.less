@@ -3,15 +3,17 @@
 @text: #333;
 
 html {
-	font-family: sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 100%;
 }
+
 body {
 	background: @background;
 	font-size: 1rem;
 	color: @text;
 	font-weight: 100;
 	line-height: 1.5rem;
+	letter-spacing: 0.08rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -23,25 +25,21 @@ p {
 }
 
 a {
-	transition: all 0.2s ease-in-out;
+	color: @text;
 	text-decoration: none;
-	&:link    { color: @text; text-decoration: none; }
-	&:visited { color: @text; text-decoration: none; }
-	&:hover   { color: @primary; text-decoration: none; }
-	&:anchor  { color: @text; text-decoration: none; }
+	transition: all 0.2s ease-in-out;
+	&:hover   { color: @primary; }
+	&:active  { color: @primary; }
 }
 
 header {
-	margin: 0;
-	padding: 10px 0;
-	width: 100%;
+	padding: 40px;
 	background: @primary;
 	color: white;
-	heigh: 120px;
 }
 
 article {
-	margin: 40px;
+	padding: 40px;
 }
 
 
