@@ -14,7 +14,7 @@ create table users (
 
 
 insert into users(email, password)
-  values('user@ipay.social', sha2('password', 256));
+  values('cool@programming.language', sha2('password', 256));
 
 
 -- end

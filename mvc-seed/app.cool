@@ -25,18 +25,15 @@ class MyController extends Controller {
 
 	member query(context) {
 		var view = this.view;
-		this.model.query("select * from users", function(data) {
-			var page = view.render("query.html", {
-				title: "MySQL",
-				data: data
-			});
+		this.model.query("select * from users", function(records) {
+			var data = {title: "MySQL", data: records};
+			var page = view.render("query.html", data);
 			context.response.end(page);
 		});
 	}
 }
 
-main
-class Test {
+main class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
@@ -44,8 +41,7 @@ class Test {
 	}
 }
 
-main
-class Simple extends Controller {
+main class Simple extends Controller {
 	new {
 		var server = new Server(this);
 		server.port = 2001;
