@@ -1,11 +1,9 @@
-@primary: lighten(dodgerblue, 20%);
-@primary: lightsteelblue;
 @primary: #2196f3;
-
 @background: white;
 @text: #333;
 
 html {
+	font-family: sans-serif;
 	font-size: 100%;
 }
 body {
@@ -13,7 +11,7 @@ body {
 	font-size: 1rem;
 	color: @text;
 	font-weight: 100;
-	letter-spacing: 0.1rem;
+	line-height: 1.5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,7 +31,7 @@ a {
 	&:anchor  { color: @text; text-decoration: none; }
 }
 
-.banner {
+header {
 	margin: 0;
 	padding: 10px 0;
 	width: 100%;
@@ -42,72 +40,9 @@ a {
 	heigh: 120px;
 }
 
-.center {
-	text-align: center;
+article {
+	margin: 40px;
 }
-.circle {
-	border-radius: 50%;
-	max-width: 200px;
-	margin: 20px;
-	margin-left: 0;
-	transition: all 0.5s ease-in-out;
-	border: 6px solid darken(@primary, 20%);
-	&:hover {
-		// border: 6px solid white;
-		box-shadow: 0 0 50px 0 white;
-	}
-}
-
-.inline {
-	display: inline-block;
-}
-.block {
-	display: block;
-}
-.center-parent {
-	display: block;
-	margin: 0 auto;
-}
-
-.background-primary {
-	background: @primary;
-	color: white;
-}
-
-.background-light {
-	background: lighten(@primary, 40%);
-	color: white;
-}
-
-.background-icon {
-	font-size: 2rem;
-	padding: 1rem;
-	color: darken(@primary, 20%);
-	transition: all 0.1s linear;
-	text-shadow: 0 1px lighten(@primary, 10%);
-	&:hover {
-		color: white;
-		text-shadow: 0 0 50px black;
-		/*
-		color: darken(@primary, 10%);
-		text-shadow: 0 0 10px white;
-		*/
-	}
-}
-
-footer {
-	background: @primary;
-	// background: lighten(@primary, 0%);
-	overflow: hidden;
-	height: 200px;
-	bottom: 0;
-}
-
-
-
-
-
-
 
 
 
