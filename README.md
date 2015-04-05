@@ -155,7 +155,7 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```
 
 # HTML Event Handling
-```html
+```es6
 <script type="text/cool">
 main class Main {
 	member scroll(e) {
