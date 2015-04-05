@@ -3,20 +3,21 @@
 # The Cool! programming language () {
 
 Cool! is a purely object-oriented programming language. It has been designed for
-transpile to JavaScript easily. The syntax is similar to JavaScript and Java.
-It supports encapsulation, abstraction, inheritance and polymorphism for the
-current version. I'm consider to add static and other features to this language
-in the near future.
+transpile to JavaScript directly. The syntax is similar to JavaScript and Java.
+It supports encapsulation, abstraction, inheritance, polymorphism and many
+features. Some feature such as static member are considering to implement in
+the near future.
 
-The another benefit of the Cool! programming language is its small library or
-framework. So developer can easily to remember and no need to use any IDE. A
-large framework language like Java or C# is very hard to remember even doing a
-common task. The Cool! programming language will have only 20-30 basic methods
-such as File.read(), Integer.parse(), System.log().
+The another benefit of the Cool! programming language is it comes with a small
+library or framework. So developer can easily to remember and no need to use
+any IDE. A large framework language like Java or C# is very hard to remember
+even doing a common task such as reading database. Cool! will have only 20-30
+basic methods such as File.read() or Database.execute().
 
 The Cool! programming language is similar to CoffeeScript, Dart, and TypeScript
 in term of "transpile" to JavaScript. It can run both browser-side and
-server-side.
+server-side. And of course it is a superset of JavaScript, it can load Node.js
+module directly.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
@@ -57,7 +58,7 @@ main class Fibonacci {
 }
 ```
 
-# Creating an object
+# More complex constructor
 Creating an object in Cool! is easy like Java / C# by writing new ClassName()
 ```es6
 class Student(name, dob) extends Root {
@@ -274,8 +275,8 @@ The default template engine is EJS.
 
 
 # Additional Information
-Currently Cool! is a superset of JavaScript, but using global object will be
-prohibit in the future.
+Currently Cool! is a superset of JavaScript, but something e.g. using global
+object will be invalid in the future.
 
 The "function" keyword uses for an internal or private function as well as
 call back function. But the "method" keyword uses to declare a member method of
