@@ -167,7 +167,6 @@ main class Main {
 			password : "password",
 			database : "db"
 		});
-
 		pool.getConnection(function (error, db) {
 			db.query("select * from users", function (error, records) {
 				if (!error) {
