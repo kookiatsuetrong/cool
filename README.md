@@ -19,8 +19,8 @@ in term of "transpile" to JavaScript. It can run both browser-side and
 server-side.
 
 # The first program
-Program written by the Cool! programming language starts from the constructor
-of any any main class. So let's start by writing the first Cool! program:
+A Cool! program starts from the constructor of any main class. So let's start
+by writing the first Cool! program:
 ```es6
 main class Hello {
 	new {
@@ -33,10 +33,15 @@ To transpile the above code to JavaScript, you have to execute this command:
 ```
 node transpile.js < hello.cool > hello.cool.js
 ```
-The you can run this program by execute this command:
+Then you can run this program by execute this command:
 ```
 node hello.cool.js
 ```
+
+# The Member keyword
+A class consist of property and method, both can be declared using keyword
+"member". If you want to access these member please use this. follow by the
+identifier of member.
 
 # Writing a recursion method
 ```es6
@@ -66,7 +71,6 @@ class Student(name, dob) extends Root {
 		return this.name + ' ' + this.dob;
 	}
 }
-
 main class Main {
 	new {
 		var system = new System();
@@ -81,19 +85,16 @@ main class Main {
 ```
 
 # Inheritance and Polymorphism
+Similar to Java.
 ```es6
-// Demo of Inheritance and Polymorphism
-
 class A {
 	member system = new System();
 	member aaa() { this.system.log("A.aaa()"); }
 }
-
 class B {
 	member system = new System();
 	member bbb() { this.system.log("B.bbb()"); }
 }
-
 class C(p) extends A {
 	member p = p;
 	member aaa() {
@@ -102,7 +103,6 @@ class C(p) extends A {
 	member ccc() {
 	}
 }
-
 class D(p) extends C(p) {}
 class E extends B {}
 ```
@@ -274,6 +274,9 @@ The default template engine is EJS.
 
 
 # Additional Information
+Currently Cool! is a superset of JavaScript, but using global object will be
+prohibit in the future.
+
 The "function" keyword uses for an internal or private function as well as
 call back function. But the "method" keyword uses to declare a member method of
 class.
@@ -283,14 +286,14 @@ keyword are required when creating a member variable.
 
 # To Do
 ```
-- Annotate and 2-way binding
+- Annotation (similar to Java)
+- 2-way binding (similar to Angular.js)
 - New way of multiple inheritance
-- Static member
+- Static member (similar to Java / C#)
 - Nested class
+- Partial class (C#)
 - import vs require
 - Syntax checking
 ```
-
-
 
 # }
