@@ -52,7 +52,8 @@ main class Fibonacci {
 }
 ```
 
-# Writing class with constructor
+# Creating an object
+Creating an object in Cool! is easy like Java / C# by writing new ClassName()
 ```es6
 class Student(name, dob) extends Root {
 	member name;

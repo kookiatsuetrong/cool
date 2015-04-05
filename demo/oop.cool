@@ -6,8 +6,25 @@ class T extends U, V, W {
 */
 
 class A {
+	console.log('name is ' + this.name);
+
 	member system = new System();
-	member aaa() { this.system.log("A.aaa()"); }
+	member aaa() { this.system.log("A.aaa()"); this.system.log(this.__proto__); }
+
+	// static xxx() {
+	// this.xxx = function() { return "A.xxx()-" + a.name; }
+}
+
+A.xxx = function() { return "A.xxx() " + this.__proto__; }
+
+/*
+static A.xyz() { }   -> A.xyz = function { }
+*/
+
+// method A.abc() {}
+A.abc = function() {
+	var system = new System();
+	system.log("A.abc()");
 }
 
 class B {
@@ -17,6 +34,7 @@ class B {
 
 class A2 extends A {
 }
+A2.xxx = function() { return "A2.xxx()"; }
 
 class Ax(p) extends A {
 	this.p = p;
@@ -48,7 +66,10 @@ class ABC extends A, B, C {}
 */
 
 main class Main {
-	member run() {
+	new {
+
+		console.log(A.name);
+
 		var a2 = new A2();
 		a2.aaa();
 		var ax = new Ax("ppp");
@@ -61,6 +82,10 @@ main class Main {
 
 		var a3x = new A3x("ppp", "qqq", "rrr");
 		a3x.aaa();
+
+		A.abc();
+		console.log(A.xxx());
+		console.log(A2.xxx());
 
 		/*
 		var ab = new AB();

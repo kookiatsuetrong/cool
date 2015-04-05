@@ -1,24 +1,9 @@
 
 
-- member field data property attribute
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-- method
+class(\s+)(\w+)([\s\S]*)static(\s*)(\w+)
 
-- derive extend mutate obtain expand borrow include extends inherits
-- the Root class similar to Object in Java
-
-class Root {
-    member class = "Root";
-}
-
-class Integer {
-    extend Root;
-    this.class = "Integer";
-
-    method parse(x) {
-        return parseInt(x);
-    }
-}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 Lexeme
@@ -61,7 +46,7 @@ endStatement    :- ; \n \r
 Syntax
 
 class identifier block
-class identifier () block
+class identifier parameter_list block
 block :- {[[statement]endStatement]*}
 
 stringLiteral          "{} // /* */ \" " also inside singleQuote
