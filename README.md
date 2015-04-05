@@ -3,21 +3,21 @@
 # The Cool! programming language () {
 
 Cool! is a purely object-oriented programming language. It has been designed for
-transpile to JavaScript directly. The syntax is similar to JavaScript and Java.
-It supports encapsulation, abstraction, inheritance, polymorphism and many
-features. Some feature such as static member are considering to implement in
-the near future.
+transpiling to JavaScript directly. The syntax is very similar to JavaScript,
+Java and C#. It supports abstraction, encapsulation, inheritance, polymorphism
+and many features. Some feature such as static member or big number are
+considering to implement in the future.
 
-The another benefit of the Cool! programming language is it comes with a small
-library or framework. So developer can easily to remember and no need to use
-any IDE. A large framework language like Java or C# is very hard to remember
+The another benefit of the Cool! programming language is the built-in small
+library or framework. So developer can easily remember method name and no need
+to use any IDE. A large framework like ASP.net MVC, is very hard to remember
 even doing a common task such as reading database. Cool! will have only 20-30
 basic methods such as File.read() or Database.execute().
 
-The Cool! programming language is similar to CoffeeScript, Dart, and TypeScript
-in term of "transpile" to JavaScript. It can run both browser-side and
-server-side. And of course it is a superset of JavaScript, it can load Node.js
-module directly.
+Cool! is similar to CoffeeScript, Dart, and TypeScript in term of "transpile"
+to JavaScript. It can run both browser-side and server-side. And of course it
+is a superset of JavaScript, so everything in JavaScript is valid in Cool!. And
+of course it can load and run Node.js module directly.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
