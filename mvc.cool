@@ -50,6 +50,7 @@ class Controller extends Root {
 	member error(context) {context.response.end(); }
 }
 
+// TODO: On production server, .html, .js, .css must be minified
 class Server(controller) extends Root {
 	member port    = 2000;
 	member address = "0.0.0.0";

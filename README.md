@@ -14,10 +14,11 @@ to use any IDE. A large framework like ASP.net MVC, is very hard to remember
 even doing a common task such as reading database. Cool! will have only 20-30
 basic methods such as File.read() or Database.execute().
 
-Cool! is similar to CoffeeScript, Dart, and TypeScript in term of "transpile"
-to JavaScript. It can run both browser-side and server-side. And of course it
-is a superset of JavaScript, so everything in JavaScript is valid in Cool!. And
-of course it can load and run Node.js module directly.
+Cool! is similar to CoffeeScript, Dart, and TypeScript in term of they're
+"transpile" their code to JavaScript. It can run both browser-side and
+server-side. And of course it is a superset of JavaScript, so everything in
+JavaScript is valid in Cool!. And of course it can load and run Node.js module
+directly.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
@@ -158,27 +159,25 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```es6
 <script type="text/cool">
 main class Main {
-	member scroll(e) {
-		var system = new System();
-		system.log("Scrolling " + this.scrollY);
-	}
-	member resize(e) {
-		var page = new Page();
-		var body = page.select("body");
-		var footer = page.select("footer");
-		if (window.innerHeight > body.clientHeight) {
-			footer.style.position = "absolute";
-		} else {
-			footer.style.position = "relative";
-		}
-	}
 	new {
-		var system = new System();
-		var page = new Page();
-		var body = page.select('body');
-		body.onscroll = this.scroll;
-		body.onresize = this.resize;
-		this.resize();
+		var mysql = require("mysql");
+		var pool  = mysql.createPool({
+			host     : "localhost",
+			user     : "user",
+			password : "password",
+			database : "db"
+		});
+
+		pool.getConnection(function (error, db) {
+			db.query("select * from users", function (error, records) {
+				if (!error) {
+					var system = new System();
+					system.log(records);
+				}
+				db.release();
+				pool.end();
+			});
+		});
 	}
 }
 </script>

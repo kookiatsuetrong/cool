@@ -40,23 +40,10 @@ class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
+		server.port = 2002;
 		server.start();
 	}
 }
-
-main
-class Simple extends Controller {
-	new {
-		var server = new Server(this);
-		server.port = 2001;
-		server.start();
-	}
-
-	member index(context) {
-		context.response.end("Cool!");
-	}
-}
-
 
 
 

@@ -8,15 +8,14 @@ main class Main {
 			database : "db"
 		});
 
-		var system = new System();
-
 		pool.getConnection(function (error, db) {
-			db.query("select * from users", [], function (error, records) {
+			db.query("select * from users", function (error, records) {
 				if (!error) {
+					var system = new System();
 					system.log(records);
 				}
 				db.release();
-				system.exit();
+				pool.end();
 			});
 		});
 	}
