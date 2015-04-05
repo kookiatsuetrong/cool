@@ -159,24 +159,28 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```es6
 <script type="text/cool">
 main class Main {
+	member scroll(e) {
+		var system = new System();
+		system.log("Scrolling " + this.scrollY);
+	}
+	member resize(e) {
+		var page = new Page();
+		var body = page.select("body");
+		var footer = page.select("footer");
+
+		if (window.innerHeight > body.clientHeight) {
+			footer.style.position = "absolute";
+		} else {
+			footer.style.position = "relative";
+		}
+	}
 	new {
-		var mysql = require("mysql");
-		var pool  = mysql.createPool({
-			host     : "localhost",
-			user     : "user",
-			password : "password",
-			database : "db"
-		});
-		pool.getConnection(function (error, db) {
-			db.query("select * from users", function (error, records) {
-				if (!error) {
-					var system = new System();
-					system.log(records);
-				}
-				db.release();
-				pool.end();
-			});
-		});
+		var system = new System();
+		var page = new Page();
+		var body = page.select('body');
+		body.onscroll = this.scroll;
+		body.onresize = this.resize;
+		this.resize();
 	}
 }
 </script>
@@ -195,16 +199,14 @@ main class Main {
 			password : "password",
 			database : "db"
 		});
-
-		var system = new System();
-
 		pool.getConnection(function (error, db) {
-			db.query("select * from users", [], function (error, records) {
+			db.query("select * from users", function (error, records) {
 				if (!error) {
+					var system = new System();
 					system.log(records);
 				}
 				db.release();
-				system.exit();
+				pool.end();
 			});
 		});
 	}
