@@ -266,19 +266,21 @@ main class Test {
 }
 ```
 
-The default template engine for rendering the HTML5 document is EJS.
+The default template engine is EJS. You can also change to your preferred
+template engine.
 ```html
 <% for (var i = 0; i < data.length; i++) { %>
 		<%= data[i].email %><br/>
 <% } %>
 ```
 
-You will need to install Node.js module by execute this command:
+If you want to build the sample MVC application, please go to the "mvc-seed"
+directory and install Node.js modules by execute this command:
 ```
-npm install less mysql ejs
+npm install ejs less mysql
 ```
 
-And then you can run it:
+And you can run the application by this command:
 ```
 node ../transpile.js < app.cool > app.cool.js ; node app.cool.js
 ```
