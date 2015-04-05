@@ -1,0 +1,72 @@
+// Web MVC Demo
+
+class MyController extends Controller {
+	member view  = new View();
+	member model = new Model();
+
+	new {
+		this.view.header = "header.html";
+		this.view.footer = "footer.html";
+	}
+
+	member error(context) {
+		var page = this.view.render("error.html", {
+			title: "Error " + context.request.url
+		});
+		context.response.end(page);
+	}
+
+	member index(context) {
+		var page = this.view.render("index.html", {
+			title: "Cool!"
+		});
+		context.response.end(page);
+	}
+
+	member query(context) {
+		var view = this.view;
+		this.model.query("select * from users", function(data) {
+			var page = view.render("query.html", {
+				title: "MySQL",
+				data: data
+			});
+			context.response.end(page);
+		});
+	}
+}
+
+main
+class Test {
+	new {
+		var controller = new MyController();
+		var server = new Server(controller);
+		server.start();
+	}
+}
+
+main
+class Simple extends Controller {
+	new {
+		var server = new Server(this);
+		server.port = 2001;
+		server.start();
+	}
+
+	member index(context) {
+		context.response.end("Cool!");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

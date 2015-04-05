@@ -144,20 +144,32 @@
 </footer>
 
 <script type="text/cool">
-class Main {
-	method onClick(e) {
+main class Main {
+
+	member scroll(e) {
 		var system = new System();
-		system.log(e);
+		system.log("Scrolling " + this.scrollY);
 	}
-	method onScroll(e) {
+
+	member resize(e) {
+		var page = new Page();
+		var body = page.select("body");
+		var footer = page.select("footer");
+
+		if (window.innerHeight > body.clientHeight) {
+			footer.style.position = "absolute";
+		} else {
+			footer.style.position = "relative";
+		}
+	}
+
+	new {
 		var system = new System();
-		system.log(this.scrollY);
-	}
-	method start() {
 		var page = new Page();
 		var body = page.select('body');
-		body[0].onscroll = this.onScroll;
-		body[0].onclick  = this.onClick;
+		body.onscroll = this.scroll;
+		body.onresize = this.resize;
+		this.resize();
 	}
 }
 </script>

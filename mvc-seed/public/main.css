@@ -1,0 +1,102 @@
+html {
+  font-size: 100%;
+}
+body {
+  background: white;
+  font-size: 1rem;
+  color: #333333;
+  font-weight: 100;
+  letter-spacing: 0.1rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+}
+p {
+  text-align: justify;
+}
+a {
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+a:link {
+  color: #333333;
+  text-decoration: none;
+}
+a:visited {
+  color: #333333;
+  text-decoration: none;
+}
+a:hover {
+  color: #2196f3;
+  text-decoration: none;
+}
+a:anchor {
+  color: #333333;
+  text-decoration: none;
+}
+.banner {
+  margin: 0;
+  padding: 10px 0;
+  width: 100%;
+  background: #2196f3;
+  color: white;
+  heigh: 120px;
+}
+.center {
+  text-align: center;
+}
+.circle {
+  border-radius: 50%;
+  max-width: 200px;
+  margin: 20px;
+  margin-left: 0;
+  transition: all 0.5s ease-in-out;
+  border: 6px solid #0960a5;
+}
+.circle:hover {
+  box-shadow: 0 0 50px 0 white;
+}
+.inline {
+  display: inline-block;
+}
+.block {
+  display: block;
+}
+.center-parent {
+  display: block;
+  margin: 0 auto;
+}
+.background-primary {
+  background: #2196f3;
+  color: white;
+}
+.background-light {
+  background: #e3f2fd;
+  color: white;
+}
+.background-icon {
+  font-size: 2rem;
+  padding: 1rem;
+  color: #0960a5;
+  transition: all 0.1s linear;
+  text-shadow: 0 1px #51adf6;
+}
+.background-icon:hover {
+  color: white;
+  text-shadow: 0 0 50px black;
+  /*
+		color: darken(@primary, 10%);
+		text-shadow: 0 0 10px white;
+		*/
+}
+footer {
+  background: #2196f3;
+  overflow: hidden;
+  height: 200px;
+  bottom: 0;
+}

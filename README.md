@@ -220,7 +220,7 @@ main class Simple extends Controller {
 ```
 Then navigate to http://localhost:2000, you will see a greeting!
 
-# MVC View Engine and Database
+# Using View and Database
 ```es6
 class MyController extends Controller {
 	member view  = new View();
@@ -266,13 +266,25 @@ main class Test {
 }
 ```
 
-The default template engine is EJS.
+The default template engine for rendering the HTML5 document is EJS.
 ```html
 <% for (var i = 0; i < data.length; i++) { %>
 		<%= data[i].email %><br/>
 <% } %>
 ```
 
+You will need to install Node.js module by execute this command:
+```
+npm install less mysql ejs
+```
+
+And then you can run it:
+```
+node ../transpile.js < app.cool > app.cool.js ; node app.cool.js
+```
+
+What you will see is here:
+![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/mvc-seed.png)
 
 # Additional Information
 Currently Cool! is a superset of JavaScript, but something e.g. using global
