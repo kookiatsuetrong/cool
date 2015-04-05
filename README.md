@@ -41,7 +41,7 @@ node hello.cool.js
 
 # The Member keyword
 A class consist of property and method, both can be declared using keyword
-"member". If you want to access these member please use this. follow by the
+"member". If you want to access these member please use "this."" follow by the
 identifier of member.
 
 # Writing a recursion method
