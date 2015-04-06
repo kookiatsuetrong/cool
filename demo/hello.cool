@@ -1,8 +1,10 @@
 // Cool! Demo
 
 main class Hello {
-	member cool() {
-		var system = new System();
-		system.log("Cool!");
+	new {
+		var console = new Console();
+		console.write("Enter your name: ");
+		var name = console.readLine();
+		console.write("Hello " + name);
 	}
 }

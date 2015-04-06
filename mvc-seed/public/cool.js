@@ -132,9 +132,7 @@ function Page() {
 		return document.querySelectorAll(x);
 	}
 	// alert,
-}
 
-function Web() {
 	this.get = function(url, data, callback) {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = function () {

@@ -14,9 +14,7 @@ class Exception extends Root {
 class System extends Root {
 	member class = "System";
 
-	member log(data) {
-		console.log(data);
-	}
+	/*
 	member execute(code) {
 		eval(code);
 	}
@@ -29,6 +27,10 @@ class System extends Root {
 	member stringify(data) {
 		return JSON.stringify(data);
 	}
+	member write(data) {
+		console.log(data);
+	}
+	*/
 }
 
 class Integer extends Root {
@@ -58,6 +60,7 @@ class File extends Root {
 	member append(name, data) {
 		this.fs.appendFileSync(name, data);
 	}
+
 	/*
 	member exists(name) {
 		return this.fs.existsSync(name);
@@ -85,3 +88,45 @@ class Web extends Root {
 		callback();
 	}
 }
+
+class Console extends Root {
+	new {
+		process.stdin.resume();
+		process.stdin.setEncoding("UTF8");
+	}
+	member data = "";
+	member write(data) {
+		process.stdout.write(data);
+	}
+	member read(callback) {
+		process.stdin.on("data", function (chunk) { this.data += chunk; });
+		process.stdin.on("end", function() { callback(this.data); });
+	}
+	member index = 0;
+	member readLine() {
+		process.stdin.pause();
+		var lines = this.data.split("\n");
+		process.stdin.resume();
+		// return lines[this.index++];
+	}
+}
+
+/*
+class File(name) extends Root {
+	new {
+		this.name = name;
+	}
+	member read();
+	member write(data);
+}
+
+class TextFile(name) extends File(name) {
+	new {
+		this.name = name;
+	}
+	member read();
+	member write(data);
+	member append(data);
+}
+
+*/
