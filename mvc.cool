@@ -70,7 +70,11 @@ class Server(controller) extends Root {
 			var callee     = urlTokens[1];
 			if (callee == "") callee = "index";
 
-			if (typeof controller[callee] == "function") {
+			if (server.exception.indexOf(callee) >= 0) {
+				response.statusCode = 404;
+				response.setHeader("Content-Type", "text/html");
+				controller.error(context);
+			} else if (typeof controller[callee] == "function") {
 				response.statusCode = 200;
 				response.setHeader("Content-Type", "text/html");
 				controller[callee](context);
@@ -153,6 +157,20 @@ class Server(controller) extends Root {
 			});
 		}
 	}
+
+	member exception = [
+		"__defineGetter__",
+		"__defineSetter__",
+		"__lookupGetter__",
+		"__lookupSetter__",
+		"constructor",
+		"hasOwnProperty",
+		"isPrototypeOf",
+		"propertyIsEnumerable",
+		"toLocaleString",
+		"toString",
+		"valueOf"
+	];
 
 	member mime = {
 		"js"   : { text: true , type: "text/javascript"  },

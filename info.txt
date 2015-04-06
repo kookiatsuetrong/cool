@@ -1,9 +1,37 @@
 
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+JavaScript Built-in method
+__defineGetter__
+__defineSetter__
+__lookupGetter__
+__lookupSetter__
+constructor
+hasOwnProperty
+isPrototypeOf
+propertyIsEnumerable
+toLocaleString
+toString
+valueOf
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+Cool! Ideas
+SAP - Simple As Possible        -> Only 20-30 methods
+TOI - Text editor Over IDE      -> You can use any text editor to write Cool!
+LIS - Life Is Short             -> Don't spend 10000 hours learn how to code.
+LOC - Learn Online Conveniently -> No installation required. Use Cool! on the web.
+
 A minimal language with memorable framework.
 You don't need any IDE to write a Cool! app.
 All you need is text editor.
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 Multiple Inheritance are good for some interface like Comparable
 

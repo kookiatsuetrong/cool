@@ -52,6 +52,7 @@ function transpile(originalCode) {
 	code = code.replace(/class(\s+)(\w+)/g, "function $2 ");
 
 	// member m(p) -> this.m = function(p)
+	code = code.replace(/method(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
 	code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
 
 	// member m -> this.m
