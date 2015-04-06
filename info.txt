@@ -1,5 +1,17 @@
 
 
+A minimal language with memorable framework.
+You don't need any IDE to write a Cool! app.
+All you need is text editor.
+
+
+Multiple Inheritance are good for some interface like Comparable
+
+
+
+
+All Cool! programs start with constructor of any main class.
+
 
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -17,30 +29,12 @@ alpha numeric _ = == === != !==  + - * / & ^ ! | % $ && || \ " ' : ;
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 Tokens
 
-underscore
-plusSign
-minusSign
-multiplySign
-divideSign
-moduloSign
-backslash
-
-ampersand
-
-logicalOr       "||"
-logicalAnd      "&&"
-
-openParenthesis "("
-closeParenthesis "("
-
-doubleQuote       "\""
-singleQuote       "\'"
-
-reservedWord    for while do function var if switch case break this
+reserved_word   for while do function var if switch case break this
                 class method member
+
 identifier      name name_2 $name
 literal         1 0.5 "data"
-endStatement    :- ; \n \r
+end_statement    :- ; \n \r
 
 
 
@@ -51,15 +45,20 @@ class identifier block
 class identifier parameter_list block
 block :- {[[statement]endStatement]*}
 
-stringLiteral          "{} // /* */ \" " also inside singleQuote
-singleLineComment      // ... \n
-multipleLineComment    /* ... */
+string_literal           "{} // /* */ \" " also inside singleQuote
+single_line_comment      // ... \n
+multiple_line_comment    /* ... */
 
 
-statement :- assignment | conditional | iterative |
-    functionDeclaration | variableDeclaration |
-    methodDeclaration | memberDeclaration
+statement ::= assignment | conditional | iterative |
+    function_declaration | variable_declaration |
+    method_declaration | member_declaration;
 
+assigment
+    ::= identifer = expression
+
+variable_declartion
+    ::= var identifier
 
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

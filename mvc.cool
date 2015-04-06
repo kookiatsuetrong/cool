@@ -1,26 +1,22 @@
 // Web MVC Framework
 
-class Model extends Root {
-	member mysql  = require("mysql");
-	member pool   = this.mysql.createPool({
-		host      : "localhost",
-		user      : "user",
-		password  : "password",
-		database  : "db"
+class Database extends Root {
+	member mysql = require("mysql");
+	member pool  = this.mysql.createPool({
+		host     : "localhost",
+		user     : "user",
+		password : "password",
+		database : "db"
 		});
 
-	member query(sql, callback) {
-		this.pool.getConnection(function(error, db) {
+	method execute(sql, callback) {
+		this.pool.getConnection(function(error, server) {
 			if (error) {
 				callback(null);
 			} else {
-				db.query(sql, function(error, data) {
-					if (error) {
-						callback(null);
-					} else {
-						callback(data);
-					}
-					db.release();
+				server.query(sql, function(error, data) {
+					callback(data);
+					server.release();
 				});
 			}
 		});
@@ -34,7 +30,7 @@ class View extends Root {
 	member header = "";
 	member footer = "";
 
-	member render(name, data) {
+	method render(name, data) {
 		var engine = this.engine;
 		var header = this.fs.readFileSync(this.folder + this.header);
 		var footer = this.fs.readFileSync(this.folder + this.footer);
@@ -46,8 +42,8 @@ class View extends Root {
 }
 
 class Controller extends Root {
-	member index(context) {context.response.end(); }
-	member error(context) {context.response.end(); }
+	method index(context) {context.response.end(); }
+	method error(context) {context.response.end(); }
 }
 
 // TODO: On production server, .html, .js, .css must be minified
@@ -64,7 +60,7 @@ class Server(controller) extends Root {
 		this.controller = controller;
 	}
 
-	member start() {
+	method start() {
 		var controller = this.controller;
 		var server  = this;
 
@@ -88,7 +84,7 @@ class Server(controller) extends Root {
 		console.log("Running at http://" + this.address + ":" + this.port);
 	}
 
-	member send(context) {
+	method send(context) {
 		var response   = context.response;
 		var request    = context.request;
 		var server     = this;

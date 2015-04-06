@@ -1,8 +1,26 @@
 // Standard Library
 
+/*
+Standard
+9 Classes:
+Root, Exception, System, Engine, Web, Integer, Float, File, TextFile
+11 Methods
+text, read, write, append, execute, select, list, get, post, parse
+
+MVC
+4 Classes
+Database View Controller Server
+4 Methods
+render index error start (execute)
+
+Additional
+DateTime
+
+*/
+
 class Root {
 	member class = "Root";
-	member toString() {
+	method text() {
 		return this.class;
 	}
 }
@@ -14,119 +32,144 @@ class Exception extends Root {
 class System extends Root {
 	member class = "System";
 
-	/*
-	member execute(code) {
-		eval(code);
+	method write() {
+		// for (var i = 0; i < arguments.length; i++)
+		{
+			console.log(arguments);
+		}
+		/*
+		if (arguments.length == 0) {
+			process.stdout.write("\n");
+		} else if (typeof data == "string" ||
+			typeof data == "number") {
+			process.stdout.write(data);
+		} else {
+			console.log(data);
+		}
+		*/
 	}
-	member exit() {
-		process.exit();
+	method execute(name) {
+		var child = require("child_process");
+		child.exec(name).unref();
 	}
-	member parse(data) {
-		return JSON.parse(data);
-	}
-	member stringify(data) {
-		return JSON.stringify(data);
-	}
-	member write(data) {
-		console.log(data);
-	}
-	*/
-}
-
-class Integer extends Root {
-	member class = "Integer";
-	member parse(n) { return parseInt(n); }
-}
-
-class Float extends Root {
-	member class = "Float";
-	member parse(f) { return parseFloat(f); }
-}
-
-class File extends Root {
-	member class = "File";
-
-	member fs = require("fs");
-	member read(name) {
-		var result = "";
-		try {
-			result = this.fs.readFileSync(name, {encoding: "utf8"});
-		} catch (e) { throw new Exception(); }
-		return result;
-	}
-	member write(name, data) {
-		this.fs.writeFileSync(name, data);
-	}
-	member append(name, data) {
-		this.fs.appendFileSync(name, data);
-	}
-
-	/*
-	member exists(name) {
-		return this.fs.existsSync(name);
-	}
-	member list(name) {
-		return this.fs.readdirSync(name);
-	}
-	member isDirectory(name) {
-		var info = this.fs.statsSync(name);
-		return info.isDirectory();
-	}
-	*/
 }
 
 class Web extends Root {
 	member class = "Web";
 
-	member select(x) {
+	method list(x) {
 		return [];
 	}
-	member get(url, data, callback) {
+	method get(url, data, callback) {
 		callback();
 	}
-	member post(url, data, callback) {
+	method post(url, data, callback) {
 		callback();
 	}
 }
 
-class Console extends Root {
+// JavaScript Engine
+class Engine extends Root {
+	member class = "Engine";
+
+	method execute(code) {
+		return eval(code);
+	}
+	method parse(data) {
+		return JSON.parse(data);
+	}
+	method text(data) {
+		return JSON.stringify(data);
+	}
+}
+
+class Integer extends Root {
+	member class = "Integer";
+	method parse(n) { return parseInt(n); }
+}
+
+class Float extends Root {
+	member class = "Float";
+	method parse(f) { return parseFloat(f); }
+}
+
+class File(name) extends Root {
+	member class = "File";
+	member fs = require("fs");
 	new {
-		process.stdin.resume();
-		process.stdin.setEncoding("UTF8");
+		this.name = name;
 	}
+	method read() {
+		var result = null;
+		try {
+			result = this.fs.readFileSync(this.name);
+		} catch (e) { /* throw new Exception(); */ }
+		return result;
+	}
+	method write(data) {
+		this.fs.writeFileSync(this.name, data);
+	}
+}
+
+class TextFile(name) extends File(name) {
+	member class = "TextFile";
+
+	method read() {
+		var result = null;
+		try {
+			result = this.fs.readFileSync(this.name, {encoding: "utf8"});
+		} catch (e) { /* throw new Exception(); */ }
+		return result;
+	}
+	method write(data) {
+		this.fs.writeFileSync(this.name, data);
+	}
+	method append(data) {
+		this.fs.appendFileSync(this.name, data);
+	}
+}
+
+
+
+/*
+member exists(name) {
+	return this.fs.existsSync(name);
+}
+member list(name) {
+	return this.fs.readdirSync(name);
+}
+member isDirectory(name) {
+	var info = this.fs.statsSync(name);
+	return info.isDirectory();
+}
+*/
+
+// DEPRECATED
+class Console extends Root {
+	member class = "Console";
 	member data = "";
-	member write(data) {
-		process.stdout.write(data);
+	member index = 0;
+
+	method write(data) {
+		process.stdout.write(data + "");
 	}
-	member read(callback) {
-		process.stdin.on("data", function (chunk) { this.data += chunk; });
+	method read(callback) {
+		// process.stdin.resume();
+		// process.stdin.setEncoding("UTF8");
+		// process.stdin.on("data", function (chunk) { this.data += chunk; });
+
+		process.stdin.on("readable", function() {
+			var chunk = process.stdin.read();
+			this.data += chunk;
+		});
 		process.stdin.on("end", function() { callback(this.data); });
 	}
-	member index = 0;
-	member readLine() {
+	/*
+	method readLine() {
 		process.stdin.pause();
 		var lines = this.data.split("\n");
 		process.stdin.resume();
 		// return lines[this.index++];
 	}
+	*/
 }
-
-/*
-class File(name) extends Root {
-	new {
-		this.name = name;
-	}
-	member read();
-	member write(data);
-}
-
-class TextFile(name) extends File(name) {
-	new {
-		this.name = name;
-	}
-	member read();
-	member write(data);
-	member append(data);
-}
-
-*/

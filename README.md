@@ -27,7 +27,7 @@ by writing the first Cool! program:
 main class Hello {
 	new {
 		var system = new System();
-		system.log("Cool!");
+		system.write("Cool!");
 	}
 }
 ```
@@ -50,7 +50,7 @@ identifier of member.
 main class Fibonacci {
 	new {
 		var system = new System();
-		system.log(this.calculate(40));
+		system.write(this.calculate(40));
 	}
 	member calculate(n) {
 		if (n <= 1) return n;
@@ -69,10 +69,11 @@ class Student(name, dob) extends Root {
 		this.name = name;
 		this.dob = dob;
 	}
-	member toString() {
-		return this.name + ' ' + this.dob;
+	method text() {
+		return this.name + " " + this.dob;
 	}
 }
+
 main class Main {
 	new {
 		var system = new System();
@@ -80,10 +81,11 @@ main class Main {
 		students[0] = new Student("James", "1980-01-01");
 		students[1] = new Student("Smith", "1980-03-01");
 		for (var i = 0; i < students.length; i++) {
-			system.log(students[i].toString());
+			system.write(students[i].text() + "\n");
 		}
 	}
 }
+
 ```
 
 # Inheritance and Polymorphism
@@ -232,44 +234,34 @@ Then navigate to http://localhost:2000, you will see a greeting!
 ```es6
 class MyController extends Controller {
 	member view  = new View();
-	member model = new Model();
+	member database = new Database();
 
 	new {
 		this.view.header = "header.html";
 		this.view.footer = "footer.html";
 	}
 
-	member error(context) {
+	method error(context) {
 		var page = this.view.render("error.html", {
 			title: "Error " + context.request.url
 		});
 		context.response.end(page);
 	}
 
-	member index(context) {
+	method index(context) {
 		var page = this.view.render("index.html", {
 			title: "Cool!"
 		});
 		context.response.end(page);
 	}
 
-	member query(context) {
+	method query(context) {
 		var view = this.view;
-		this.model.query("select * from users", function(data) {
-			var page = view.render("query.html", {
-				title: "MySQL",
-				data: data
-			});
+		this.database.execute("select * from users", function(records) {
+			var model = {title: "Query", records: records};
+			var page  = view.render("query.html", model);
 			context.response.end(page);
 		});
-	}
-}
-
-main class Test {
-	new {
-		var controller = new MyController();
-		var server = new Server(controller);
-		server.start();
 	}
 }
 ```

@@ -2,9 +2,12 @@
 
 main class Hello {
 	new {
-		var console = new Console();
-		console.write("Enter your name: ");
-		var name = console.readLine();
-		console.write("Hello " + name);
+		var system = new System();
+		system.write("Cool!");
+		system.write();
+		system.write("3rd");
+		system.write(null);
+		system.write(5 + "\n");
+		system.write(5, 3, 1);
 	}
 }

@@ -1,11 +1,8 @@
-class Main {
-
-	method start() {
-		var file = new File();
-		var str = file.read('demo/data.txt');
-		var system = new System();
-		system.log(str);
-		file.write('demo/new.txt', str);
+main class Main {
+	new {
+		var text  = new TextFile("./new.txt");
+		text.write("Cool! is super cool\n");
+		var text2 = new TextFile("./new2.txt");
+		text2.append("Appending\n");
 	}
-
 }

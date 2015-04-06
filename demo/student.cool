@@ -1,53 +1,23 @@
-class Student(name, dob) {
-	property name;
-	property dob;
-
-	field data = "Test";
-
-	// comment
-	constructor {
+class Student(name, dob) extends Root {
+	member name;
+	member dob;
+	new {
 		this.name = name;
 		this.dob = dob;
 	}
-
-	method toString() {
-		return this.name + ' ' + this.dob;
+	method text() {
+		return this.name + " " + this.dob;
 	}
-	/*
-	 * End of the class
-	 */
 }
 
-/*
-class Employee {
-	field name;
-	field dob;
-	method getData() { }
-}
-
-class Employee {
-	property name;
-	property dob;
-	method getData() { }
-}
-
-class Employee {
-	public  name;
-	private dob;
-	public  method getData() {}
-	private method process() {}
-}
-*/
-
-class Main {
-	method start() {
+main class Main {
+	new {
 		var system = new System();
 		var students = [];
 		students[0] = new Student("James", "1980-01-01");
 		students[1] = new Student("Smith", "1980-03-01");
-
 		for (var i = 0; i < students.length; i++) {
-			system.log(students[i].toString());
+			system.write(students[i].text() + "\n");
 		}
 	}
 }
