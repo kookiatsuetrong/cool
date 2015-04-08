@@ -1,30 +1,37 @@
+
 <header>
-	<img src="/cool.png" />
+	<a href="https://github.com/kookiatsuetrong/cool">
+		<img src="/cool.png" />
+	</a>
 	<h1>The Cool! Programming Language</h1>
 </header>
 
 <article>
-	<h2>Hello World</h2>
-	<p>
-	The Cool! programming language is cool!
-	</p>
-
-	<h2>Useful Links</h2>
+	<h2>Cool! Ideas</h2>
 	<ul>
-		<li><a href="https://github.com/kookiatsuetrong/cool"
-			>The Cool! Programming Language</a></li>
-		<li><a href=
-			"https://github.com/kookiatsuetrong/cool/blob/master/mvc/app.cool"
-			>MVC Web Application</a></li>
+		<li>SAP - Simple And Powerful  -> Only 20-30 methods, but produce same result as any large framework.</li>
+		<li>TOI - Text editor Over IDE -> You can use any text editor to write Cool!</li>
+		<li>BAS - Browser And Server   -> Cool! can use on browser and server.</li>
+		<li>LIS - Life Is Short        -> Don't spend 10000 hours learn how to code. Cool! is good for everyone.</li>
+		<li>LOE - Learn Online Easily  -> No installation required. Cool! has online editor.</li>
 	</ul>
+
+	<textarea class="editor" id="cool-code">// Cool! Demo
+main class Hello() {
+	new {
+		var system = new System();
+		system.write("Cool!");
+	}
+}
+</textarea>
+
+	<textarea class="editor" id="javascript-code"></textarea>
+
+
 </article>
 
 <script type="text/cool">
 main class Main {
-
-	// two-way binding
-	member name; // @id
-
 	member prime = [];
 	method sieve(n) {
 		this.prime[0] = false;
@@ -40,16 +47,40 @@ main class Main {
 			}
 		}
 	}
+
+	method transpile() {
+			var web = new Web();
+			var editor1 = web.select("#cool-code");
+			var code2 = transpile(editor1.value);
+			var editor2 = web.select("#javascript-code");
+			editor2.value = code2;
+	}
 	new {
+		this.transpile();
+		var web = new Web();
+		var editor1 = web.select("#cool-code");
+		editor1.oninput = this.transpile;
+
 		var n = 100;
 		var system = new System();
-		system.log("Prime Numbers <= " + n);
+		system.write("Prime Numbers <= " + n);
 		this.sieve(n);
 		for (var i = 0; i <= n; i++) {
 			if (this.prime[i]) {
-				system.log(i);
+				system.write(i);
 			}
 		}
 	}
+
+
+
+	// Browser MVC and two-way binding
+	/*
+	// ("#id")
+	member name;
+	// ("#save").click
+	method save () {
+	}
+	*/
 }
 </script>

@@ -3,7 +3,7 @@
 /*
 Standard
 9 Classes:
-Root, Exception, System, Engine, Web, Integer, Float, File, TextFile
+Root, Exception, System, Engine, Web, File, TextFile [Integer, Float = Number]
 11 Methods
 text, read, write, append, execute, select, list, get, post, parse
 
@@ -54,20 +54,6 @@ class System extends Root {
 	}
 }
 
-class Web extends Root {
-	member class = "Web";
-
-	method list(x) {
-		return [];
-	}
-	method get(url, data, callback) {
-		callback();
-	}
-	method post(url, data, callback) {
-		callback();
-	}
-}
-
 // JavaScript Engine
 class Engine extends Root {
 	member class = "Engine";
@@ -83,14 +69,20 @@ class Engine extends Root {
 	}
 }
 
-class Integer extends Root {
-	member class = "Integer";
-	method parse(n) { return parseInt(n); }
-}
-
-class Float extends Root {
-	member class = "Float";
-	method parse(f) { return parseFloat(f); }
+class Web extends Root {
+	member class = "Web";
+	method select(x) {
+		return [];
+	}
+	method list(x) {
+		return [];
+	}
+	method get(url, data, callback) {
+		callback();
+	}
+	method post(url, data, callback) {
+		callback();
+	}
 }
 
 class File(name) extends Root {
@@ -127,6 +119,16 @@ class TextFile(name) extends File(name) {
 	method append(data) {
 		this.fs.appendFileSync(this.name, data);
 	}
+}
+
+class Integer extends Root {
+	member class = "Integer";
+	method parse(n) { return parseInt(n); }
+}
+
+class Float extends Root {
+	member class = "Float";
+	method parse(f) { return parseFloat(f); }
 }
 
 

@@ -16,16 +16,51 @@ toString
 valueOf
 
 
+JavaScript Type
+
+number
+boolean
+function
+string
+object (new, null)
+undefined
+
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+Browser MVC
+
+class PageView extends Root {
+
+}
+
+
+main class PageController extends Root {
+    // ("#id").value
+    member name;
+    // ("#button").onclick
+    method onclick () {
+
+    }
+
+    // ("body").onscroll
+    method onscroll () {
+
+    }
+
+    new {
+
+    }
+}
 
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 Cool! Ideas
-SAP - Simple As Possible        -> Only 20-30 methods
+SAP - Simple And Powerful       -> Only 20-30 methods, but produce same result as large framework.
 TOI - Text editor Over IDE      -> You can use any text editor to write Cool!
 LIS - Life Is Short             -> Don't spend 10000 hours learn how to code.
-LOC - Learn Online Conveniently -> No installation required. Use Cool! on the web.
+BAS - Browser And Server        -> Cool! can use on browser and server.
+LOC - Learn Online Conveniently -> No installation required. Cool! has online editor.
 
 A minimal language with memorable framework.
 You don't need any IDE to write a Cool! app.

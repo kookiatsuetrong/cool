@@ -302,13 +302,17 @@ keyword are required when creating a member variable.
 # To Do
 ```
 - Annotation (similar to Java)
-- 2-way binding (similar to Angular.js)
+- 2-way data binding (similar to Angular.js)
 - New way of multiple inheritance
 - Static member (similar to Java / C#)
 - Nested class
 - Partial class (C#)
-- import vs require
+- Using import vs require
 - Syntax checking
+- Transpile Directive
+- Canvas Demo
+- Online Editor
+- Transpile to ES6
 ```
 
 # }

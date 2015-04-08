@@ -27,7 +27,10 @@ class MyController extends Controller {
 		var view = this.view;
 		this.database.execute("select * from users", function(records) {
 			var model = {title: "Query", records: records};
-			var page  = view.render("query.html", model);
+			var page  = "";
+			try {
+				page = view.render("query.html", model);
+			} catch (e) {}
 			context.response.end(page);
 		});
 	}
@@ -44,6 +47,7 @@ main class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
+		server.port = 2000;
 		server.start();
 	}
 }
