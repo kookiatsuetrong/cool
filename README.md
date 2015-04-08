@@ -188,6 +188,34 @@ main class Main {
 </script>
 ```
 
+# More Complicate Event Handling
+```es6
+main class Start {
+	method keydown(event) {
+		var TAB = 9;
+		if (event.keyCode == TAB) {
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
+			var target = event.target;
+			var value = target.value;
+			target.value = value.substring(0, start)
+				+ "\t"
+				+ value.substring(end);
+			this.selectionStart = this.selectionEnd = start + 1;
+			event.preventDefault();
+		}
+	}
+
+	new {
+		var web = new Web();
+		var editor = web.select("#cool-code");
+		editor.onkeydown = this.keydown;
+	}
+
+}
+
+```
+
 # Reading Data from AJAX
 ```es6
 var web = new Web();
