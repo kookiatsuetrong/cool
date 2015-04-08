@@ -17,14 +17,17 @@ basic methods such as File.read() or Database.execute().
 Cool! is similar to CoffeeScript, Dart, and TypeScript in term of they're
 "transpile" their code to JavaScript. It can run both browser-side and
 server-side. And of course it is a superset of JavaScript, so everything in
-JavaScript is valid in Cool!. And of course it can load and run Node.js module
+JavaScript is valid in Cool!. And finally it can load and run Node.js module
 directly.
 
 Philosophies of the Cool! programming language:
 - SAB - Server And Browser - Use only one language from server to browser
 - TOI - Text editor Over IDE - You can use any text editor to write Cool!
 - LIS - Life Is Short - Don't spend 10000 hours learning large framework.
-- LOE - Learn Online Easily - No installation required. Cool! has online editor.
+- LOE - Learn Online Easily -
+	No installation required. Cool! has an online editor.
+- PYS - Powerful Yet Small -
+	Only 20-30 methods, but produce same result as any large framework.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
@@ -44,6 +47,96 @@ node transpile.js < hello.cool > hello.cool.js
 Then you can run this program by execute this command:
 ```
 node hello.cool.js
+```
+
+# Using Cool! in a web page
+You can put your Cool! code in a separated .cool file like this:
+```html
+<script type="text/cool" src="/test.cool"></script>
+```
+Or using it as an inline code:
+```html
+<script type="text/cool">
+... Your Cool! code here ...
+</script>
+```
+You can also specify your Cool! code using "language" attribute:
+```html
+<script language="cool">
+</script>
+```
+Of course at the end of the page, you will need to include the "cool.js" file:
+```html
+<script src="/cool.js"></script>
+```
+
+# HTML Event Handling
+```es6
+<script type="text/cool">
+main class Main {
+	method scroll(e) {
+		var system = new System();
+		system.log("Scrolling " + this.scrollY);
+	}
+	method resize(e) {
+		var page = new Web();
+		var body = page.select("body");
+		var footer = page.select("footer");
+
+		if (window.innerHeight > body.clientHeight) {
+			footer.style.position = "absolute";
+		} else {
+			footer.style.position = "relative";
+		}
+	}
+	new {
+		var system = new System();
+		var page = new Web();
+		var body = page.select('body');
+		body.onscroll = this.scroll;
+		body.onresize = this.resize;
+		this.resize();
+	}
+}
+</script>
+```
+
+# More Complicate Event Handling
+```es6
+main class Start {
+	method keydown(event) {
+		var TAB = 9;
+		if (event.keyCode == TAB) {
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
+			var target = event.target;
+			var value = target.value;
+			target.value = value.substring(0, start)
+				+ "\t"
+				+ value.substring(end);
+			this.selectionStart = this.selectionEnd = start + 1;
+			event.preventDefault();
+		}
+	}
+
+	new {
+		var web = new Web();
+		var editor = web.select("#cool-code");
+		editor.onkeydown = this.keydown;
+	}
+
+}
+
+```
+
+# Reading Data from AJAX
+```es6
+var web = new Web();
+web.get("/test", {}, function (data) {
+	var engine = new Engine();
+	var system = new System();
+	system.write(engine.parse(data));
+});
 ```
 
 # Writing a recursion method
@@ -139,91 +232,6 @@ try {
 } catch (error) {
 	throw new Exception();
 }
-```
-
-# Using Cool! in a web page
-You can put your Cool! code in a separated .cool file like this:
-```html
-<script type="text/cool" src="/test.cool"></script>
-```
-Or using it as an inline code:
-```html
-<script type="text/cool">
-... Your Cool! code here ...
-</script>
-```
-Of course at the end of the page, you will need to include the "cool.js" file:
-```html
-<script src="/cool.js"></script>
-```
-
-# HTML Event Handling
-```es6
-<script type="text/cool">
-main class Main {
-	method scroll(e) {
-		var system = new System();
-		system.log("Scrolling " + this.scrollY);
-	}
-	method resize(e) {
-		var page = new Web();
-		var body = page.select("body");
-		var footer = page.select("footer");
-
-		if (window.innerHeight > body.clientHeight) {
-			footer.style.position = "absolute";
-		} else {
-			footer.style.position = "relative";
-		}
-	}
-	new {
-		var system = new System();
-		var page = new Web();
-		var body = page.select('body');
-		body.onscroll = this.scroll;
-		body.onresize = this.resize;
-		this.resize();
-	}
-}
-</script>
-```
-
-# More Complicate Event Handling
-```es6
-main class Start {
-	method keydown(event) {
-		var TAB = 9;
-		if (event.keyCode == TAB) {
-			var start = this.selectionStart;
-			var end = this.selectionEnd;
-			var target = event.target;
-			var value = target.value;
-			target.value = value.substring(0, start)
-				+ "\t"
-				+ value.substring(end);
-			this.selectionStart = this.selectionEnd = start + 1;
-			event.preventDefault();
-		}
-	}
-
-	new {
-		var web = new Web();
-		var editor = web.select("#cool-code");
-		editor.onkeydown = this.keydown;
-	}
-
-}
-
-```
-
-# Reading Data from AJAX
-```es6
-var web = new Web();
-web.get("/test", {}, function (data) {
-	var engine = new Engine();
-	var system = new System();
-	system.write(engine.parse(data));
-});
 ```
 
 # Importing JavaScript Code

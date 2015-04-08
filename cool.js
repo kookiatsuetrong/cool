@@ -1,18 +1,28 @@
 var scripts = document.getElementsByTagName('script');
 
 for (var i = 0; i < scripts.length; i++) {
+	var cool = false;
 	if (scripts[i].attributes['type'] != null) {
 		if (scripts[i].attributes['type'].value === 'text/cool') {
-			if (scripts[i].attributes['src'] == null) {
-				eval(transpile(scripts[i].text));
-			} else {
-				transrequest(scripts[i].attributes['src'].value);
-			}
+			cool = true;
+		}
+	}
+	if (scripts[i].attributes['language'] != null) {
+		if (scripts[i].attributes['language'].value = "cool") {
+			cool = true;
+		}
+	}
+
+	if (cool) {
+		if (scripts[i].attributes['src'] == null) {
+			eval(transpile(scripts[i].text));
+		} else {
+			request(scripts[i].attributes['src'].value);
 		}
 	}
 }
 
-function transrequest(url) {
+function request(url) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
 		var DONE = 4;
@@ -53,7 +63,7 @@ function transpile(originalCode) {
 
 	// member m(p) -> this.m = function(p)
 	code = code.replace(/method(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
-	code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
+	// code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
 
 	// member m -> this.m
 	code = code.replace(/member(\s+)(\w+)/g, "this.$2");
