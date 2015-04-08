@@ -297,6 +297,49 @@ node ../transpile.js < app.cool > app.cool.js ; node app.cool.js
 What you will see is here:
 ![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/mvc-seed.png)
 
+# Using Middleware
+```es6
+main class Test {
+	new {
+		var controller = new MyController();
+		var server = new Server(controller);
+		server.middleware.push(new Logger());
+		server.middleware.push(new Less());
+		server.start();
+		var system = new System();
+		system.write(server.text());
+	}
+}
+```
+
+# Writing Your Own Middleware (Advanced)
+Just inherit the Middleware class and override the request() method
+```es6
+class Logger extends Middleware {
+	method request(context) {
+		var system = new System();
+		system.write(context.request.url);
+	}
+}
+```
+
+# Using MVC with JavaScript or ES6
+```es6
+function Simple () {
+	Controller.call(this);
+
+	this.index = function (context) {
+		context.response.end("Cool!");
+	}
+}
+
+var simple = new Simple();
+var server = new Server(simple);
+server.port = 2003;
+server.start();
+```
+
+
 # Additional Information
 Currently Cool! is a superset of JavaScript, but something e.g. using global
 object will be invalid in the future.
