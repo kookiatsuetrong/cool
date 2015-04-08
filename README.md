@@ -21,10 +21,10 @@ JavaScript is valid in Cool!. And of course it can load and run Node.js module
 directly.
 
 Philosophies of the Cool! programming language:
-SAB - Server And Browser - Use only one language from server to browser
-TOI - Text editor Over IDE - You can use any text editor to write Cool!
-LIS - Life Is Short - Don't spend 10000 hours learning large framework.
-LOE - Learn Online Easily - No installation required. Cool! has online editor.
+- SAB - Server And Browser - Use only one language from server to browser
+- TOI - Text editor Over IDE - You can use any text editor to write Cool!
+- LIS - Life Is Short - Don't spend 10000 hours learning large framework.
+- LOE - Learn Online Easily - No installation required. Cool! has online editor.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
@@ -357,7 +357,7 @@ keyword are required when creating a member variable.
 - Annotation (similar to Java)
 - 2-way data binding (similar to Angular.js)
 - New way of multiple inheritance
-- Static member (similar to Java / C#)
+- Static member (similar to Java, C# and ES6)
 - Nested class
 - Partial class (C#)
 - Using import vs require
@@ -366,7 +366,6 @@ keyword are required when creating a member variable.
 - Canvas Demo
 - Online Editor
 - Transpile to ES6
-- Writing MVC Middleware
 ```
 
 # }
