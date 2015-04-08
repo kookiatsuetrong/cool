@@ -1,6 +1,6 @@
-![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/cool.jpg)
-
 # The Cool! programming language () {
+
+![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/cool.jpg)
 
 Cool! is a purely object-oriented programming language. It has been designed for
 transpiling to JavaScript directly. The syntax is very similar to JavaScript,

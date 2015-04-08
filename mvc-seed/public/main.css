@@ -43,10 +43,16 @@ article {
 }
 .editor {
   tab-size: 4;
+  -moz-tab-size: 4;
+  margin: 1%;
   border-radius: 4px;
   font-family: monospace;
-  border: 1px solid #2196f3;
+  border: 1px solid #82c4f8;
   width: 45%;
-  height: 200px;
+  height: 400px;
   padding: 8px;
+  resize: vertical;
+}
+.editor:focus {
+  border: 1px solid #2196f3;
 }
