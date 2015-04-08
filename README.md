@@ -326,6 +326,21 @@ directory and install Node.js modules by execute this command:
 npm install ejs less mysql
 ```
 
+You will need the main class to run the above controller.
+```es6
+main class Test {
+	new {
+		var controller = new MyController();
+		var server = new Server(controller);
+		server.middleware.push(new Logger());
+		server.middleware.push(new Less());
+		server.start();
+		var system = new System();
+		system.write(server.text());
+	}
+}
+```
+
 And you can run the application by this command:
 ```
 node ../transpile.js < app.cool > app.cool.js ; node app.cool.js
