@@ -299,6 +299,9 @@ What you will see is here:
 ![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/mvc-seed.png)
 
 # Using Middleware
+All middleware are processing request before the controller. There are some
+built-in middleware, e.g. Logger for logging the request, Less for compiling
+CSS files.
 ```es6
 main class Test {
 	new {
@@ -314,7 +317,8 @@ main class Test {
 ```
 
 # Writing Your Own Middleware (Advanced)
-Just inherit the Middleware class and override the request() method
+If you wan to build your own middleware, you can do it by inherit the
+Middleware class and override the request() method.
 ```es6
 class Logger extends Middleware {
 	method request(context) {
@@ -325,6 +329,7 @@ class Logger extends Middleware {
 ```
 
 # Using MVC with JavaScript or ES6
+You can also use Cool! MVC from JavaScript or ES6, for example:
 ```es6
 function Simple () {
 	Controller.call(this);
