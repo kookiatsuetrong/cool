@@ -20,6 +20,12 @@ server-side. And of course it is a superset of JavaScript, so everything in
 JavaScript is valid in Cool!. And of course it can load and run Node.js module
 directly.
 
+Philosophies of the Cool! programming language:
+SAB - Server And Browser - Use only one language from server to browser
+TOI - Text editor Over IDE - You can use any text editor to write Cool!
+LIS - Life Is Short - Don't spend 10000 hours learning large framework.
+LOE - Learn Online Easily - No installation required. Cool! has online editor.
+
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
 by writing the first Cool! program:
