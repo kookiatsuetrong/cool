@@ -21,13 +21,13 @@ JavaScript is valid in Cool!. And finally it can load and run Node.js module
 directly.
 
 Philosophies of the Cool! programming language:
-- SAB - Server And Browser - Use only one language from server to browser
+- SAB - Server And Browser - Use only one language from server to browser.
 - TOI - Text editor Over IDE - You can use any text editor to write Cool!
 - LIS - Life Is Short - Don't spend 10000 hours learning large framework.
 - LOE - Learn Online Easily -
 	No installation required. Cool! has an online editor.
 - PYS - Powerful Yet Small -
-	Only 20-30 methods, but produce same result as any large framework.
+	Only 20-30 methods, but produce result as any large framework.
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
@@ -335,9 +335,9 @@ What you will see is here:
 ![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/mvc-seed.png)
 
 # Using Middleware
-All middleware are processing request before the controller. There are some
-built-in middleware, e.g. Logger for logging the request, Less for compiling
-CSS files.
+All middleware process request before the main controller. There are some
+built-in middlewares in the framework, e.g. Logger for logging the request,
+Less for compiling CSS files.
 ```es6
 main class Test {
 	new {
