@@ -52,7 +52,7 @@ main class Fibonacci {
 		var system = new System();
 		system.write(this.calculate(40));
 	}
-	member calculate(n) {
+	method calculate(n) {
 		if (n <= 1) return n;
 		return this.calculate(n-1) + this.calculate(n-2);
 	}
@@ -85,7 +85,6 @@ main class Main {
 		}
 	}
 }
-
 ```
 
 # Inheritance and Polymorphism
@@ -93,18 +92,18 @@ Similar to Java.
 ```es6
 class A {
 	member system = new System();
-	member aaa() { this.system.log("A.aaa()"); }
+	method aaa() { this.system.log("A.aaa()"); }
 }
 class B {
 	member system = new System();
-	member bbb() { this.system.log("B.bbb()"); }
+	method bbb() { this.system.log("B.bbb()"); }
 }
 class C(p) extends A {
 	member p = p;
-	member aaa() {
+	method aaa() {
 		// do something polymorphism here
 	}
-	member ccc() {
+	method ccc() {
 	}
 }
 class D(p) extends C(p) {}
@@ -161,12 +160,12 @@ Of course at the end of the page, you will need to include the "cool.js" file:
 ```es6
 <script type="text/cool">
 main class Main {
-	member scroll(e) {
+	method scroll(e) {
 		var system = new System();
 		system.log("Scrolling " + this.scrollY);
 	}
-	member resize(e) {
-		var page = new Page();
+	method resize(e) {
+		var page = new Web();
 		var body = page.select("body");
 		var footer = page.select("footer");
 
@@ -178,7 +177,7 @@ main class Main {
 	}
 	new {
 		var system = new System();
-		var page = new Page();
+		var page = new Web();
 		var body = page.select('body');
 		body.onscroll = this.scroll;
 		body.onresize = this.resize;
@@ -186,6 +185,16 @@ main class Main {
 	}
 }
 </script>
+```
+
+# Reading Data from AJAX
+```es6
+var web = new Web();
+web.get("/test", {}, function (data) {
+	var engine = new Engine();
+	var system = new System();
+	system.write(engine.parse(data));
+});
 ```
 
 # Importing JavaScript Code
@@ -223,7 +232,7 @@ main class Simple extends Controller {
 		server.start();
 	}
 
-	member index(context) {
+	method index(context) {
 		context.response.end("Cool!");
 	}
 }
@@ -313,6 +322,7 @@ keyword are required when creating a member variable.
 - Canvas Demo
 - Online Editor
 - Transpile to ES6
+- Writing MVC Middleware
 ```
 
 # }

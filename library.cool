@@ -32,21 +32,8 @@ class Exception extends Root {
 class System extends Root {
 	member class = "System";
 
-	method write() {
-		// for (var i = 0; i < arguments.length; i++)
-		{
-			console.log(arguments);
-		}
-		/*
-		if (arguments.length == 0) {
-			process.stdout.write("\n");
-		} else if (typeof data == "string" ||
-			typeof data == "number") {
-			process.stdout.write(data);
-		} else {
-			console.log(data);
-		}
-		*/
+	method write(data) {
+		console.log(data);
 	}
 	method execute(name) {
 		var child = require("child_process");

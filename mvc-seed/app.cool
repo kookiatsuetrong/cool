@@ -35,11 +35,17 @@ class MyController extends Controller {
 		});
 	}
 
-	function test(context) {
-		var page = this.view.render("index.html", {
-			title: "Cool!"
-		});
-		context.response.end(page);
+	method test(context) {
+		var info = {
+			name: "name",
+			data: [
+				{email: "email0@email.com"},
+				{email: "email1@email.com"},
+				{email: "email2@email.com"},
+			]
+		};
+		var engine = new Engine();
+		context.response.end(engine.text(info));
 	}
 }
 
@@ -47,8 +53,11 @@ main class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
-		server.port = 2000;
+		server.middleware.push(new Logger());
+		server.middleware.push(new Less());
 		server.start();
+		var system = new System();
+		system.write(server.text());
 	}
 }
 
@@ -57,6 +66,8 @@ main class Simple extends Controller {
 		var server = new Server(this);
 		server.port = 2001;
 		server.start();
+		var system = new System();
+		system.write(server.text());
 	}
 
 	method index(context) {

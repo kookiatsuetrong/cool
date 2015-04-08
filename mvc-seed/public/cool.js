@@ -43,7 +43,7 @@ function transpile(originalCode) {
 	// main class
 	code = code.replace(
 		/main(\s+)class(\s+)(\w+)/g,
-		"new $3(); class $3");
+		"new $3();$1class$2$3");
 
 	// class A { -> function A () {
 	code = code.replace(/class(\s+)(\w+)(\s*){/g, "function $2 () { ");
@@ -116,15 +116,15 @@ function System() {
 
 function Engine () {
 	Root.call(this);
-	thisclass = "Engine";
+	this.class = "Engine";
 
-	function execute(code) {
+	this.execute = function(code) {
 		return eval(code);
 	}
-	function parse(data) {
+	this.parse = function(data) {
 		return JSON.parse(data);
 	}
-	function text(data) {
+	this.text = function(data) {
 		return JSON.stringify(data);
 	}
 }

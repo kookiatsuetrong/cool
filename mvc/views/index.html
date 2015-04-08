@@ -146,13 +146,13 @@
 <script type="text/cool">
 main class Main {
 
-	member scroll(e) {
+	method scroll(e) {
 		var system = new System();
-		system.log("Scrolling " + this.scrollY);
+		system.write("Scrolling " + this.scrollY);
 	}
 
-	member resize(e) {
-		var page = new Page();
+	method resize(e) {
+		var page = new Web();
 		var body = page.select("body");
 		var footer = page.select("footer");
 
@@ -165,7 +165,7 @@ main class Main {
 
 	new {
 		var system = new System();
-		var page = new Page();
+		var page = new Web();
 		var body = page.select('body');
 		body.onscroll = this.scroll;
 		body.onresize = this.resize;

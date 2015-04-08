@@ -2,6 +2,15 @@
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+var web = new Web();
+web.get("/test", {}, function (data) {
+	var engine = new Engine();
+	var system = new System();
+	system.write(engine.parse(data));
+});
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 JavaScript Built-in method
 __defineGetter__
 __defineSetter__
