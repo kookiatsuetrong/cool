@@ -1,0 +1,81 @@
+
+<header>
+	<a href="https://github.com/kookiatsuetrong/cool">
+		<img src="/cool.png" />
+	</a>
+	<h1>The Cool! Programming Language</h1>
+</header>
+
+<article>
+	<h2>Cool! Ideas</h2>
+	<ul>
+		<li>SAB - Server And Browser   -
+			Use only one language from server to browser</li>
+		<li>TOI - Text editor Over IDE -
+			You can use any text editor to write Cool!</li>
+		<li>LIS - Life Is Short        -
+			Don't spend 10000 hours learning large framework.</li>
+		<!--
+		<li>PYS - Powerful Yet Small   -
+			Only 20-30 methods, but produce same result as any large framework.
+		</li>
+		-->
+		<li>LOE - Learn Online Easily  -
+			No installation required. Cool! has online editor.</li>
+	</ul>
+
+</article>
+
+<script language="cool">
+main
+class Test {
+	new {
+		var system = new System();
+		system.write("Cool!");
+	}
+}
+</script>
+
+<script type="text/cool" src="/test.cool"></script>
+
+<script type="text/cool">
+main class Main {
+	member prime = [];
+	method sieve(n) {
+		this.prime[0] = false;
+		this.prime[1] = false;
+		for (var i = 2; i <= n; i++) {
+			this.prime[i] = true;
+		}
+		for (var i = 0; i <= Math.sqrt(n); i++) {
+			if (this.prime[i] == true) {
+				for (var j = 2; i * j <= n; j++) {
+					this.prime[i * j] = false;
+				}
+			}
+		}
+	}
+
+	new {
+		var n = 100;
+		var system = new System();
+		system.write("Prime Numbers <= " + n);
+		this.sieve(n);
+		for (var i = 0; i <= n; i++) {
+			if (this.prime[i]) {
+				system.write(i);
+			}
+		}
+	}
+
+
+	// Browser MVC and two-way binding
+	/*
+	// ("#id")
+	member name;
+	// ("#save").click
+	method save () {
+	}
+	*/
+}
+</script>
