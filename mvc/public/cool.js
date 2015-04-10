@@ -1,13 +1,23 @@
 var scripts = document.getElementsByTagName('script');
 
 for (var i = 0; i < scripts.length; i++) {
+	var cool = false;
 	if (scripts[i].attributes['type'] != null) {
 		if (scripts[i].attributes['type'].value === 'text/cool') {
-			if (scripts[i].attributes['src'] == null) {
-				eval(transpile(scripts[i].text));
-			} else {
-				request(scripts[i].attributes['src'].value);
-			}
+			cool = true;
+		}
+	}
+	if (scripts[i].attributes['language'] != null) {
+		if (scripts[i].attributes['language'].value = "cool") {
+			cool = true;
+		}
+	}
+
+	if (cool) {
+		if (scripts[i].attributes['src'] == null) {
+			eval(transpile(scripts[i].text));
+		} else {
+			request(scripts[i].attributes['src'].value);
 		}
 	}
 }
@@ -82,11 +92,14 @@ function transpile(originalCode) {
 	// code = code.replace(/private(\s+)/g, "var ");
 
 	var prefix = '"use strict;"; ';
+	code = prefix + code;
+	/*
 	if (code.indexOf("//") == 0) {
 		code = prefix + code;
 	} else {
 		code = prefix + "\n" + code;
 	}
+	*/
 
 	return code;
 }
@@ -152,8 +165,12 @@ function Web() {
 				}
 			}
 		}
-		request.open('get', url, true);
-		request.send(data);
+		var str = "?";
+		for (var key in data) {
+			str += key + "=" + data[key] + "&";
+		}
+		request.open('get', url + str, true);
+		request.send();
 	}
 
 	this.post = function(url, data, callback) {
@@ -168,11 +185,14 @@ function Web() {
 				}
 			}
 		}
+		var str = "";
+		for (var key in data) {
+			str += key + "=" + data[key] + "&";
+		}
 		request.open('post', url, true);
 		request.setRequestHeader('Content-Type',
 			'application/x-www-form-urlencoded; charset=UTF-8');
-
-		request.send(data);
+		request.send(str);
 	}
 }
 

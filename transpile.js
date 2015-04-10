@@ -52,11 +52,14 @@ function transpile(originalCode) {
 	// code = code.replace(/private(\s+)/g, "var ");
 
 	var prefix = '"use strict;"; ';
+	code = prefix + code;
+	/*
 	if (code.indexOf("//") == 0) {
 		code = prefix + code;
 	} else {
 		code = prefix + "\n" + code;
 	}
+	*/
 
 	return code;
 }

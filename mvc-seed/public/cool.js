@@ -63,7 +63,7 @@ function transpile(originalCode) {
 
 	// member m(p) -> this.m = function(p)
 	code = code.replace(/method(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
-	// code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
+	code = code.replace(/member(\s+)(\w+)(\s*)\(/g, "this.$2 = function (");
 
 	// member m -> this.m
 	code = code.replace(/member(\s+)(\w+)/g, "this.$2");
@@ -92,11 +92,14 @@ function transpile(originalCode) {
 	// code = code.replace(/private(\s+)/g, "var ");
 
 	var prefix = '"use strict;"; ';
+	code = prefix + code;
+	/*
 	if (code.indexOf("//") == 0) {
 		code = prefix + code;
 	} else {
 		code = prefix + "\n" + code;
 	}
+	*/
 
 	return code;
 }
@@ -162,8 +165,12 @@ function Web() {
 				}
 			}
 		}
-		request.open('get', url, true);
-		request.send(data);
+		var str = "?";
+		for (var key in data) {
+			str += key + "=" + data[key] + "&";
+		}
+		request.open('get', url + str, true);
+		request.send();
 	}
 
 	this.post = function(url, data, callback) {
@@ -178,11 +185,14 @@ function Web() {
 				}
 			}
 		}
+		var str = "";
+		for (var key in data) {
+			str += key + "=" + data[key] + "&";
+		}
 		request.open('post', url, true);
 		request.setRequestHeader('Content-Type',
 			'application/x-www-form-urlencoded; charset=UTF-8');
-
-		request.send(data);
+		request.send(str);
 	}
 }
 

@@ -7,19 +7,6 @@
 </header>
 
 <article>
-	<textarea class="editor" id="cool-code">// Cool! Demo
-main class Hello() {
-	new {
-		var system = new System();
-		system.write("Cool!");
-	}
-}
-
-
-</textarea>
-
-	<textarea class="editor" id="javascript-code"></textarea>
-
 	<h2>Cool! Ideas</h2>
 	<ul>
 		<li>SAB - Server And Browser   -
@@ -69,36 +56,7 @@ main class Main {
 		}
 	}
 
-	method transpile() {
-		var web = new Web();
-		var editor1 = web.select("#cool-code");
-		var code2 = transpile(editor1.value);
-		var editor2 = web.select("#javascript-code");
-		editor2.value = code2;
-	}
-
-	method keydown(event) {
-		var TAB = 9;
-		if (event.keyCode == TAB) {
-			var start = this.selectionStart;
-			var end = this.selectionEnd;
-			var target = event.target;
-			var value = target.value;
-			target.value = value.substring(0, start)
-				+ "\t"
-				+ value.substring(end);
-			this.selectionStart = this.selectionEnd = start + 1;
-			event.preventDefault();
-		}
-	}
-
 	new {
-		this.transpile();
-		var web = new Web();
-		var editor1 = web.select("#cool-code");
-		editor1.oninput = this.transpile;
-		editor1.onkeydown = this.keydown;
-
 		var n = 100;
 		var system = new System();
 		system.write("Prime Numbers <= " + n);
@@ -109,7 +67,6 @@ main class Main {
 			}
 		}
 	}
-
 
 
 	// Browser MVC and two-way binding

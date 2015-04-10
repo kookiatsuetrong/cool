@@ -1,12 +1,29 @@
-
-
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+/*
+Standard
+9 Classes:
+Root, Exception, System, Engine, Web, File, TextFile [Integer, Float = Number]
+11 Methods
+text, read, write, append, execute, select, list, get, post, parse
+
+MVC
+4 Classes
+Database View Controller Server
+4 Methods
+render index error start (execute)
+
+Additional
+DateTime
+
+*/
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 var web = new Web();
-web.get("/test", {}, function (data) {
-	var engine = new Engine();
-	var system = new System();
-	system.write(engine.parse(data));
+web.post("/test", {data:'data', info:'info'}, function(data) {
+  var system = new System();
+  system.write(data);
+
 });
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

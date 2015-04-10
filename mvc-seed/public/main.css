@@ -34,12 +34,12 @@ a:active {
   color: #2196f3;
 }
 header {
-  padding: 40px;
+  padding: 10px 40px;
   background: #2196f3;
   color: white;
 }
 article {
-  padding: 40px;
+  padding: 10px 40px;
 }
 .editor {
   tab-size: 4;

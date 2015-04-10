@@ -1,0 +1,14 @@
+main class Test {
+
+	member test = "Hello";
+
+	new {
+		this.watch(this.test, function(data) {
+			var system = new System();
+			system.write("changed");
+		});
+
+		this.test = "bingo";
+	}
+
+}
