@@ -107,7 +107,7 @@ main class Simple extends Controller {
 
 			<pre>
 &lt;script type="text/cool"&gt;
-main class Test {
+main class Hello() {
 	new {
 		var system = new System();
 		system.write("Cool!");
@@ -130,16 +130,17 @@ main class Test {
 		<div class="col-xs-12 col-sm-6">
 			<h3>Cool! code</h3>
 <textarea class="editor" id="cool-code">// Cool! Demo
-main class Hello() {
+main class Hello {
+	member system = new System();
+
 	new {
-		var system = new System();
-		system.write("Cool!");
+		this.system.write("Cool!");
+	}
+
+	method sayHi(name) {
+		this.system.write("Hi! " + name);
 	}
 }
-
-
-
-
 </textarea>
 		</div>
 		<div class="col-xs-12 col-sm-6">
