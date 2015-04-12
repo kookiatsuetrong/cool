@@ -2,7 +2,7 @@
 
 class MyController extends Controller {
 	member view  = new View();
-	member database = new Database();
+	member database = new Database("mysql://user:password@localhost/db");
 
 	new {
 		this.view.header = "header.html";

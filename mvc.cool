@@ -1,13 +1,22 @@
 // Web MVC Framework
 
-class Database extends Root {
-	member mysql = require("mysql");
-	member pool  = this.mysql.createPool({
+class Database(connection) extends Root {
+	member connection = "";
+		/*
+		{
 		host     : "localhost",
+		database : "db",
 		user     : "user",
-		password : "password",
-		database : "db"
-		});
+		password : "password"
+		};
+		*/
+
+	new {
+		this.connection = connection;
+	}
+
+	member mysql = require("mysql");
+	member pool  = this.mysql.createPool(this.connection);
 
 	method execute(sql, callback) {
 		this.pool.getConnection(function(error, server) {
@@ -24,7 +33,7 @@ class Database extends Root {
 }
 
 class View extends Root {
-	member fs     = require('fs');
+	member fs     = require("fs");
 	member engine = require("ejs");
 	member folder = "./views/";
 	member header = "";
@@ -46,7 +55,7 @@ class Server(controller) extends Root {
 	member address = "0.0.0.0";
 	member http    = require("http");
 	member folder  = "./public"
-	member storage = require('fs');
+	member storage = require("fs");
 
 	new {
 		this.controller = controller;

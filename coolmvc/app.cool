@@ -1,8 +1,11 @@
 // Web MVC Demo
+// @mvc.cool
+// @library.cool
+// @web.cool
 
 class MyController extends Controller {
 	member view  = new View();
-	member database = new Database();
+	member database = new Database("mysql://user:password@localhost/db");
 
 	new {
 		this.view.header = "header.html";
@@ -60,7 +63,7 @@ main class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
-		server.middleware.push(new Logger());
+		// server.middleware.push(new Logger());
 		server.middleware.push(new Less());
 		server.start();
 		var system = new System();

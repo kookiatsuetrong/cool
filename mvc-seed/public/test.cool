@@ -1,0 +1,6 @@
+main class Test {
+	new {
+		var system = new System();
+		system.write("External File");
+	}
+}

@@ -2,7 +2,7 @@
 
 function MyController () {  Controller.call(this); 
 	this.view  = new View();
-	this.database = new Database();
+	this.database = new Database("mysql://user:password@localhost/db");
 
 	{
 		this.view.header = "header.html";
@@ -60,7 +60,7 @@ new Test(); function Test () {
 	{
 		var controller = new MyController();
 		var server = new Server(controller);
-		server.middleware.push(new Logger());
+		// server.middleware.push(new Logger());
 		server.middleware.push(new Less());
 		server.start();
 		var system = new System();
@@ -245,14 +245,23 @@ function Console () {  Root.call(this);
 
 // Web MVC Framework
 
-function Database () {  Root.call(this); 
-	this.mysql = require("mysql");
-	this.pool  = this.mysql.createPool({
+function Database (connection){ Root.call(this); 
+	this.connection = "";
+		/*
+		{
 		host     : "localhost",
+		database : "db",
 		user     : "user",
-		password : "password",
-		database : "db"
-		});
+		password : "password"
+		};
+		*/
+
+	{
+		this.connection = connection;
+	}
+
+	this.mysql = require("mysql");
+	this.pool  = this.mysql.createPool(this.connection);
 
 	this.execute = function (sql, callback) {
 		this.pool.getConnection(function(error, server) {
