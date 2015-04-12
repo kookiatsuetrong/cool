@@ -45,8 +45,9 @@ pre {
   margin: 8px 0;
   tab-size: 4;
   -moz-tab-size: 4;
-  border: 1px solid #2196f3;
+  border: none;
   background: #fbfbff;
+  overflow-x: auto;
 }
 .editor {
   tab-size: 4;
