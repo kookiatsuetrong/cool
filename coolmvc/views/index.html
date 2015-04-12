@@ -1,34 +1,106 @@
+
 <header>
-	<a href="http://coolmvc.com">
-		<img src="/cool.png" />
-	</a>
-	<h1>The Cool! Programming Language</h1>
+	<div>
+		<a href="http://coolmvc.com">
+			<img src="/cool.png" />
+		</a>
+		<h1>The Cool! Programming Language</h1>
+	</div>
 </header>
 
-<article>
-	<h2>Cool! Ideas</h2>
-	<ul>
-		<li>SAB - Server And Browser   -
-			Use only one language from server to browser</li>
-		<li>TOI - Text editor Over IDE -
-			You can use any text editor to write Cool!</li>
-		<li>LIS - Life Is Short        -
-			Don't spend 10000 hours learning large framework.</li>
-		<!--
-		<li>PYS - Powerful Yet Small   -
-			Only 20-30 methods, but produce same result as any large framework.
-		</li>
-		-->
-		<li>LOE - Learn Online Easily  -
-			No installation required. Cool! has online editor.</li>
-	</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h2>Cool! Ideas</h2>
+			<ul>
+				<li>SAB - Server And Browser   -
+					Use only one language from server to browser</li>
+				<li>TOI - Text editor Over IDE -
+					You can use any text editor to write Cool!</li>
+				<li>LIS - Life Is Short		-
+					Don't spend 10000 hours learning large framework.</li>
+				<!--
+				<li>PYS - Powerful Yet Small   -
+					Only 20-30 methods, but produce same result as any large
+					framework.
+				</li>
+				-->
+				<li>LOE - Learn Online Easily  -
+					No installation required. Cool! has online editor.</li>
+			</ul>
 
-	<p>
-	Please visit our <a href="https://github.com/kookiatsuetrong/cool"
-		>GitHub</a> for more information.
-	</p>
+			<p>
+			Please visit our <a href="https://github.com/kookiatsuetrong/cool"
+				>GitHub</a> for more information.
+			</p>
+		</div>
 
-</article>
+		<div class="col-sm-6 col-xs-12">
+			<h3>Hello World!</h3>
+			<pre style="width:100%;">
+main class Hello {
+	new {
+		var system = new System();
+		system.write("Cool!");
+	}
+}
+			</pre>
+		</div>
+
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h2>Model View Controller (MVC)</h2>
+			MVC Framework in Cool! is simple, compact and memorable. You can
+code without any IDE or generator. You can also use Cool! MVC with Node.js and
+io.js.
+		</div>
+
+		<div class="col-sm-6 col-xs-12">
+			<h3>MVC Sample</h3>
+			<pre>
+main class Simple extends Controller {
+	new {
+		var server = new Server(this);
+		server.start();
+	}
+
+	method index(context) {
+		context.response.end("Cool!");
+	}
+}
+			</pre>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h2>Server And Browser</h2>
+			Cool! can use on both server and browser. You can use by writing
+			Cool! code inside HTML or separate Cool! code file. Don't forget
+			to include the cool.js file in your HTML file.<br/>
+			&lt;script src="/cool.js"&gt;&lt;/script&gt;
+		</div>
+		<div class="col-sm-6 col-xs-12">
+			<h3>Browser Sample</h3>
+			<pre>
+&lt;script type="text/cool" src="code.cool"&gt;&lt;/script&gt;
+			</pre>
+
+			<pre>
+&lt;script type="text/cool"&gt;
+... Your Cool! code here ...
+&lt;/script&gt;
+			</pre>
+		</div>
+	</div>
+
+</div>
 
 <script language="cool">
 main

@@ -43,6 +43,13 @@ article {
 	padding: 10px 40px;
 }
 
+pre {
+	margin: 8px 0;
+	tab-size: 2;
+	-moz-tab-size: 2;
+	border: 1px solid @primary;
+	background: #fbfbff;
+}
 
 .editor {
 	tab-size: 4;
@@ -60,7 +67,23 @@ article {
 	}
 }
 
+.background-icon {
+	font-size: 2rem;
+	padding: 1rem;
+	color: darken(@primary, 20%);
+	transition: all 0.1s linear;
+	text-shadow: 0 1px lighten(@primary, 10%);
+	&:hover {
+		color: white;
+		text-shadow: 0 0 50px black;
+	}
+}
 
+footer {
+	background: @primary;
+	overflow: hidden;
+	height: 200px;
+}
 
 
 

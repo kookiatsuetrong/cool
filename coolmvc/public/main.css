@@ -41,6 +41,13 @@ header {
 article {
   padding: 10px 40px;
 }
+pre {
+  margin: 8px 0;
+  tab-size: 2;
+  -moz-tab-size: 2;
+  border: 1px solid #2196f3;
+  background: #fbfbff;
+}
 .editor {
   tab-size: 4;
   -moz-tab-size: 4;
@@ -55,4 +62,20 @@ article {
 }
 .editor:focus {
   border: 1px solid #2196f3;
+}
+.background-icon {
+  font-size: 2rem;
+  padding: 1rem;
+  color: #0960a5;
+  transition: all 0.1s linear;
+  text-shadow: 0 1px #51adf6;
+}
+.background-icon:hover {
+  color: white;
+  text-shadow: 0 0 50px black;
+}
+footer {
+  background: #2196f3;
+  overflow: hidden;
+  height: 200px;
 }

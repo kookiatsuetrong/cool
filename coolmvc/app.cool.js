@@ -1,4 +1,7 @@
 "use strict;"; // Web MVC Demo
+// @mvc.cool
+// @library.cool
+// @web.cool
 
 function MyController () {  Controller.call(this); 
 	this.view  = new View();
@@ -278,7 +281,7 @@ function Database (connection){ Root.call(this);
 }
 
 function View () {  Root.call(this); 
-	this.fs     = require('fs');
+	this.fs     = require("fs");
 	this.engine = require("ejs");
 	this.folder = "./views/";
 	this.header = "";
@@ -300,7 +303,7 @@ function Server (controller){ Root.call(this);
 	this.address = "0.0.0.0";
 	this.http    = require("http");
 	this.folder  = "./public"
-	this.storage = require('fs');
+	this.storage = require("fs");
 
 	{
 		this.controller = controller;

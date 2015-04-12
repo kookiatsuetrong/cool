@@ -209,6 +209,8 @@ function File (name) {
 function TextFile (name) {
 	File.call(this);
 	this.class = "TextFile";
+	this.append = function(data) {
+	}
 }
 
 function Float() {
@@ -222,6 +224,12 @@ function Integer() {
 		return parseInt(x);
 	}
 }
+
+
+
+
+
+
 
 
 
