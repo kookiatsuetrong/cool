@@ -34,7 +34,7 @@ a:active {
   color: #2196f3;
 }
 header {
-  padding: 10px 40px;
+  padding-top: 20px;
   background: #2196f3;
   color: white;
 }
@@ -43,21 +43,20 @@ article {
 }
 pre {
   margin: 8px 0;
-  tab-size: 2;
-  -moz-tab-size: 2;
+  tab-size: 4;
+  -moz-tab-size: 4;
   border: 1px solid #2196f3;
   background: #fbfbff;
 }
 .editor {
   tab-size: 4;
   -moz-tab-size: 4;
-  margin: 1%;
-  border-radius: 4px;
   font-family: monospace;
   border: 1px solid #82c4f8;
-  width: 45%;
+  width: 100%;
   height: 400px;
   padding: 8px;
+  border-radius: 4px;
   resize: vertical;
 }
 .editor:focus {
@@ -74,8 +73,16 @@ pre {
   color: white;
   text-shadow: 0 0 50px black;
 }
+.background-icon-white {
+  font-family: monospace;
+  font-size: 4.1rem;
+  color: white;
+}
 footer {
   background: #2196f3;
   overflow: hidden;
   height: 200px;
+}
+.container-fluid {
+  margin-bottom: 40px;
 }

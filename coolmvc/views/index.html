@@ -1,6 +1,5 @@
-
 <header>
-	<div>
+	<div class="container-fluid">
 		<a href="http://coolmvc.com">
 			<img src="/cool.png" />
 		</a>
@@ -8,7 +7,7 @@
 	</div>
 </header>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-6 col-xs-12">
 			<h2>Cool! Ideas</h2>
@@ -50,7 +49,7 @@ main class Hello {
 	</div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-6 col-xs-12">
 			<h2>Model View Controller (MVC)</h2>
@@ -77,7 +76,7 @@ main class Simple extends Controller {
 	</div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-6 col-xs-12">
 			<h2>Server And Browser</h2>
@@ -101,6 +100,100 @@ main class Simple extends Controller {
 	</div>
 
 </div>
+
+<div class="container-fluid">
+	<h2>Transpile to JavaScript Directly</h2>
+	Cool! can transpile to JavaScript and ES6 directly. You can try writing
+	Cool! code in the left editor and it will transpile immediately to the
+	right editor.
+	<div class="row">
+
+		<div class="col-xs-12 col-sm-6">
+			<h3>Cool! code</h3>
+<textarea class="editor" id="cool-code">// Cool! Demo
+main class Hello() {
+	new {
+		var system = new System();
+		system.write("Cool!");
+	}
+}
+
+
+
+
+</textarea>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<h3>JavaScript Code</h3>
+			<textarea class="editor" id="javascript-code"></textarea>
+		</div>
+	</div>
+</div>
+
+<script type="text/cool">
+main class Main {
+	method transpile() {
+		var web = new Web();
+		var editor1 = web.select("#cool-code");
+		var code2 = transpile(editor1.value);
+		var editor2 = web.select("#javascript-code");
+		editor2.value = code2;
+	}
+
+	method keydown(event) {
+		var TAB = 9;
+		if (event.keyCode == TAB) {
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
+			var target = event.target;
+			var value = target.value;
+			target.value = value.substring(0, start)
+				+ "\t"
+				+ value.substring(end);
+			this.selectionStart = this.selectionEnd = start + 1;
+			event.preventDefault();
+		}
+	}
+
+	method scrollCool() {
+		var web = new Web();
+		var editor1 = web.select("#cool-code");
+		var editor2 = web.select("#javascript-code");
+		editor2.scrollTop = editor1.scrollTop;
+	}
+
+	method scrollJavaScript() {
+		var web = new Web();
+		var editor1 = web.select("#cool-code");
+		var editor2 = web.select("#javascript-code");
+		editor1.scrollTop = editor2.scrollTop;
+	}
+
+	new {
+		this.transpile();
+		var web = new Web();
+		var editor1 = web.select("#cool-code");
+		editor1.oninput = this.transpile;
+		editor1.onkeydown = this.keydown;
+		editor1.onscroll = this.scrollCool;
+		var editor2 = web.select("#javascript-code");
+		editor2.onscroll = this.scrollJavaScript;
+	}
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script language="cool">
 main
