@@ -411,7 +411,6 @@ Similar to the "var" keyword for private and local variable, the "member"
 keyword are required when creating a member variable.
 
 # To Do
-```
 - Annotation (similar to Java)
 - 2-way data binding (similar to Angular.js)
 - New way of multiple inheritance
@@ -433,7 +432,5 @@ keyword are required when creating a member variable.
 - HTML Event Handling
 - Working with AJAX
 - Working with Canvas
-
-```
 
 # }
