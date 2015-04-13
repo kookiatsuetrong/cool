@@ -31,10 +31,9 @@ DateTime
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 var web = new Web();
-web.post("/test", {data:'data', info:'info'}, function(data) {
+web.post("/test2", {data:'data', info:'info'}, function(data) {
   var system = new System();
   system.write(data);
-
 });
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

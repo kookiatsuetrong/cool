@@ -76,7 +76,7 @@ class Server(controller) extends Root {
 				}
 			}
 
-			var tokens = request.url.split("/");
+			var tokens = request.url.split(/\/|\?/g);
 			var callee = tokens[1];
 			if (callee == "") callee = "index";
 

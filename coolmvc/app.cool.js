@@ -1,11 +1,13 @@
 "use strict;"; // Web MVC Demo
 // @mvc.cool
-// @library.cool
+// @standard.cool
 // @web.cool
+// import standard; import mvc;
 
 function MyController () {  Controller.call(this); 
 	this.view  = new View();
 	this.database = new Database("mysql://user:password@localhost/db");
+	this.system = new System();
 
 	{
 		this.view.header = "header.html";
@@ -43,6 +45,25 @@ function MyController () {  Controller.call(this);
 			} catch (e) {}
 			context.response.end(page);
 		});
+	}
+
+	this.test2 = function (context) {
+		this.system.write(context.request.method);
+
+		if (context.request.method == "GET") {
+			var info = {
+				name: "name",
+				data: [
+					{email: "email0@email.com"},
+					{email: "email1@email.com"},
+					{email: "email2@email.com"},
+				]
+			};
+			var engine = new Engine();
+			context.response.end(engine.text(info));
+		} else {
+			context.response.end("{}");
+		}
 	}
 
 	this.test = function (context) {
@@ -324,8 +345,9 @@ function Server (controller){ Root.call(this);
 				}
 			}
 
-			var tokens = request.url.split("/");
+			var tokens = request.url.split(/\/|\?/g);
 			var callee = tokens[1];
+			console.log("callee = " + callee);
 			if (callee == "") callee = "index";
 
 			if (server.exception.indexOf(callee) >= 0) {

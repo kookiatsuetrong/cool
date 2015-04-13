@@ -1,11 +1,13 @@
 // Web MVC Demo
 // @mvc.cool
-// @library.cool
+// @standard.cool
 // @web.cool
+// import standard; import mvc;
 
 class MyController extends Controller {
 	member view  = new View();
 	member database = new Database("mysql://user:password@localhost/db");
+	member system = new System();
 
 	new {
 		this.view.header = "header.html";
@@ -43,6 +45,25 @@ class MyController extends Controller {
 			} catch (e) {}
 			context.response.end(page);
 		});
+	}
+
+	method test2(context) {
+		this.system.write(context.request.method);
+
+		if (context.request.method == "GET") {
+			var info = {
+				name: "name",
+				data: [
+					{email: "email0@email.com"},
+					{email: "email1@email.com"},
+					{email: "email2@email.com"},
+				]
+			};
+			var engine = new Engine();
+			context.response.end(engine.text(info));
+		} else {
+			context.response.end("{}");
+		}
 	}
 
 	method test(context) {
