@@ -347,7 +347,6 @@ function Server (controller){ Root.call(this);
 
 			var tokens = request.url.split(/\/|\?/g);
 			var callee = tokens[1];
-			console.log("callee = " + callee);
 			if (callee == "") callee = "index";
 
 			if (server.exception.indexOf(callee) >= 0) {

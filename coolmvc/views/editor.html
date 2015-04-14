@@ -1,24 +1,16 @@
-<header>
-	<a href="http://coolmvc.com"><img src="/cool.png" /></a>
-	<h1>The Cool! Programming Language</h1>
-</header>
+<style>
+	.editor {
+		font-size: 1.5rem;
+		line-height: 1.6rem;
+		height: 240px;
+	}
+	.btn {
+		margin-bottom: 10px;
+	}
+</style>
 
-<article>
-
-	<a href="https://github.com/kookiatsuetrong/cool#the-cool-programming-language--"
-		>Cool!</a>
-		is a computer language that available on Server And Browser (SAB).
-		It can easily to write on any Text editor Over IDE (TOI).
-		<!--
-		You don't have to spend 10000 hours to learn a large framework,
-		your Life Is Short (LIS), you should learn only 20-30 methods is enough
-		to write a great web app.
-		-->
-	<br/>
-	<a href="https://github.com/kookiatsuetrong/cool#web-mvc-framework"
-		>Cool! MVC</a> is an MVC framework for JavaScript, EcmaScript and Cool!
-	<br/>
-
+<div class="container-fluid">
+	<a class="btn btn-default" id="run">Run</a>
 	<textarea class="editor" id="cool-code">// Cool! Demo
 main class Hello() {
 	new {
@@ -27,26 +19,25 @@ main class Hello() {
 	}
 }
 
-
-
-
 </textarea>
-
-	<textarea class="editor" id="javascript-code" readonly></textarea>
-</article>
+</div>
 
 <script type="text/cool">
 main class Main {
 	method transpile() {
 		var web = new Web();
 		var editor1 = web.select("#cool-code");
+		console.log(editor1);
+
 		var code2 = transpile(editor1.value);
-		var editor2 = web.select("#javascript-code");
-		editor2.value = code2;
+		var engine = new Engine();
+		engine.execute(code2);
 	}
 
 	method keydown(event) {
 		var TAB = 9;
+		var F4  = 115;
+
 		if (event.keyCode == TAB) {
 			var start = this.selectionStart;
 			var end = this.selectionEnd;
@@ -58,32 +49,28 @@ main class Main {
 			this.selectionStart = this.selectionEnd = start + 1;
 			event.preventDefault();
 		}
+		/* else if (event.keyCode == F4) {
+			target.run();
+		}
+		*/
 	}
 
-	method scrollCool() {
+	method run() {
 		var web = new Web();
 		var editor1 = web.select("#cool-code");
-		var editor2 = web.select("#javascript-code");
-		editor2.scrollTop = editor1.scrollTop;
-	}
-
-	method scrollJavaScript() {
-		var web = new Web();
-		var editor1 = web.select("#cool-code");
-		var editor2 = web.select("#javascript-code");
-		editor1.scrollTop = editor2.scrollTop;
+		var code2 = transpile(editor1.value);
+		var engine = new Engine();
+		engine.execute(code2);
 	}
 
 	new {
-		this.transpile();
 		var web = new Web();
+		var button = web.select("#run");
+		button.onclick = this.run;
 		var editor1 = web.select("#cool-code");
-		editor1.oninput = this.transpile;
 		editor1.onkeydown = this.keydown;
-		editor1.onscroll = this.scrollCool;
-		var editor2 = web.select("#javascript-code");
-		editor2.onscroll = this.scrollJavaScript;
+		editor1.focus();
 	}
 }
 </script>
-<script src="/cool/cool.js"></script>
+<script src="/cool.js"></script>
