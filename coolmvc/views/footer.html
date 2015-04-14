@@ -85,6 +85,25 @@
 	<span class="background-icon glyphicon glyphicon-trash"></span>
 </footer>
 
+<script type="text/cool">
+main class Footer {
+
+	new {
+		var web = new Web();
+		var footer = web.select("footer");
+		var body = web.select("body");
+		var system = new System();
+		system.write(body.clientHeight);
+		system.write(window.innerHeight);
+		if (body.clientHeight < window.innerHeight) {
+			footer.style.position = "absolute";
+		} else {
+			footer.style.position = "relative";
+		}
+	}
+}
+</script>
+
 <script src="/cool.js"></script>
 </body>
 </html>

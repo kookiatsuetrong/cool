@@ -83,6 +83,7 @@ footer {
   background: #2196f3;
   overflow: hidden;
   height: 200px;
+  bottom: 0;
 }
 .container-fluid {
   margin-bottom: 40px;
