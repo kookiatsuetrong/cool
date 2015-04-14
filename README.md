@@ -3,24 +3,24 @@
 ![](https://raw.githubusercontent.com/kookiatsuetrong/cool/master/logo/cool.jpg)
 
 Cool! is a purely object-oriented programming language. It has been designed for
-transpiling to JavaScript directly. The syntax is very similar to JavaScript,
+transpile to JavaScript directly. The syntax is very similar to JavaScript,
 Java and C#. It supports abstraction, encapsulation, inheritance, polymorphism
 and many features. Some feature such as static member or big number are
 considering to implement in the future.
 
-The another benefit of the Cool! programming language is the built-in small
-library or framework. So developer can easily remember method name and no need
-to use any IDE. A large framework like ASP.net MVC, is very hard to remember
+The another benefit of the Cool! is the built-in small library or framework.
+It contains only 20-30 methods, so developer can easily remember method names
+and no need to use any IDE. A large framework is very hard to remember
 even doing a common task such as reading database. Cool! will have only 20-30
 basic methods such as File.read() or Database.execute().
 
-Cool! is similar to CoffeeScript, Dart, and TypeScript in term of they're
-"transpile" their code to JavaScript. It can run both browser-side and
-server-side. And of course it is a superset of JavaScript, so everything in
+Cool! is similar to CoffeeScript, Dart, and TypeScript in term of "transpile"
+the code to JavaScript. It can run both browser-side and server-side.
+And of course it is a superset of JavaScript, so everything in
 JavaScript is valid in Cool!. And finally it can load and run Node.js module
 directly.
 
-Philosophies of the Cool! programming language:
+Philosophies of Cool! programming language:
 - SAB - Server And Browser - Use only one language from server to browser.
 - TOI - Text editor Over IDE - You can use any text editor to write Cool!
 - LIS - Life Is Short - Don't spend 10000 hours learning large framework.
@@ -32,7 +32,7 @@ Philosophies of the Cool! programming language:
 The Cool! online editor is here: http://coolmvc.com/editor
 
 # The first program
-A Cool! program starts from the constructor of any main class. So let's start
+A Cool! program starts from the constructor of any "main class". So let's start
 by writing the first Cool! program:
 ```es6
 main class Hello {
@@ -156,7 +156,8 @@ main class Fibonacci {
 ```
 
 # More complex constructor
-Creating an object in Cool! is easy like Java / C# by writing new ClassName()
+Creating an object in Cool! is easy like Java / C# by using keyword "new" and
+follow by the class name.
 ```es6
 class Student(name, dob) extends Root {
 	member name;
