@@ -26,7 +26,6 @@ function MyController () {  Controller.call(this);
 	this.blog = function (context) {
 		var view = this.view;
 		var title = context.request.url.split("/")[2];
-		console.log(title);
 		this.database.execute("select * from blogs where title=? or id=?",
 		[title, title],
 		function(records) {

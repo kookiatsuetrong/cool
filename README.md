@@ -29,7 +29,7 @@ Philosophies of the Cool! programming language:
 - PYS - Powerful Yet Small -
 	Only 20-30 methods, but produce result as any large framework.
 
-The Cool! online editor is here: http://coolmvc.github.io/
+The Cool! online editor is here: http://coolmvc.com/editor
 
 # The first program
 A Cool! program starts from the constructor of any main class. So let's start
