@@ -53,7 +53,7 @@ main class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
-		server.middleware.push(new Logger());
+		// server.middleware.push(new Logger());
 		server.middleware.push(new Less());
 		server.start();
 		var system = new System();

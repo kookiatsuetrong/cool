@@ -2,7 +2,7 @@
 
 class MyController extends Controller {
 	member view     = new View();
-	member database = new Database();
+	member database = new Database("mysql://user:password@localhost/db");
 
 	new {
 		this.view.header = "header.html";
@@ -23,6 +23,18 @@ class MyController extends Controller {
 		context.response.end(page);
 	}
 
+	method blog(context) {
+		var view = this.view;
+		var title = context.request.url.split("/")[2];
+		this.database.execute("select * from blogs where title=? or id=?",
+		[title, title],
+		function(records) {
+			var model = {title: records[0].title, records: records};
+			var page  = view.render("blog.html", model);
+			context.response.end(page);
+		});
+	}
+
 	method query(context) {
 		var view = this.view;
 		this.database.execute("select * from users", function(records) {
@@ -41,7 +53,7 @@ class Test {
 	new {
 		var controller = new MyController();
 		var server = new Server(controller);
-		server.middleware.push(new Logger());
+		// server.middleware.push(new Logger());
 		server.middleware.push(new Less());
 		server.start();
 		var system = new System();

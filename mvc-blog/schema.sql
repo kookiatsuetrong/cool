@@ -14,7 +14,18 @@ create table users (
 
 
 insert into users(email, password)
-  values('user@ipay.social', sha2('password', 256));
+  values('cool@programming.language', sha2('password', 256));
 
+-- drop table if exists blogs;
+create table blogs (
+  id         serial,
+  title      nvarchar(255),
+  info       mediumtext,
+  date       date
+);
+
+insert into blogs set date="2015-04-01", title="Title-1", info="blog detail 1";
+insert into blogs set date="2015-04-02", title="Title-2", info="blog detail 2";
+insert into blogs set date="2015-04-03", title="Title-3", info="blog detail 3";
 
 -- end
