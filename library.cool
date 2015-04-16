@@ -21,6 +21,12 @@ class System extends Root {
 		var child = require("child_process");
 		child.exec(name).unref();
 	}
+	method unescape(data) {
+		return unescape(data);
+	}
+	method escape(data) {
+		return escape(data);
+	}
 }
 
 // JavaScript Engine

@@ -28,4 +28,21 @@ insert into blogs set date="2015-04-01", title="Title-1", info="blog detail 1";
 insert into blogs set date="2015-04-02", title="Title-2", info="blog detail 2";
 insert into blogs set date="2015-04-03", title="Title-3", info="blog detail 3";
 
+-- drop table if exists tokens;
+create table tokens (
+  id        serial,
+  email     nvarchar(255),
+  token     nvarchar(255),
+  timestamp timestamp
+);
+
+
+
+
+
+
+
+
+
+
 -- end
