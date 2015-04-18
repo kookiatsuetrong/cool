@@ -10,6 +10,15 @@ Article:
 - Working with Canvas
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+Level of problem
+
+1 star: Finding maximum element in array
+2 stars: Simulation, Basic Algorithm, String
+3 stars: Greedy, Dynamic Programming, Advance Data Structure, Geometry
+4 stars: Medium problem in Code Jam, Graph
+5 stars: Hard problem from Code Jam, Hacker Cup
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 /*
 Standard

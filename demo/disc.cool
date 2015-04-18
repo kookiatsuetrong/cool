@@ -1,0 +1,29 @@
+main class demo {
+
+	method solve(s, p) {
+		if (s == "" || p == "") return 0;
+		var key = s + "-" + p;
+		if (this.cache[key])
+			return this.cache[key];
+
+		if (s.charAt(0) == p.charAt(0)) {
+			var value0 = 0;
+			if (p.length == 1)
+				value0 = 1;
+			var value1 = this.solve(s.substring(1), p.substring(1));
+			var value2 = this.solve(s.substring(1), p);
+			return this.cache[key] = value0 + value1 + value2;
+		} else {
+			return this.cache[key] = this.solve(s.substring(1), p);
+		}
+	}
+	member cache = [];
+
+
+	new {
+		var system = new System();
+		system.write(this.solve("CATGAGT", "CAT"));
+	}
+
+
+}
