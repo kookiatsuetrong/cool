@@ -47,6 +47,16 @@ function MyController () {  Controller.call(this);
 		});
 	}
 
+	this.tutorial = function (context) {
+		var tokens = context.request.url.split("/");
+		
+
+		var page = this.view.render("tutorial-" + tokens[2] + ".html",
+			{ title: "Cool! Tutorial"}
+		);
+		context.response.end(page);
+	}
+
 	this.test2 = function (context) {
 		this.system.write(context.request.method);
 
@@ -142,6 +152,12 @@ function System () {  Root.call(this);
 	this.execute = function (name) {
 		var child = require("child_process");
 		child.exec(name).unref();
+	}
+	this.unescape = function (data) {
+		return unescape(data);
+	}
+	this.escape = function (data) {
+		return escape(data);
 	}
 }
 
@@ -271,15 +287,6 @@ function Console () {  Root.call(this);
 
 function Database (connection){ Root.call(this); 
 	this.connection = "";
-		/*
-		{
-		host     : "localhost",
-		database : "db",
-		user     : "user",
-		password : "password"
-		};
-		*/
-
 	{
 		this.connection = connection;
 	}
@@ -287,12 +294,12 @@ function Database (connection){ Root.call(this);
 	this.mysql = require("mysql");
 	this.pool  = this.mysql.createPool(this.connection);
 
-	this.execute = function (sql, callback) {
+	this.execute = function (sql, data, callback) {
 		this.pool.getConnection(function(error, server) {
 			if (error) {
 				callback(null);
 			} else {
-				server.query(sql, function(error, data) {
+				server.query(sql, data, function(error, data) {
 					callback(data);
 					server.release();
 				});
@@ -310,10 +317,14 @@ function View () {  Root.call(this);
 
 	this.render = function (name, data) {
 		var engine = this.engine;
-		var header = this.fs.readFileSync(this.folder + this.header);
-		var footer = this.fs.readFileSync(this.folder + this.footer);
-		var center = this.fs.readFileSync(this.folder + name);
+		var header = "";
+		var footer = "";
+		var center = "";
+		try { header = this.fs.readFileSync(this.folder + this.header); } catch (e) {}
+		try { footer = this.fs.readFileSync(this.folder + this.footer); } catch (e) {}
+		try { center = this.fs.readFileSync(this.folder + name);        } catch (e) {}
 		var html = header + center + footer;
+
 		// TODO: add caching here for production server
 		return engine.render(html, data);
 	}

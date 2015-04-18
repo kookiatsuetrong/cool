@@ -1,0 +1,80 @@
+<div class="container-fluid">
+
+	<h1>Tutorial 2: Using Cool! MVC</h1>
+	<p>
+		Cool! MVC designed to be a small framework for creating web application.
+		You can start by inheriting the Controller class and pass it to an
+		intance of the Server class.
+	</p>
+
+	<pre>
+main class Simple extends Controller {
+	new {
+		var server = new Server(this);
+		server.start();
+	}
+
+	method index(context) {
+		context.response.end("Cool!");
+	}
+}
+	</pre>
+
+	<p>
+		The default port is 2000, you can speciy a new port by set the
+		Server.port = xxxx; before calling Server.start() method
+	</p>
+	<pre>
+main class Simple {
+	new {
+		var server = new Server(this);
+		server.port = 2001;
+		server.start();
+	}
+}
+
+class Simple extends Controller {
+	method index(context) {
+		context.response.end("Cool!");
+	}
+}
+	</pre>
+
+	<h3>Rendering View</h3>
+
+	<pre>
+class MyController extends Controller {
+	member view  = new View();
+	member database = new Database();
+
+	new {
+		this.view.header = "header.html";
+		this.view.footer = "footer.html";
+	}
+
+	method error(context) {
+		var page = this.view.render("error.html", {
+			title: "Error " + context.request.url
+		});
+		context.response.end(page);
+	}
+
+	method index(context) {
+		var page = this.view.render("index.html", {
+			title: "Cool!"
+		});
+		context.response.end(page);
+	}
+
+	method query(context) {
+		var view = this.view;
+		this.database.execute("select * from users", function(records) {
+			var model = {title: "Query", records: records};
+			var page  = view.render("query.html", model);
+			context.response.end(page);
+		});
+	}
+}
+	</pre>
+
+</div>

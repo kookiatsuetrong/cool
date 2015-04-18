@@ -1,0 +1,81 @@
+<div class="container-fluid">
+
+	<h1>OOP in Cool!</h1>
+
+	<h3>Sample Class</h3>
+	<pre>
+class Student(name, dob) extends Root {
+	member name;
+	member dob;
+	new {
+		this.name = name;
+		this.dob = dob;
+	}
+	method text() {
+		return this.name + " " + this.dob;
+	}
+}
+
+main class Main {
+	new {
+		var system = new System();
+		var students = [];
+		students[0] = new Student("James", "1980-01-01");
+		students[1] = new Student("Smith", "1980-03-01");
+		for (var i = 0; i < students.length; i++) {
+			system.write(students[i].text() + "\n");
+		}
+	}
+}
+	</pre>
+
+	<h3>Inheritance</h3>
+	<pre>
+class A {
+	member system = new System();
+	method aaa() { this.system.log("A.aaa()"); }
+}
+class B {
+	member system = new System();
+	method bbb() { this.system.log("B.bbb()"); }
+}
+class C(p) extends A {
+	member p = p;
+	method aaa() {
+		// do something polymorphism here
+	}
+	method ccc() {
+	}
+}
+class D(p) extends C(p) {}
+class E extends B {}
+	</pre>
+
+	<h3>Multiple Inheritance</h3>
+	<p>
+		If you want to use multiple inheritance please use extend keyword for
+		example:
+	</p>
+	<pre>
+class F(p) {
+	extend C(p);
+	extend E;
+}
+	</pre>
+
+	<h3>The Root class</h3>
+	<p>
+		The Root class is the base class for every class, please explicitly
+		extends from this class. Unlike Java or C# that automatically extends
+		from the Object class. For example:
+	</p>
+	<pre>
+class Root {
+	...
+}
+class System extends Root {
+	...
+}
+	</pre>
+
+</div>

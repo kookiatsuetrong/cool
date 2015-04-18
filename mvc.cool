@@ -2,15 +2,6 @@
 
 class Database(connection) extends Root {
 	member connection = "";
-		/*
-		{
-		host     : "localhost",
-		database : "db",
-		user     : "user",
-		password : "password"
-		};
-		*/
-
 	new {
 		this.connection = connection;
 	}
@@ -41,10 +32,14 @@ class View extends Root {
 
 	method render(name, data) {
 		var engine = this.engine;
-		var header = this.fs.readFileSync(this.folder + this.header);
-		var footer = this.fs.readFileSync(this.folder + this.footer);
-		var center = this.fs.readFileSync(this.folder + name);
+		var header = "";
+		var footer = "";
+		var center = "";
+		try { header = this.fs.readFileSync(this.folder + this.header); } catch (e) {}
+		try { footer = this.fs.readFileSync(this.folder + this.footer); } catch (e) {}
+		try { center = this.fs.readFileSync(this.folder + name);        } catch (e) {}
 		var html = header + center + footer;
+
 		// TODO: add caching here for production server
 		return engine.render(html, data);
 	}
