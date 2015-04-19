@@ -65,7 +65,8 @@ pre {
   -moz-tab-size: 4;
   font-family: monospace;
   border: 1px solid #82c4f8;
-  width: 100%;
+  width: 96%;
+  margin-top: 4px;
   height: 400px;
   padding: 8px;
   border-radius: 4px;

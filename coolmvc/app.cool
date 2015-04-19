@@ -49,7 +49,7 @@ class MyController extends Controller {
 
 	method tutorial(context) {
 		var tokens = context.request.url.split("/");
-		
+
 
 		var page = this.view.render("tutorial-" + tokens[2] + ".html",
 			{ title: "Cool! Tutorial"}
@@ -57,7 +57,7 @@ class MyController extends Controller {
 		context.response.end(page);
 	}
 
-	method test2(context) {
+	method test_get(context) {
 		this.system.write(context.request.method);
 
 		if (context.request.method == "GET") {

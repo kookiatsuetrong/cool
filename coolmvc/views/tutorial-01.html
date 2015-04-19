@@ -1,5 +1,6 @@
 <div class="grid-container">
 	<div class="grid-row">
+		<div class="grid-xs-100 grid-lg-70">
 		<h1>Tutorial 1: Using Cool! in a web page</h1>
 		<p>
 			Currently you can use Cool! in 3 ways:
@@ -12,44 +13,35 @@
 		</p>
 
 		<h3>Solution 1: Using Cool! inside HTML page</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 &lt;script type="text/cool"&gt;
 ... Your Cool! code here ...
 &lt;/script&gt;
 		</pre>
-	</div>
 
-	<div class="grid-row">
 		<h3>Solution 2: Using Cool! in a separated .cool file</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 &lt;script type="text/cool" src="file.cool"&gt;&lt;/script&gt;
 		</pre>
 
-	</div>
-
-	<div class="grid-row">
 		<h3>Solution 3: Transpiling Cool! code manually</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 // This is JavaScript code
 var code = "... Cool! code ...";
 var js = transpile(code);
 var result = eval(js);
 		</pre>
-	</div>
 
-	<div class="grid-row">
 		<p>
 			In each solution, you have to load the Cool! JavaScript file or cool.js
 			at the bottom of the HTML file.
 		</p>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 &lt;script src="cool.js"&gt;
 		</pre>
-	</div>
 
-	<div class="grid-row">
 		<h3>HTML Event Handling</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 &lt;script type="text/cool"&gt;
 main class Main {
 	method scroll(e) {
@@ -78,11 +70,9 @@ main class Main {
 }
 &lt;/script&gt;
 		</pre>
-	</div>
 
-	<div class="grid-row">
 		<h3>More Complicate Event Handling</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 main class Start {
 	method keydown(event) {
 		var TAB = 9;
@@ -107,11 +97,9 @@ main class Start {
 
 }
 		</pre>
-	</div>
 
-	<div class="grid-row">
 		<h3>Reading Data from AJAX</h3>
-		<pre class="grid-lg-2-3 grid-xs-1-1">
+		<pre>
 var web = new Web();
 web.get("/test", {}, function (data) {
 	var engine = new Engine();
@@ -119,12 +107,11 @@ web.get("/test", {}, function (data) {
 	system.write(engine.parse(data));
 });
 		</pre>
+
+		</div>
+
+		<div class="grid-lg-30">
+			&nbsp;
+		</div>
 	</div>
-
-
-
-
-
-
-
 </div>
