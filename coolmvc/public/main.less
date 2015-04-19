@@ -31,6 +31,14 @@ a {
 	transition: all 0.2s ease-in-out;
 	&:hover   { color: @primary; }
 	&:active  { color: @primary; }
+	&.white {
+		color: white;
+		margin-right: 10px;
+		&:hover {
+			color: darken(@primary, 20%);
+			text-decoration: none;
+		}
+	}
 }
 
 header {
@@ -92,9 +100,10 @@ pre {
 }
 
 footer {
+	// background: lighten(@primary, 5%);
 	background: @primary;
 	overflow: hidden;
-	height: 200px;
+	height: 130px;
 	bottom: 0;
 }
 

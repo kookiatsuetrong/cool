@@ -33,6 +33,14 @@ a:hover {
 a:active {
   color: #2196f3;
 }
+a.white {
+  color: white;
+  margin-right: 10px;
+}
+a.white:hover {
+  color: #0960a5;
+  text-decoration: none;
+}
 header {
   padding-top: 20px;
   padding-bottom: 10px;
@@ -87,6 +95,6 @@ pre {
 footer {
   background: #2196f3;
   overflow: hidden;
-  height: 200px;
+  height: 130px;
   bottom: 0;
 }

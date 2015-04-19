@@ -9,9 +9,13 @@
 	}
 </style>
 
-<div class="container-fluid">
-	<a class="btn btn-default" id="run">Run</a>
-	<textarea class="editor" id="cool-code">// Cool! Demo
+<div class="grid-container">
+	<div class="grid-row">
+		<div class="grid-xs-1-1 grid-lg-2-3">
+			<a class="btn btn-default" id="run">Run</a>
+			<a class="btn btn-default" id="clear">Clear</a>
+
+			<textarea class="editor" id="cool-code">// Cool! Demo
 main class Hello() {
 	new {
 		var system = new System();
@@ -20,19 +24,41 @@ main class Hello() {
 }
 
 </textarea>
+		</div>
+
+	</div>
+	<div class="grid-row">
+		<div class="grid-xs-1-1 grid-lg-2-3">
+			Output:<br/>
+			<textarea class="editor" id="output"></textarea>
+		</div>
+	</div>
 </div>
 
+<script type="text/html" id="redirect">
+function System() {
+	this.write = function(data) {
+		var web = new Web();
+		var item = web.select("#output");
+		item.innerHTML += data;
+	}
+}
+</script>
+
+
 <script type="text/cool">
+
 main class Main {
+	/*
 	method transpile() {
 		var web = new Web();
 		var editor1 = web.select("#cool-code");
-		console.log(editor1);
 
 		var code2 = transpile(editor1.value);
 		var engine = new Engine();
 		engine.execute(code2);
 	}
+	*/
 
 	method keydown(event) {
 		var TAB = 9;
@@ -59,14 +85,21 @@ main class Main {
 		var web = new Web();
 		var editor1 = web.select("#cool-code");
 		var code2 = transpile(editor1.value);
+		var library = web.select("#redirect");
 		var engine = new Engine();
-		engine.execute(code2);
+		engine.execute(code2 + " " + library.innerText);
+	}
+
+	method clear() {
+		var web = new Web();
+		web.select("#output").innerHTML = "";
 	}
 
 	new {
 		var web = new Web();
 		var button = web.select("#run");
 		button.onclick = this.run;
+		web.select("#clear").onclick = this.clear;
 		var editor1 = web.select("#cool-code");
 		editor1.onkeydown = this.keydown;
 		editor1.focus();

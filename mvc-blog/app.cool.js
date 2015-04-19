@@ -45,7 +45,6 @@ function MyController () {  Controller.call(this);
 			context.request.on("end", function() {
 				var system = new System();
 				data = system.unescape(data);
-				system.write(data);
 				var tokens = data.split("&");
 				for (var i = 0; i < tokens.length; i++) {
 					var fields = tokens[i].split("=");

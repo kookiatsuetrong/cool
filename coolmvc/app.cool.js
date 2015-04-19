@@ -320,9 +320,12 @@ function View () {  Root.call(this);
 		var header = "";
 		var footer = "";
 		var center = "";
-		try { header = this.fs.readFileSync(this.folder + this.header); } catch (e) {}
-		try { footer = this.fs.readFileSync(this.folder + this.footer); } catch (e) {}
-		try { center = this.fs.readFileSync(this.folder + name);        } catch (e) {}
+		try { header = this.fs.readFileSync(this.folder + this.header); }
+		catch (e) {}
+		try { footer = this.fs.readFileSync(this.folder + this.footer); }
+		catch (e) {}
+		try { center = this.fs.readFileSync(this.folder + name);        }
+		catch (e) { center = ""; }
 		var html = header + center + footer;
 
 		// TODO: add caching here for production server
