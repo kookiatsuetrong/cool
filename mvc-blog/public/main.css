@@ -7,6 +7,7 @@ body {
   color: #333333;
   font-weight: 100;
   letter-spacing: 0.1rem;
+  line-height: 1.75rem;
 }
 h1,
 h2,
@@ -39,6 +40,12 @@ a:anchor {
   color: #333333;
   text-decoration: none;
 }
+ul {
+  list-style: none;
+}
+.container {
+  max-width: 800px;
+}
 .banner {
   margin: 0;
   padding: 10px 0;
@@ -46,9 +53,6 @@ a:anchor {
   background: steelblue;
   color: white;
   heigh: 120px;
-}
-.center {
-  text-align: center;
 }
 .circle {
   border-radius: 50%;
@@ -61,14 +65,12 @@ a:anchor {
 .circle:hover {
   box-shadow: 0 0 50px 0 white;
 }
-.inline {
-  display: inline-block;
-}
-.block {
-  display: block;
+.center {
+  text-align: center;
 }
 .center-parent {
-  display: block;
+  width: 100%;
+  display: blog;
   margin: 0 auto;
 }
 .background-primary {
@@ -93,6 +95,31 @@ a:anchor {
 		color: darken(@primary, 10%);
 		text-shadow: 0 0 10px white;
 		*/
+}
+.icon {
+  font-size: 5rem;
+  color: steelblue;
+  text-shadow: 0 1px white;
+  display: block;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in;
+}
+.icon:hover {
+  color: #38678f;
+}
+.page {
+  text-align: center;
+  padding: 5px 0 40px 0;
+}
+.page h1,
+.page h2 {
+  margin-bottom: 20px;
+}
+.white {
+  background: white;
+}
+.light {
+  background: #eef;
 }
 footer {
   background: steelblue;

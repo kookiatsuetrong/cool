@@ -1,6 +1,5 @@
 @primary: lighten(dodgerblue, 20%);
 @primary: steelblue;
-// @primary: #2196f3;
 
 @background: white;
 @text: #333;
@@ -14,6 +13,7 @@ body {
 	color: @text;
 	font-weight: 100;
 	letter-spacing: 0.1rem;
+	line-height: 1.75rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,6 +33,14 @@ a {
 	&:anchor  { color: @text; text-decoration: none; }
 }
 
+ul {
+	list-style: none;
+}
+
+.container {
+	max-width: 800px;
+}
+
 .banner {
 	margin: 0;
 	padding: 10px 0;
@@ -42,9 +50,6 @@ a {
 	heigh: 120px;
 }
 
-.center {
-	text-align: center;
-}
 .circle {
 	border-radius: 50%;
 	max-width: 200px;
@@ -57,14 +62,14 @@ a {
 		box-shadow: 0 0 50px 0 white;
 	}
 }
-.inline {
-	display: inline-block;
+
+.center {
+	text-align: center;
 }
-.block {
-	display: block;
-}
+
 .center-parent {
-	display: block;
+	width: 100%;
+	display: blog;
 	margin: 0 auto;
 }
 
@@ -92,6 +97,31 @@ a {
 		text-shadow: 0 0 10px white;
 		*/
 	}
+}
+
+.icon {
+	font-size: 5rem;
+	color: @primary;
+	text-shadow: 0 1px white;
+	display: block;
+	margin-bottom: 10px;
+	transition: all 0.2s ease-in;
+	&:hover {
+		color: darken(@primary, 10%);
+	}
+}
+.page {
+	text-align: center;
+	padding: 5px 0 40px 0;
+	h1,h2 {
+		margin-bottom: 20px;
+	}
+}
+.white {
+	background: white;
+}
+.light {
+	background: #eef;
 }
 
 footer {
