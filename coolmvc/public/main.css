@@ -4,23 +4,7 @@ html {
 }
 body {
   background: white;
-  font-size: 1rem;
   color: #333333;
-  font-weight: 100;
-  line-height: 1.5rem;
-  letter-spacing: 0.05rem;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 100;
-  letter-spacing: 0.08rem;
-}
-p {
-  text-align: justify;
 }
 a {
   color: #333333;
@@ -94,8 +78,17 @@ pre {
   color: white;
 }
 footer {
-  background: #2196f3;
+  color: #2196f3;
+  text-shadow: 0 1px white;
+  background: #eef;
   overflow: hidden;
   height: 130px;
   bottom: 0;
+  text-align: center;
+}
+footer a {
+  color: #2196f3;
+}
+footer a:hover {
+  color: #0c7cd5;
 }

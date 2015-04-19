@@ -9,20 +9,7 @@ html {
 
 body {
 	background: @background;
-	font-size: 1rem;
 	color: @text;
-	font-weight: 100;
-	line-height: 1.5rem;
-	letter-spacing: 0.05rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	font-weight: 100;
-	letter-spacing: 0.08rem;
-}
-
-p {
-	text-align: justify;
 }
 
 a {
@@ -101,11 +88,19 @@ pre {
 }
 
 footer {
-	// background: lighten(@primary, 5%);
-	background: @primary;
+	color: @primary;
+	text-shadow: 0 1px white;
+	background: #eef;
 	overflow: hidden;
 	height: 130px;
 	bottom: 0;
+	text-align: center;
+	a {
+		color: @primary;
+		&:hover {
+			color: darken(@primary, 10%);
+		}
+	}
 }
 
 
