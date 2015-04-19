@@ -26,11 +26,14 @@ class MyController extends Controller {
 
 	method index(context) {
 		var page = this.view.render("index.html", {
-			title: "Cool!"
+			title: "Kookiat Suetrong (Beer)"
 		});
 		context.response.end(page);
 	}
 
+
+
+/*
 	method signin(context) {
 		if (context.request.method == "POST") {
 			var data = "";
@@ -89,7 +92,6 @@ class MyController extends Controller {
 		});
 	}
 
-/*
 // creating token
 var token = "token-ABC0000001";
 this.session[token] = { email: "kookiat@kookiat.com" };

@@ -32,7 +32,7 @@ a:visited {
   text-decoration: none;
 }
 a:hover {
-  color: #2196f3;
+  color: steelblue;
   text-decoration: none;
 }
 a:anchor {
@@ -43,7 +43,7 @@ a:anchor {
   margin: 0;
   padding: 10px 0;
   width: 100%;
-  background: #2196f3;
+  background: steelblue;
   color: white;
   heigh: 120px;
 }
@@ -56,7 +56,7 @@ a:anchor {
   margin: 20px;
   margin-left: 0;
   transition: all 0.5s ease-in-out;
-  border: 6px solid #0960a5;
+  border: 6px solid #294d6b;
 }
 .circle:hover {
   box-shadow: 0 0 50px 0 white;
@@ -72,19 +72,19 @@ a:anchor {
   margin: 0 auto;
 }
 .background-primary {
-  background: #2196f3;
+  background: steelblue;
   color: white;
 }
 .background-light {
-  background: #e3f2fd;
+  background: #d7e4ef;
   color: white;
 }
 .background-icon {
   font-size: 2rem;
   padding: 1rem;
-  color: #0960a5;
+  color: #294d6b;
   transition: all 0.1s linear;
-  text-shadow: 0 1px #51adf6;
+  text-shadow: 0 1px #699bc4;
 }
 .background-icon:hover {
   color: white;
@@ -95,7 +95,7 @@ a:anchor {
 		*/
 }
 footer {
-  background: #2196f3;
+  background: steelblue;
   overflow: hidden;
   height: 200px;
 }

@@ -26,11 +26,14 @@ function MyController () {  Controller.call(this);
 
 	this.index = function (context) {
 		var page = this.view.render("index.html", {
-			title: "Cool!"
+			title: "Kookiat Suetrong (Beer)"
 		});
 		context.response.end(page);
 	}
 
+
+
+/*
 	this.signin = function (context) {
 		if (context.request.method == "POST") {
 			var data = "";
@@ -89,7 +92,6 @@ function MyController () {  Controller.call(this);
 		});
 	}
 
-/*
 // creating token
 var token = "token-ABC0000001";
 this.session[token] = { email: "kookiat@kookiat.com" };
@@ -305,15 +307,6 @@ function Console () {  Root.call(this);
 
 function Database (connection){ Root.call(this); 
 	this.connection = "";
-		/*
-		{
-		host     : "localhost",
-		database : "db",
-		user     : "user",
-		password : "password"
-		};
-		*/
-
 	{
 		this.connection = connection;
 	}
@@ -344,10 +337,17 @@ function View () {  Root.call(this);
 
 	this.render = function (name, data) {
 		var engine = this.engine;
-		var header = this.fs.readFileSync(this.folder + this.header);
-		var footer = this.fs.readFileSync(this.folder + this.footer);
-		var center = this.fs.readFileSync(this.folder + name);
+		var header = "";
+		var footer = "";
+		var center = "";
+		try { header = this.fs.readFileSync(this.folder + this.header); }
+		catch (e) {}
+		try { footer = this.fs.readFileSync(this.folder + this.footer); }
+		catch (e) {}
+		try { center = this.fs.readFileSync(this.folder + name);        }
+		catch (e) { center = ""; }
 		var html = header + center + footer;
+
 		// TODO: add caching here for production server
 		return engine.render(html, data);
 	}
