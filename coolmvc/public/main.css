@@ -35,6 +35,8 @@ a:active {
 }
 header {
   padding-top: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   background: #2196f3;
   color: white;
 }
@@ -87,7 +89,4 @@ footer {
   overflow: hidden;
   height: 200px;
   bottom: 0;
-}
-.container-fluid {
-  margin-bottom: 20px;
 }
