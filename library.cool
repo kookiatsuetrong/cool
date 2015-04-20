@@ -76,6 +76,10 @@ class File(name) extends Root {
 	method write(data) {
 		this.fs.writeFileSync(this.name, data);
 	}
+	method list() {
+		var list = this.fs.readdirSync(this.name);
+		return list;
+	}
 }
 
 class TextFile(name) extends File(name) {

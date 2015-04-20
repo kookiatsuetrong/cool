@@ -7,7 +7,7 @@ body {
   color: #333333;
   font-weight: 100;
   letter-spacing: 0.1rem;
-  line-height: 1.75rem;
+  padding-top: 80px;
 }
 h1,
 h2,
@@ -17,8 +17,8 @@ h5,
 h6 {
   font-weight: 100;
 }
-p {
-  text-align: justify;
+pre {
+  border: none;
 }
 a {
   transition: all 0.2s ease-in-out;
@@ -43,8 +43,36 @@ a:anchor {
 ul {
   list-style: none;
 }
+ul li {
+  margin-top: 10px;
+}
 .container {
   max-width: 800px;
+}
+header.small-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 80px;
+  background: steelblue;
+  padding-top: 10px;
+  opacity: 0.9;
+  color: white;
+}
+header.small-header a {
+  color: white;
+}
+header.small-header img.profile {
+  max-height: 60px;
+  border-radius: 50%;
+  border: 2px solid #38678f;
+}
+header.small-header article > * {
+  float: left;
+  display: inline-block;
+}
+header.small-header h1 {
+  margin: 12px 0 0 10px;
 }
 .banner {
   margin: 0;
@@ -126,4 +154,6 @@ footer {
   overflow: hidden;
   height: 200px;
   text-align: center;
+  clear: both;
+  bottom: 0;
 }

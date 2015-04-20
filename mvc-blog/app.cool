@@ -9,11 +9,6 @@ class MyController extends Controller {
 	new {
 		this.view.header = "header.html";
 		this.view.footer = "footer.html";
-
-		this.system.write("test");
-		var file = new TextFile("./data/data1.xml");
-		var data = file.read();
-		
 	}
 
 	method error(context) {
@@ -27,6 +22,42 @@ class MyController extends Controller {
 		var page = this.view.render("index.html", {
 			title: "Kookiat Suetrong (Beer)"
 		});
+		context.response.end(page);
+	}
+
+	method blog(context) {
+		var tokens = context.request.url.split("/");
+		var page = "";
+		if (tokens.length < 3) {
+			var folder = "./views/blog/";
+			var file = new File(folder);
+			var list = file.list().reverse();
+			var blogs = [];
+			var system = new System();
+			for (var i = 0; i < list.length; i++) {
+				var text = new TextFile(folder + list[i]);
+				var data = text.read();
+				var start = data.indexOf("<h1>");
+				var stop  = data.indexOf("</h1>");
+				var title = data.substring(start+4, stop).trim();
+				if (title != "") {
+					blogs.push({
+						url:"/blog/" + list[i].split(".")[0].split("-")[1],
+						title:title});
+					// system.write(title);
+				}
+			}
+
+			page = this.view.render("blog.html", {
+				title: "Blog List",
+				blogs: blogs
+			});
+		} else {
+			var name = "blog/blog-" + tokens[2] + ".html";
+			page = this.view.render(name, {
+				title: "Blog"
+			});
+		}
 		context.response.end(page);
 	}
 

@@ -1,0 +1,61 @@
+<article>
+<h1>
+Idea of transpiler to JavaScript
+</h1>
+<date>
+2015-04-03
+</date>
+
+<p>
+Making a class like C++ class
+</p>
+<pre>
+function Car (desc) {
+  this.desc = desc;
+  this.color = "red";
+}
+
+Car.prototype = {
+  getInfo: function() {
+    return 'A ' + this.color + ' ' + this.desc + '.';
+  },
+  drive: function() {},
+  stop:  function() {}
+};
+</pre>
+<p>
+Multiple Inheritance in JavaScript
+</p>
+<pre>
+function A() { this.aaa = function() { console.log("A.aaa()"); } }
+function B() { this.bbb = function() { console.log("B.bbb()"); } }
+function C() { A.call(this); B.call(this); }
+function D() { A.call(this); B.call(this); this.aaa = function() { console.log('D.aaa()'); } }
+var c = new C(); // test multiple inheritance
+c.aaa();
+c.bbb();
+var d = new D(); // test polymorphism
+d.aaa();
+function G() { D.call(this); }
+var g = new G();
+g.aaa();
+</pre>
+<p>
+Written in Cool!
+</p>
+<pre>
+class F extends A    { -> function F()  { A.call(this);
+class C extends A, B { -> function C()  { A.call(this); B.call(this);
+class E(p) extends A { -> function E(p) { A.call(this);
+</pre>
+<p>
+or something that easier to transpile
+</p>
+<pre>
+class H { extend A; extend E;   -> function H { A.call(this); B.call(this);
+</pre>
+<p>
+or using apply() so what is the different between apply() and call()
+</p>
+
+</article>

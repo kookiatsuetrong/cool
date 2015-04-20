@@ -1,0 +1,25 @@
+<article>
+<h1>
+Using Vertex as a new platform
+</h1>
+<date>
+2015-04-09
+</date>
+
+<p>
+  Beside node.js and io.js, I'm gonna add vertex as a new platform. The sample
+of JS application using vertex is a follow:
+</p>
+<pre>
+var vertx = require('vertx');
+vertx.createHttpServer().requestHandler(function(req) {
+    var file = req.path() === '/' ? 'index.html' : req.path();
+    req.response.sendFile('webroot/' + file);
+}).listen(8080);
+</pre>
+<p>
+  It looks easier than node.js and io.js, it seems to run faster than the
+current node.js/io.js platform.
+</p>
+
+</article>

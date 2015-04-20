@@ -9,13 +9,6 @@ function MyController () {  Controller.call(this);
 	{
 		this.view.header = "header.html";
 		this.view.footer = "footer.html";
-
-		this.system.write("test");
-		var file = new TextFile("./data/data1.xml");
-		var data = file.read();
-		var parser = new DOMParser();
-		var dom = parser.parseFromString(data, "text/xml");
-		this.system.write(dom);
 	}
 
 	this.error = function (context) {
@@ -29,6 +22,42 @@ function MyController () {  Controller.call(this);
 		var page = this.view.render("index.html", {
 			title: "Kookiat Suetrong (Beer)"
 		});
+		context.response.end(page);
+	}
+
+	this.blog = function (context) {
+		var tokens = context.request.url.split("/");
+		var page = "";
+		if (tokens.length < 3) {
+			var folder = "./views/blog/";
+			var file = new File(folder);
+			var list = file.list().reverse();
+			var blogs = [];
+			var system = new System();
+			for (var i = 0; i < list.length; i++) {
+				var text = new TextFile(folder + list[i]);
+				var data = text.read();
+				var start = data.indexOf("<h1>");
+				var stop  = data.indexOf("</h1>");
+				var title = data.substring(start+4, stop).trim();
+				if (title != "") {
+					blogs.push({
+						url:"/blog/" + list[i].split(".")[0].split("-")[1],
+						title:title});
+					// system.write(title);
+				}
+			}
+
+			page = this.view.render("blog.html", {
+				title: "Blog List",
+				blogs: blogs
+			});
+		} else {
+			var name = "blog/blog-" + tokens[2] + ".html";
+			page = this.view.render(name, {
+				title: "Blog"
+			});
+		}
 		context.response.end(page);
 	}
 
@@ -149,6 +178,10 @@ function File (name){ Root.call(this);
 	}
 	this.write = function (data) {
 		this.fs.writeFileSync(this.name, data);
+	}
+	this.list = function () {
+		var list = this.fs.readdirSync(this.name);
+		return list;
 	}
 }
 

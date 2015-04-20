@@ -1,4 +1,9 @@
 <article>
-	<%= title %>
-	<%= record.info  %>
+	<ul>
+<% for (var i = 0; i < blogs.length; i++) { %>
+	<li>
+	<a href="<%= blogs[i].url %>"><%= blogs[i].title %></a>
+	</li>
+<% } %>
+	</ul>
 </article>
