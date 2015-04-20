@@ -10,11 +10,12 @@ function MyController () {  Controller.call(this);
 		this.view.header = "header.html";
 		this.view.footer = "footer.html";
 
-		this.database.execute("select * from sesions", [], function(records) {
-			if (records == null) records = [];
-			for (var i = 0; i < records.length; i++) {
-			}
-		});
+		this.system.write("test");
+		var file = new TextFile("./data/data1.xml");
+		var data = file.read();
+		var parser = new DOMParser();
+		var dom = parser.parseFromString(data, "text/xml");
+		this.system.write(dom);
 	}
 
 	this.error = function (context) {
@@ -31,85 +32,6 @@ function MyController () {  Controller.call(this);
 		context.response.end(page);
 	}
 
-
-
-/*
-	this.signin = function (context) {
-		if (context.request.method == "POST") {
-			var data = "";
-			var body = {};
-			var controller = this;
-
-			context.request.on("readable", function() {
-				var chunk = context.request.read();
-				data += chunk.toString();
-			});
-
-			context.request.on("end", function() {
-				var system = new System();
-				data = system.unescape(data);
-				var tokens = data.split("&");
-				for (var i = 0; i < tokens.length; i++) {
-					var fields = tokens[i].split("=");
-					body[fields[0]] = fields[1];
-				}
-
-				system.write(body);
-				if (body.email == "user@email.com" &&
-					body.password == "password") {
-					var token = "token007007";
-					controller.sessions[token] = body.email;
-					context.response.setHeader("Set-Cookie",
-						"session=" + token + "; HttpOnly");
-				}
-				context.response.writeHead(302, {Location: "/"});
-				context.response.end();
-			});
-
-		} else {
-			var model = {title: "Sign In"};
-			var page  = this.view.render("signin.html", model);
-			context.response.end(page);
-		}
-	}
-
-	this.blog = function (context) {
-		var view = this.view;
-		var title = context.request.url.split("/")[2] || "";
-
-		this.database.execute("select * from blogs where title=? or id=?",
-		[title, title],
-		function(records) {
-			if (records == null || records.length == 0) {
-				var model = {title: "Blog not found"};
-				var page  = view.render("error.html", model);
-				context.response.end(page);
-			} else {
-				var model = {title: records[0].title, record: records[0]};
-				var page  = view.render("blog.html", model);
-				context.response.end(page);
-			}
-		});
-	}
-
-// creating token
-var token = "token-ABC0000001";
-this.session[token] = { email: "kookiat@kookiat.com" };
-context.response.setHeader("Set-Cookie", "session=" + token + "; HttpOnly");
-context.response.end("OK");
-
-// verify token
-this.system.write(context.request.headers);
-var cookies = context.request.headers.cookie.split(";");
-for (var i = 0; i < cookies.length; i++) {
-	var fields = cookies[i].trim().split("=");
-	if (fields[0] == "session") {
-		if (this.session[fields[1]]) {
-			this.system.write("session is " + this.session[fields[1]]["email"]);
-		}
-	}
-}
-*/
 
 	this.query = function (context) {
 		var view = this.view;
