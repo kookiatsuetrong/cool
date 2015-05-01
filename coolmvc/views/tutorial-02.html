@@ -1,15 +1,14 @@
-<div class="grid-container">
-	<div class="grid-row">
-		<div class="grid-xs-100 grid-lg-70">
+<article>
 
-	<h1>Tutorial 2: Using Cool! MVC</h1>
-	<p>
-		Cool! MVC designed to be a small framework for creating web application.
-		You can start by inheriting the Controller class and pass it to an
-		intance of the Server class.
-	</p>
+<div class="grid-l-8">
+<h1>Tutorial 2: Using Cool! MVC</h1>
+<p>
+Cool! MVC designed to be a small framework for creating web application.
+You can start by inheriting the Controller class and pass it to an
+intance of the Server class.
+</p>
 
-	<pre>
+<pre>
 main class Simple extends Controller {
 	new {
 		var server = new Server(this);
@@ -20,13 +19,13 @@ main class Simple extends Controller {
 		context.response.end("Cool!");
 	}
 }
-	</pre>
+</pre>
 
-	<p>
-		The default port is 2000, you can speciy a new port by set the
-		Server.port = xxxx; before calling Server.start() method
-	</p>
-	<pre>
+<p>
+The default port is 2000, you can speciy a new port by set the
+Server.port = xxxx; before calling Server.start() method
+</p>
+<pre>
 main class Simple {
 	new {
 		var server = new Server(this);
@@ -40,11 +39,11 @@ class Simple extends Controller {
 		context.response.end("Cool!");
 	}
 }
-	</pre>
+</pre>
 
-	<h3>Rendering View</h3>
+<h3>Rendering View</h3>
 
-	<pre>
+<pre>
 class MyController extends Controller {
 	member view  = new View();
 	member database = new Database();
@@ -77,8 +76,10 @@ class MyController extends Controller {
 		});
 	}
 }
-	</pre>
-
-		</div>
-	</div>
+</pre>
 </div>
+
+<div class="grid-l-4">
+	&nbsp;
+</div>
+</article>

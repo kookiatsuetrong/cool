@@ -1,0 +1,32 @@
+<article>
+<div class="grid-l-8">
+<h1>
+Using Cool! MVC with JavaScript and ES6
+</h1>
+
+<p>
+You can also use Cool! MVC with JavaScript or ES6. The following code is an
+example of JavaScript server (Node.js or io.js).
+</p>
+
+<pre>
+function Simple () {
+	Controller.call(this);
+
+	this.index = function (context) {
+		context.response.end("Cool!");
+	}
+}
+
+var simple = new Simple();
+var server = new Server(simple);
+server.port = 2003;
+server.start();
+</pre>
+</div>
+
+<div class="grid-l-4">
+	&nbsp;
+</div>
+
+</article>

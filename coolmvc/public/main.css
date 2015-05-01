@@ -32,8 +32,8 @@ header {
   background: #2196f3;
   color: white;
 }
-article {
-  padding: 10px 40px;
+header img {
+  width: 80px;
 }
 pre {
   margin: 8px 0;

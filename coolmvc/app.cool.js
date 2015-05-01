@@ -49,7 +49,7 @@ function MyController () {  Controller.call(this);
 
 	this.tutorial = function (context) {
 		var tokens = context.request.url.split("/");
-		
+
 
 		var page = this.view.render("tutorial-" + tokens[2] + ".html",
 			{ title: "Cool! Tutorial"}
@@ -57,7 +57,7 @@ function MyController () {  Controller.call(this);
 		context.response.end(page);
 	}
 
-	this.test2 = function (context) {
+	this.test_get = function (context) {
 		this.system.write(context.request.method);
 
 		if (context.request.method == "GET") {
@@ -207,6 +207,10 @@ function File (name){ Root.call(this);
 	}
 	this.write = function (data) {
 		this.fs.writeFileSync(this.name, data);
+	}
+	this.list = function () {
+		var list = this.fs.readdirSync(this.name);
+		return list;
 	}
 }
 
