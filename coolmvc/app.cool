@@ -33,7 +33,7 @@ class MyController extends Controller {
 
 	method query(context) {
 		var view = this.view;
-		this.database.execute("select * from users", function(records) {
+		this.database.execute("select * from users", [], function(records) {
 			if (records == null) records = [];
 			var model = {title: "Query", records: records};
 			var page  = "";
