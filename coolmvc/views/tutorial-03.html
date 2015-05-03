@@ -1,11 +1,10 @@
-<div class="grid-container">
-	<div class="grid-row">
-		<div class="grid-xs-100 grid-lg-70">
+<article>
+<div class="grid-x-8">
 
-	<h1>OOP in Cool!</h1>
+<h1>OOP in Cool!</h1>
 
-	<h3>Sample Class</h3>
-	<pre>
+<h3>Sample Class</h3>
+<pre>
 class Student(name, dob) extends Root {
 	member name;
 	member dob;
@@ -29,10 +28,10 @@ main class Main {
 		}
 	}
 }
-	</pre>
+</pre>
 
-	<h3>Inheritance</h3>
-	<pre>
+<h3>Inheritance</h3>
+<pre>
 class A {
 	member system = new System();
 	method aaa() { this.system.log("A.aaa()"); }
@@ -51,35 +50,37 @@ class C(p) extends A {
 }
 class D(p) extends C(p) {}
 class E extends B {}
-	</pre>
+</pre>
 
-	<h3>Multiple Inheritance</h3>
-	<p>
-		If you want to use multiple inheritance please use extend keyword for
-		example:
-	</p>
-	<pre>
+<h3>Multiple Inheritance</h3>
+<p>
+	If you want to use multiple inheritance please use extend keyword for
+	example:
+</p>
+<pre>
 class F(p) {
 	extend C(p);
 	extend E;
 }
-	</pre>
+</pre>
 
-	<h3>The Root class</h3>
-	<p>
-		The Root class is the base class for every class, please explicitly
-		extends from this class. Unlike Java or C# that automatically extends
-		from the Object class. For example:
-	</p>
-	<pre>
+<h3>The Root class</h3>
+<p>
+	The Root class is the base class for every class, please explicitly
+	extends from this class. Unlike Java or C# that automatically extends
+	from the Object class. For example:
+</p>
+<pre>
 class Root {
 	...
 }
 class System extends Root {
 	...
 }
-	</pre>
-
-		</div>
-	</div>
+</pre>
 </div>
+
+<div class="grid-l-4">
+	&nbsp;
+</div>
+</article>

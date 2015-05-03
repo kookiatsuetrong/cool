@@ -144,7 +144,7 @@ function Engine () {
 
 function Web() {
 	Root.call(this);
-	thisclass = "Web";
+	this.class = "Web";
 
 	this.select = function(x) {
 		return document.querySelector(x);

@@ -20,13 +20,13 @@
 	}
 </style>
 
-<div class="grid-container">
-	<div class="grid-row">
-		<div class="grid-xs-100 grid-lg-70">
-			<button id="run">Run</button>
-			<button id="clear">Clear</button>
+<article>
+<div class="grid-x-12">
+<button id="run">Run</button>
+<button id="clear">Clear</button>
+<br/>
 
-			<textarea class="editor" id="cool-code">// Cool! Demo
+<textarea class="editor" id="cool-code">// Cool! Demo
 main class Hello() {
 	new {
 		var system = new System();
@@ -35,16 +35,14 @@ main class Hello() {
 }
 
 </textarea>
-		</div>
-
-	</div>
-	<div class="grid-row">
-		<div class="grid-xs-100 grid-lg-70">
-			Output:<br/>
-			<textarea class="editor" id="output"></textarea>
-		</div>
-	</div>
 </div>
+
+<div class="grid-x-12">
+Output:<br/>
+<textarea class="editor" id="output"></textarea>
+</div>
+
+</article>
 
 <script type="text/html" id="redirect">
 function System() {
