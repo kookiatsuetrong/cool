@@ -268,7 +268,7 @@ function Database (connection){ Root.call(this);
 	this.execute = function (sql, data, callback) {
 		this.pool.getConnection(function(error, server) {
 			if (error) {
-				callback(null);
+				callback([]);
 			} else {
 				server.query(sql, data, function(error, data) {
 					callback(data);
