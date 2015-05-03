@@ -1,8 +1,4 @@
 "use strict;"; // Web MVC Demo
-// @mvc.cool
-// @standard.cool
-// @web.cool
-// import standard; import mvc;
 
 function MyController () {  Controller.call(this); 
 	this.view  = new View();
@@ -38,6 +34,7 @@ function MyController () {  Controller.call(this);
 	this.query = function (context) {
 		var view = this.view;
 		this.database.execute("select * from users", function(records) {
+			if (records == null) records = [];
 			var model = {title: "Query", records: records};
 			var page  = "";
 			try {
@@ -49,15 +46,13 @@ function MyController () {  Controller.call(this);
 
 	this.tutorial = function (context) {
 		var tokens = context.request.url.split("/");
-		
-
 		var page = this.view.render("tutorial-" + tokens[2] + ".html",
 			{ title: "Cool! Tutorial"}
 		);
 		context.response.end(page);
 	}
 
-	this.test2 = function (context) {
+	this.test_get = function (context) {
 		this.system.write(context.request.method);
 
 		if (context.request.method == "GET") {
@@ -101,34 +96,6 @@ new Test(); function Test () {
 		system.write(server.text());
 	}
 }
-
-new Simple(); function Simple () {  Controller.call(this); 
-	{
-		var server = new Server(this);
-		server.port = 2001;
-		server.start();
-		var system = new System();
-		system.write(server.text());
-	}
-
-	this.index = function (context) {
-		context.response.end("Cool!");
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
 
 // Standard Library
 
@@ -207,6 +174,10 @@ function File (name){ Root.call(this);
 	}
 	this.write = function (data) {
 		this.fs.writeFileSync(this.name, data);
+	}
+	this.list = function () {
+		var list = this.fs.readdirSync(this.name);
+		return list;
 	}
 }
 

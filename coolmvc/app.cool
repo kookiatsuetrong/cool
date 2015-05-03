@@ -1,8 +1,4 @@
 // Web MVC Demo
-// @mvc.cool
-// @standard.cool
-// @web.cool
-// import standard; import mvc;
 
 class MyController extends Controller {
 	member view  = new View();
@@ -38,6 +34,7 @@ class MyController extends Controller {
 	method query(context) {
 		var view = this.view;
 		this.database.execute("select * from users", function(records) {
+			if (records == null) records = [];
 			var model = {title: "Query", records: records};
 			var page  = "";
 			try {
@@ -49,8 +46,6 @@ class MyController extends Controller {
 
 	method tutorial(context) {
 		var tokens = context.request.url.split("/");
-
-
 		var page = this.view.render("tutorial-" + tokens[2] + ".html",
 			{ title: "Cool! Tutorial"}
 		);
@@ -101,31 +96,3 @@ main class Test {
 		system.write(server.text());
 	}
 }
-
-main class Simple extends Controller {
-	new {
-		var server = new Server(this);
-		server.port = 2001;
-		server.start();
-		var system = new System();
-		system.write(server.text());
-	}
-
-	method index(context) {
-		context.response.end("Cool!");
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
