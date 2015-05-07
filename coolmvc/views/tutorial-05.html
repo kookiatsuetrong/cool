@@ -1,0 +1,39 @@
+<article>
+<h1>
+Using Cool! MVC with JavaScript and ES6
+</h1>
+
+<pre>
+"use strict;";
+
+main();
+function main() {
+	var server = new Server(new MyController());
+	server.port = 2100;
+	server.middleware.push(new Less());
+	server.start();
+	var system = new System();
+	system.write(server.text());
+}
+
+function MyController () {
+	Controller.call(this);
+	this.view  = new View();
+	this.view.header = "header.html";
+	this.view.footer = "footer.html";
+	this.database = new Database("mysql://user:password@localhost/db");
+
+	this.index = function (context) {
+		var page = this.view.render("index.html");
+		context.response.end(page);
+	}
+
+	this.error = function (context) {
+		var page = this.view.render("error.html");
+		context.response.end(page);
+	}
+}
+</pre>
+	
+	
+</article>

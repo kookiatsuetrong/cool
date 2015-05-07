@@ -124,33 +124,3 @@ member isDirectory(name) {
 	return info.isDirectory();
 }
 */
-
-// DEPRECATED
-class Console extends Root {
-	member class = "Console";
-	member data = "";
-	member index = 0;
-
-	method write(data) {
-		process.stdout.write(data + "");
-	}
-	method read(callback) {
-		// process.stdin.resume();
-		// process.stdin.setEncoding("UTF8");
-		// process.stdin.on("data", function (chunk) { this.data += chunk; });
-
-		process.stdin.on("readable", function() {
-			var chunk = process.stdin.read();
-			this.data += chunk;
-		});
-		process.stdin.on("end", function() { callback(this.data); });
-	}
-	/*
-	method readLine() {
-		process.stdin.pause();
-		var lines = this.data.split("\n");
-		process.stdin.resume();
-		// return lines[this.index++];
-	}
-	*/
-}
