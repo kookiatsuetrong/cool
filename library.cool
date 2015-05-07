@@ -76,9 +76,14 @@ class File(name) extends Root {
 	method write(data) {
 		this.fs.writeFileSync(this.name, data);
 	}
-	method list() {
-		var list = this.fs.readdirSync(this.name);
-		return list;
+	member exists() {
+		return this.fs.existsSync(this.name);
+	}
+	member list() {
+		return this.fs.readdirSync(this.name);
+	}
+	member isDirectory() {
+		return this.fs.statsSync(this.name).isDirectory();
 	}
 }
 
@@ -109,18 +114,3 @@ class Float extends Root {
 	member class = "Float";
 	method parse(f) { return parseFloat(f); }
 }
-
-
-
-/*
-member exists(name) {
-	return this.fs.existsSync(name);
-}
-member list(name) {
-	return this.fs.readdirSync(name);
-}
-member isDirectory(name) {
-	var info = this.fs.statsSync(name);
-	return info.isDirectory();
-}
-*/

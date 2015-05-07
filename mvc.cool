@@ -205,6 +205,3 @@ class Less extends Middleware {
 		}
 	}
 }
-
-// TODO: On production server, .html, .js, .css must be minified
-// or create minified middleware
