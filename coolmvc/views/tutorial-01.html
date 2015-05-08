@@ -100,7 +100,7 @@ main class Start {
 <h3>Reading Data from AJAX</h3>
 <pre>
 var web = new Web();
-web.get("/test", {}, function (data) {
+web.get("/test", [], function (data) {
 	var engine = new Engine();
 	var system = new System();
 	system.write(engine.parse(data));

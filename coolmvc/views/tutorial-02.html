@@ -41,12 +41,12 @@ class Simple extends Controller {
 }
 </pre>
 
-<h3>Rendering View</h3>
+<h3>View and Database</h3>
 
 <pre>
 class MyController extends Controller {
 	member view  = new View();
-	member database = new Database();
+	member database = new Database("mysql://user:pwd@localhost/db");
 
 	new {
 		this.view.header = "header.html";
@@ -77,6 +77,110 @@ class MyController extends Controller {
 	}
 }
 </pre>
+
+<h3>The full source code of this web site is as follow</h3>
+
+<pre>
+// Web MVC Demo
+
+class MyController extends Controller {
+	member view  = new View();
+	member database = new Database("mysql://user:pwd@localhost/db");
+	member system = new System();
+
+	new {
+		this.view.header = "header.html";
+		this.view.footer = "footer.html";
+	}
+
+	method error(context) {
+		var page = this.view.render("error.html", {
+			title: "Error " + context.request.url
+		});
+		context.response.end(page);
+	}
+
+	method index(context) {
+		var page = this.view.render("index.html", {
+			title: "Cool!"
+		});
+		context.response.end(page);
+	}
+
+	method editor(context) {
+		var page = this.view.render("editor.html", {
+			title: "Cool! Editor"
+		});
+		context.response.end(page);
+	}
+
+	method query(context) {
+		var view = this.view;
+		this.database.execute("select * from users", [], function(records) {
+			if (records == null) records = [];
+			var model = {title: "Query", records: records};
+			var page  = "";
+			try {
+				page = view.render("query.html", model);
+			} catch (e) {}
+			context.response.end(page);
+		});
+	}
+
+	method tutorial(context) {
+		var tokens = context.request.url.split("/");
+		var page = this.view.render("tutorial-" + tokens[2] + ".html",
+			{ title: "Cool! Tutorial"}
+		);
+		context.response.end(page);
+	}
+
+	method test_get(context) {
+		this.system.write(context.request.method);
+
+		if (context.request.method == "GET") {
+			var info = {
+				name: "name",
+				data: [
+					{email: "email0@email.com"},
+					{email: "email1@email.com"},
+					{email: "email2@email.com"},
+				]
+			};
+			var engine = new Engine();
+			context.response.end(engine.text(info));
+		} else {
+			context.response.end("{}");
+		}
+	}
+
+	method test(context) {
+		var info = {
+			name: "name",
+			data: [
+				{email: "email0@email.com"},
+				{email: "email1@email.com"},
+				{email: "email2@email.com"},
+			]
+		};
+		var engine = new Engine();
+		context.response.end(engine.text(info));
+	}
+}
+
+main class Test {
+	new {
+		var controller = new MyController();
+		var server = new Server(controller);
+		// server.middleware.push(new Logger());
+		server.middleware.push(new Less());
+		server.start();
+		var system = new System();
+		system.write(server.text());
+	}
+}
+</pre>
+
 </div>
 
 <div class="grid-l-4">
