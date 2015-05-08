@@ -41,50 +41,18 @@ function MyController () {
 		context.response.end(page);
 	}
 
-	this.map = function (context) {
-		var page = this.view.render("map.html");
+	this.about = function (context) {
+		var page = this.view.render("about.html");
 		context.response.end(page);
-	}
-
-	this.workshop = function (context) {
-		var page = this.view.render("workshop.html");
-		context.response.end(page);
-	}
-
-	this.article = function (context) {
-		var id = "";
-		var tokens = context.request.url.split("/");
-		if (tokens.length >= 3) {
-			id = tokens[2];
-			var name = "article/" + id + ".html";
-			var page = this.view.render(name);
-			context.response.end(page);
-		}
-		else {
-			var folder = new File("views/article");
-			var list = folder.list();
-			var header = [];
-			for (var i = 0; i < list.length; i++) {
-				var file = new TextFile("views/article/" + list[i]);
-				var text = file.read();
-				var start = text.indexOf("&lt;h1&gt;");
-				var stop  = text.indexOf("&lt;/h1&gt;");
-				var title = text.substring(start + 4, stop).trim();
-				header.push(title);
-			}
-			var name = "article.html";
-			var page = this.view.render(name, {
-				names: list,
-				titles: header
-				});
-			context.response.end(page);
-		}
-		
 	}
 	
-	this.gas = function (context) {
-		var page = this.view.render("gas.html");
-		context.response.end(page);
+	this.test = function (context) {
+		var view = this.view;
+		this.database.execute("select * from users", function(records) {
+			var model = {title: "Query", records: records};
+			var page  = view.render("query.html", model);
+			context.response.end(page);
+		});
 	}
 }
 
@@ -107,9 +75,10 @@ Download <a href="/coolmvc.txt">here</a>.
 +-views
   +-index.html
   +-error.html
-  .
-  .
-  .
+  +-header.html
+  +-footer.html
+  +-test.html
+  +-query.html
 </pre>
 
 <p>
