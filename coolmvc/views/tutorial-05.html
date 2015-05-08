@@ -64,8 +64,8 @@ function MyController () {
 			for (var i = 0; i < list.length; i++) {
 				var file = new TextFile("views/article/" + list[i]);
 				var text = file.read();
-				var start = text.indexOf("<h1>");
-				var stop  = text.indexOf("</h1>");
+				var start = text.indexOf("&lt;h1&gt;");
+				var stop  = text.indexOf("&lt;/h1&gt;");
 				var title = text.substring(start + 4, stop).trim();
 				header.push(title);
 			}
