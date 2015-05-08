@@ -185,7 +185,6 @@ class Less extends Middleware {
 	member less = require('less');
 
 	method request(context) {
-		var urlTokens  = context.request.url.split("/");
 		var path       = context.server.folder + context.request.url;
 		var pathTokens = path.split(".");
 		var fileType   = pathTokens[pathTokens.length-1];
