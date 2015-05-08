@@ -1,0 +1,7 @@
+main class Test {
+
+	new {
+		var system = new System();
+		system.execute("pwd > test.txt");
+	}
+}

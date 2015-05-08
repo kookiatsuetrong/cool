@@ -1,0 +1,13 @@
+main class Test {
+
+	method start(data) {
+		// var console = new Console();
+		console.log(data);
+	}
+
+	new {
+		var c = new Console();
+		// c.write("Enter Text \n");
+		c.read(this.start);
+	}
+}

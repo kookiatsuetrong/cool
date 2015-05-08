@@ -1,0 +1,8 @@
+main class Test {
+
+	new {
+		var system = new System();
+		var root = new Root();
+		system.log(root.text());
+	}
+}
