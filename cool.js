@@ -200,9 +200,9 @@ function File (name) {
 	Root.call(this);
 	this.class = "File";
 	this.name = name;
-	this.read = function() { return ""; }
-	this.write = function(data) {}
-	this.exists = function() { return false; }
+	this.read = function() { return sessionStorage[this.name]; }
+	this.write = function(data) { sessionStorage[this.name] = data; }
+	this.exists = function() { return sessionStorage[this.name] != null; }
 	this.list = function() { return []; }
 	this.isDirectory = function() { return false; }
 }
@@ -210,7 +210,10 @@ function File (name) {
 function TextFile (name) {
 	File.call(this);
 	this.class = "TextFile";
-	this.append = function(data) {}
+	this.append = function(data) {
+		var tmp = sessionStorage[this.name];
+		sessionStorage[this.name] = tmp + data;
+	}
 }
 
 function Float() {
