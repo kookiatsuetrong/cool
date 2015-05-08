@@ -200,17 +200,17 @@ function File (name) {
 	Root.call(this);
 	this.class = "File";
 	this.name = name;
-	this.read = function() {
-		return "";
-	}
-	this.write = function(data) {
-	}
+	this.read = function() { return ""; }
+	this.write = function(data) {}
+	this.exists = function() { return false; }
+	this.list = function() { return []; }
+	this.isDirectory = function() { return false; }
 }
+
 function TextFile (name) {
 	File.call(this);
 	this.class = "TextFile";
-	this.append = function(data) {
-	}
+	this.append = function(data) {}
 }
 
 function Float() {
@@ -224,27 +224,3 @@ function Integer() {
 		return parseInt(x);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
