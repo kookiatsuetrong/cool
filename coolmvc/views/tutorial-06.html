@@ -13,15 +13,29 @@ The standard library contains 9 classses and 10 methods, and the MVC contains
 <pre>
 Standard
 9 Classes
-Root, Exception, System, Engine, Web, File, TextFile [Integer, Float = Number]
+Root, Exception, System, Engine, Web, File, TextFile, Integer, Float
+
 10 Methods
-text, read, write, append, execute, select, list, get, post, parse
+Root.text() -- similar to toString()
+File.read()
+File.write()
+File.list()
+TextFile.append()
+Engine.execute()
+Engine.parse()
+Web.select()
+Web.get()
+Web.post()
 
 MVC
 4 Classes
 Database, View, Controller, Server
-5 Methods
-render index error start execute
+
+4 Methods
+View.render()
+Controller.index()
+Controller.error()
+Server.start()
 
 Future Release
 Date Time
