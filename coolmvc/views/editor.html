@@ -54,20 +54,9 @@ function System() {
 }
 </script>
 
-
 <script type="text/cool">
 
 main class Main {
-	/*
-	method transpile() {
-		var web = new Web();
-		var editor1 = web.select("#cool-code");
-
-		var code2 = transpile(editor1.value);
-		var engine = new Engine();
-		engine.execute(code2);
-	}
-	*/
 
 	method keydown(event) {
 		var TAB = 9;
@@ -93,10 +82,10 @@ main class Main {
 	method run() {
 		var web = new Web();
 		var editor1 = web.select("#cool-code");
-		var code2 = transpile(editor1.value);
+		var code1 = transpile(editor1.value);
 		var library = web.select("#redirect");
 		var engine = new Engine();
-		engine.execute(code2 + " " + library.innerText);
+		engine.execute(library.innerHTML + "\n" + code1);
 	}
 
 	method clear() {
@@ -115,4 +104,3 @@ main class Main {
 	}
 }
 </script>
-<script src="/cool.js"></script>
