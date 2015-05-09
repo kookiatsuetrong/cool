@@ -23,6 +23,28 @@ var server = new Server(simple);
 server.port = 2003;
 server.start();
 </pre>
+
+<p>
+You don't have to inherit from Controller class, just provide at least 2
+methods index() and error() and pass the object to Server class as the
+parameter. For example:
+</p>
+
+<pre>
+function Simple () {
+	this.index = function (context) {
+		context.response.end("Cool!");
+	}
+	this.error = function (context) {
+		context.response.end("Error");
+	}
+}
+
+var server = new Server(new Simple());
+server.port = 2004;
+server.start();
+</pre>
+
 </div>
 
 <div class="grid-l-4">
