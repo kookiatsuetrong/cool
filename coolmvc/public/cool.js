@@ -169,6 +169,7 @@ function Web() {
 		for (var key in data) {
 			str += key + "=" + data[key] + "&";
 		}
+		if (str == "?") str = "";
 		request.open('get', url + str, true);
 		request.send();
 	}
@@ -189,6 +190,7 @@ function Web() {
 		for (var key in data) {
 			str += key + "=" + data[key] + "&";
 		}
+		if (str == "?") str = "";
 		request.open('post', url, true);
 		request.setRequestHeader('Content-Type',
 			'application/x-www-form-urlencoded; charset=UTF-8');

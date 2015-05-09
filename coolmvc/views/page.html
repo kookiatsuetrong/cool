@@ -1,0 +1,56 @@
+
+<script>
+function Controller() {
+	this.data = [];
+	this.put = function(key, value) {
+		this.data[key] = value;
+	}
+	this.updateView = function() {
+		for (var key in this.data) {
+			var items = document.querySelectorAll("[data-model=" + key + "]");
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].value != null) {
+					items[i].value = this.data[key];
+				} else {
+					items[i].innerHTML = this.data[key];
+				}
+			}
+		}
+	}
+}
+
+</script>
+
+
+
+
+
+<article>
+	<h1>MVC Frontend Demo</h1>
+	<input type="text" data-model="name" onkeyup="page.change(this)" />
+	<p>Hello <span data-model="name"></span>!</p>
+</article>
+
+<script>
+	var page = new Controller();	
+	page.change = function(item) {
+		this.put("name", item.value);
+		this.updateView();
+	}
+</script>
+
+<article>
+	<ul data-model="list">
+	</ul>
+</article>
+<script>
+	page.list = ['aaa', 'bbb', 'ccc']
+	page.show = function() {
+		var text = "";
+		for (var i = 0; i < this.list.length; i++) {
+			text += "<li>" + this.list[i] + "</li>";
+		}
+		document.querySelector("[data-model=list]").innerHTML = text;
+	}
+	page.show();
+</script>
