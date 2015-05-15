@@ -58,6 +58,19 @@ class Web extends Root {
 	method post(url, data, callback) {
 		callback();
 	}
+	method parse(data) {
+		var info = {};
+		var system = new System();
+		data = decodeURI(data);
+		data = data.replace(/\+/g, " ");
+		data = system.unescape(data);
+		var pairs = data.split("&");
+		for (var i = 0; i < pairs.length; i++) {
+			var pair = pairs[i].split("=");
+			info[pair[0]] = pair[1];
+		}
+		return info;
+	}
 }
 
 class File(name) extends Root {
